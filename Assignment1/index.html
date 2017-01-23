@@ -1,14 +1,74 @@
 <html>
 <head>
+	<style>
+	button.accordion {
+    background-color: #ebb077;
+    color: #fff8d0;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+button.accordion.active, button.accordion:hover {
+    background-color: #dec8be;
+}
+div.panel {
+    padding: 0 18px;
+    background-color: bisque;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.6s ease-in-out;
+    opacity: 0;
+}
+div.panel.show {
+    opacity: 1;
+    max-height: 500px;
+}
+button.accordion:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+)'\02795' */
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+button.accordion.active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) "\2796"*/
+}
+	</style>
+
+	<script>
+	var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function(){
+        /* Toggle between adding and removing the "active" class,
+        to highlight the button that controls the panel */
+        this.classList.toggle("active");
+
+        /* Toggle between hiding and showing the active panel */
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        } else {
+            panel.style.display = "block";
+        }
+    }
+}
+</script>
+
 </head>
 
 <body>
-	
+
 	<button class="accordion">Objective</button>
 	<div class="panel">
 		<p>Quisque auctor eros rutrum lobortis tempor. Aenean fermentum semper lacus, quis tincidunt elit. Maecenas elementum sit amet massa a scelerisque. Nunc id turpis id urna venenatis ultricies. Nulla luctus semper augue, eget accumsan ante tincidunt a. Proin quis felis mattis, fringilla nibh vel, gravida lectus. Pellentesque ultrices facilisis semper. Curabitur posuere nibh mi, in dictum felis tempor et. Praesent quis pellentesque metus. Duis cursus massa vel felis venenatis, et luctus nisl tincidunt. Phasellus lacinia est ac mi tempus cursus. Suspendisse imperdiet ligula a ligula lobortis, eget efficitur dolor sagittis. Phasellus congue ullamcorper felis sed scelerisque. Sed sit amet odio consectetur neque tristique auctor. Proin eu dignissim tellus, sit amet suscipit tellus.</p>
 	</div>
-	
+
 	<button class="accordion">Education</button>
 	<div class="panel">
 		<p><ul>Maecenas elementum sit amet massa a scelerisque.</ul>
@@ -17,23 +77,23 @@
 			<ul>Proin eu dignissim tellus sit amet suscipit tellus.</ul>
 			<ul>Suspendisse imperdiet ligula a ligula lobortis eget efficitur dolor sagittis.</ul>></p>
 	</div>
-	
-	
+
+
 	<button class="accordion">Skills</button>
 	<div class="panel">
 		<p>Ut feugiat velit nec ornare eleifend. Aenean vitae erat iaculis, tincidunt quam non, blandit enim. Vivamus porttitor eros nec libero facilisis semper. Donec ut nisl condimentum, vulputate nunc in, faucibus odio. Pellentesque sit amet tortor bibendum, pretium magna et, ornare nunc.</p>
 	</div>
-	
-	
+
+
 	<button class="accordion">Awards</button>
 	<div class="panel">
-		<p> </p>
+		<p><ul></p>
 	</div>
-	
+
 	<button class="accordion">Contact</button>
 	<div class="panel">
 		<p> </p>
 	</div>
-	
+
 </body>
 </html>
