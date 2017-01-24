@@ -1,7 +1,6 @@
 <html>
 <head>
 	<style>
-	/* Style the buttons that are used to open and close the accordion panel */
 	button.accordion {
 	    background-color: #eee;
 	    color: #444;
@@ -14,9 +13,17 @@
 	    transition: 0.4s;
 	}
 
-	/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+
 	button.accordion.active, button.accordion:hover {
 	    background-color: #ddd;
+	}
+
+	div.panel {
+	    padding: 0 18px;
+	    background-color: white;
+			max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
 	}
 
 	button.accordion:after {
@@ -31,15 +38,7 @@ button.accordion.active:after {
     content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
 
-	/* Style the accordion panel. Note: hidden by default */
-	div.panel {
-	    padding: 0 18px;
-	    background-color: white;
-	    display: none;
-			max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.2s ease-out;
-	}
+
 	</style>
 
 	<script>
@@ -78,7 +77,7 @@ button.accordion.active:after {
 			<ul>QAenean fermentum semper lacus</ul>
 			<ul>Curabitur posuere nibh mi in dictum felis tempor et.</ul>
 			<ul>Proin eu dignissim tellus sit amet suscipit tellus.</ul>
-			<ul>Suspendisse imperdiet ligula a ligula lobortis eget efficitur dolor sagittis.</ul>></p>
+			<ul>Suspendisse imperdiet ligula a ligula lobortis eget efficitur dolor sagittis.</ul></p>
 	</div>
 
 
@@ -90,8 +89,11 @@ button.accordion.active:after {
 
 	<button class="accordion">Awards</button>
 	<div class="panel">
-		<p><ul></ul>
-		<ul></ul></p>
+		<p>
+		<ul>Award, Organization, Month Year</ul>
+		<ul>Award, Organization, Month Year</ul>
+	  <ul>Award, Organization, Month Year</ul>
+	</p>
 	</div>
 
 	<button class="accordion">Contact</button>
