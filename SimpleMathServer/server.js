@@ -10,7 +10,7 @@ app.get("/", function (req, res) {
       res.redirect("/index.html");
 });
 
-app.get("/eval", function (req, res) {
+app.get("/add", function (req, res) {
     console.log(req.query);
     var result  = 0
 
