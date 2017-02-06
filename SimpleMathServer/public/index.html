@@ -2,6 +2,17 @@
 
 <head>
 	<script src='asyncReq.js'></script>
+	
+	<script>
+	function calc(){
+		var a = document.getElementById("valA").value;
+		var b = document.getElementById("valB").value;
+		var op = document.getElementById("opSelect").value;
+		
+		loadFile("./mult?a=1&b=5",function(d){alert(d)})
+	}
+	</script>
+	
 </head>
 
 <body>
