@@ -12,14 +12,16 @@ app.get("/", function (req, res) {
 
 var todoList = [];
 
-var addCallback = function (req, res) {
+app.get("/addTodo", function (req, res) {
 	console.log(req.query);
 	todoList.push(req.query);
-
     res.send(JSON.stringify(todoList)); 
 }
+);
 
-app.get("/addTodo", addCallback);
+app.get("/getTodo", function(req,res) {
+	res.send(JSON.stringify(todoList));
+})
 
 app.use(methodOverride());
 app.use(bodyParser());
