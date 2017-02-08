@@ -12,6 +12,7 @@ app.get("/", function (req, res) {
 
 
 var addCallback = function (req, res) {
+	console.log(req.query);
     var a = parseFloat(req.query.a);
     var b = parseFloat(req.query.b);
     var result  = a + b;
@@ -42,10 +43,11 @@ var divCallback = function (req, res) {
   res.send(result.toString());
 }
 
-app.get("/add", addCallback);
 app.get("/sub", subCallback);
 app.get("/mult", multCallback);
 app.get("/div", divCallback);
+
+app.get("/addTodo", addCallback);
 
 app.use(methodOverride());
 app.use(bodyParser());
