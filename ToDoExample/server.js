@@ -16,7 +16,7 @@ var addCallback = function (req, res) {
 	console.log(req.query);
 	todoList.push(req.query);
 
-    res.send('1'); 
+    res.send("To-do added successfully."); 
 }
 
 app.get("/addTodo", addCallback);
