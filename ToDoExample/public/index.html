@@ -18,7 +18,7 @@
 	{
 		var markup = "";
 		for(var i = 0; i < list.length; i++){
-			markup += "<p>" + list[i].todo + "</p>";
+			markup += "<li>" + list[i].todo + "</li>";
 		}
 		document.getElementById("todoListWrapper").innerHTML = markup;
 	}
@@ -29,7 +29,7 @@
 <body>
 	<h1>To-do</h1>
 	<button onclick='addNew()'> Add </button>
-	<div id='todoListWrapper'> </div>
+	<ol id='todoListWrapper'> </ol>
 </body>
 
 </html>
