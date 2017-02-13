@@ -22,9 +22,13 @@
 		}
 		document.getElementById("todoListWrapper").innerHTML = markup;
 	}
+	
 	function start()
 	{
-		document.getElementById("todoListWrapper").innerHTML = markup;
+		var url = "/getTodo";
+		loadFile(url, function(d){
+			formatTodos(JSON.parse(d));
+		}
 	}
 	</script>
 	
