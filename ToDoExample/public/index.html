@@ -22,11 +22,15 @@
 		}
 		document.getElementById("todoListWrapper").innerHTML = markup;
 	}
+	function start()
+	{
+		document.getElementById("todoListWrapper").innerHTML = markup;
+	}
 	</script>
 	
 </head>
 
-<body>
+<body onload='start()'>
 	<h1>To-do</h1>
 	<button onclick='addNew()'> Add </button>
 	<ol id='todoListWrapper'> </ol>
