@@ -20,9 +20,10 @@
 		if(list.length == 0) {
 			markup="No todos yet"
 		}
-		else
+		else {
 		for(var i = 0; i < list.length; i++){
-			markup += "<li>" + list[i].todo + "</li>";
+			markup += "<li>" + list[i].todo + 
+			"<button onclick='deleteTodo(" + i + ")'> X </button>" + "</li>";
 		}
 	}
 		document.getElementById("todoListWrapper").innerHTML = markup;
