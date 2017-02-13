@@ -25,7 +25,7 @@
 	
 	function start(list)
 	{
-		var url = "./getTodo" + "?id=" + id + "&todo=" + todo;
+		var url = "./getTodos"
 		loadFile(url, function(d){
 			formatTodos(JSON.parse(d));
 		})
