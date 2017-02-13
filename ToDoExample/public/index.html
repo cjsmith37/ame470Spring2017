@@ -17,20 +17,20 @@
 	function formatTodos(list)
 	{
 		var markup = "";
+		if(list.length == 0) {
+			markup="No todos yet"
+		}
+		else
 		for(var i = 0; i < list.length; i++){
 			markup += "<li>" + list[i].todo + "</li>";
 		}
+	}
 		document.getElementById("todoListWrapper").innerHTML = markup;
 	}
 	
 	function start(list)
 	{
 		var url = "./getTodo";
-		var markup = "";
-		for(var i = 0; i < list.length; i++){
-			markup += "<li>" + list[0].todo + "</li>";
-			alert("List empty");
-		}
 		loadFile(url, function(d){
 			formatTodos(JSON.parse(d));
 		})
