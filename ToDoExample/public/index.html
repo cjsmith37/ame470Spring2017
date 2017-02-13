@@ -14,6 +14,17 @@
 			formatTodos(JSON.parse(d));
 		})
 	}
+	
+	function deleteTodo(index){
+		var flag = confirm("Ar you sure?");
+		
+		if(flag){
+		var url ="./deleteTodo" + "?index=" + index;
+		loadFile(url, function(d){
+			formatTodos(JSON.parse(d));
+		});
+	}
+	}
 	function formatTodos(list)
 	{
 		var markup = "";

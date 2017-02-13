@@ -25,6 +25,8 @@ app.get("/addTodo", function (req, res) {
 }
 );
 
+//connection between client and server delete
+
 app.get("/getTodo", function(req,res) {
 	res.send(JSON.stringify(todoList));
 })
