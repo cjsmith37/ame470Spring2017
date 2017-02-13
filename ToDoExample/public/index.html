@@ -26,9 +26,16 @@
 	function start(list)
 	{
 		var url = "./getTodo";
+		var markup = "";
+		for(var i = 0; i < list.length; i++){
+			markup += "<li>" + list[0].todo + "</li>";
+			alert("List empty");
+		}
 		loadFile(url, function(d){
 			formatTodos(JSON.parse(d));
 		})
+		
+			
 	}
 	</script>
 	
