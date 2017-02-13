@@ -23,18 +23,18 @@
 		document.getElementById("todoListWrapper").innerHTML = markup;
 	}
 	
-	function start()
+	function start(list)
 	{
 		var url = "./getTodo" + "?id=" + id + "&todo=" + todo;
 		loadFile(url, function(d){
 			formatTodos(JSON.parse(d));
-		}
+		)}
 	}
 	</script>
 	
 </head>
 
-<body onload='start(getToDo)'>
+<body onload='start()'>
 	<h1>To-do</h1>
 	<button onclick='addNew()'> Add </button>
 	<ol id='todoListWrapper'> </ol>
