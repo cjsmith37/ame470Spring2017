@@ -12,6 +12,12 @@ app.get("/", function (req, res) {
 
 var todoList = [];
 
+app.get("/deleteTodo", function(req,res) {
+	var index = parseInt(req.query.index);
+	todoList.splice(index,1);
+	res.send(JSON.stringify(todoList));
+});
+
 app.get("/addTodo", function (req, res) {
 	console.log(req.query);
 	todoList.push(req.query);
