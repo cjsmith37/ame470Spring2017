@@ -34,7 +34,7 @@
 		else {
 		for(var i = 0; i < list.length; i++){
 			markup += "<li>" + list[i].todo + 
-			"<button onclick='deleteTodo(" + i + ")'> X </button>" + "</li>";
+			"<button class="delButton" onclick='deleteTodo(" + i + ")'> X </button>" + "</li>";
 		}
 	}
 		document.getElementById("todoListWrapper").innerHTML = markup;
@@ -57,6 +57,12 @@
 	
 	#addButton {
 		position:absolute;
+		top:20px;
+		right:20px;
+	}
+	
+	.delButton {
+		float: right;
 	}
 	</style>
 	
