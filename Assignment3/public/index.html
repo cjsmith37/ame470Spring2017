@@ -8,7 +8,8 @@
       var a = document.getElementById("valA").value;
 
       var url = "./eval?a=" + a;
-      loadFile(url ,function(d){alert(url)})
+      console.log(url);
+      loadFile(url ,function(d){alert(d)})
     }
   </script>
 </head>
@@ -18,7 +19,7 @@
   <textarea id='valA'>
   </textarea>
     <br>
-  <button onclick='calc()'> Calculate </button>
+  <button onclick='calc().url'> Calculate </button>
 
 </body>
 
