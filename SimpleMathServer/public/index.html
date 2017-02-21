@@ -2,33 +2,33 @@
 
 <head>
 	<script src='asyncReq.js'></script>
-	
+
 	<script>
 	function calc(){
 		var a = document.getElementById("valA").value;
 		var b = document.getElementById("valB").value;
 		var op = document.getElementById("opSelect").value;
-		
+
 		console.log(a, op, b);
 		var url = "./" + op + "?a=" + a + "&b=" + b;
 		console.log(url);
 		loadFile(url,function(d){alert(d)});
 	}
 	</script>
-	
+
 </head>
 
 <body>
-	<input id='valA'>
-	
-	<select id='ops'>
+	<input type='number' id='valA'>
+
+	<select id='opSelect'>
 		<option value='add'> + </option>
 		<option value='sub'> - </option>
 		<option value='mult'> * </option>
 		<option value='div'> / </option>
 	</select>
-	
-	<input id='valB'>
+
+	<input type='number' id='valB'>
 	
 	<button onclick='calc()'>Calculate</button>
 </body>
