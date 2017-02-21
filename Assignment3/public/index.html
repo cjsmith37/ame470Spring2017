@@ -7,15 +7,16 @@
     function calc(){
       var a = document.getElementById("valA").value;
 
-      var url = "./eval" + "?a=" + a;
+      console.log(a);
 
-      eval(url);
+      var url = "./eval" + "?a=" + a;
 
 	    console.log(url);
 
-      loadFile(url,function(d){alert(d)})
+      loadFile(url,function(d){alert(d)});
 
     }
+
   </script>
 </head>
 
