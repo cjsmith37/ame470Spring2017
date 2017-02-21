@@ -5,13 +5,15 @@
 
   <script>
     function calc(){
-      a = document.getElementById("valA").value;
+      var a = document.getElementById("valA").value;
 
-      var url = "./eval?a=" + a;
+      var url = "./eval" + "?a=" + a;
+
+      eval(url);
 
 	    console.log(url);
 
-      loadFile(url,function(d){alert(JSON.parse(d))})
+      loadFile(url,function(d){alert(d)})
 
     }
   </script>
