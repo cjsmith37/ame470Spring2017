@@ -7,11 +7,12 @@
     function calc(){
       var a = document.getElementById("valA").value;
 
-      document.getElementById("valA").value = eval(a);
-
       console.log(a);
 
       var url = "./eval" + "?a=" + a;
+
+      document.getElementById("url").value = eval(a);
+
 
       loadFile(url,function(d){alert(d)});
 
