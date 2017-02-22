@@ -2,14 +2,20 @@
 <html>
 <head>
 	<script>
+	var doAdd = function(a,b, foo){
+		foo(a + b);
+	}
+	function doAdd(3,5, function(d){alert(d)});
+	
+	
+	
+	function(){
+		alert("here");
+	}();
 	var ame470 = {
 		term: '2017',
 		location: 'tempeAZ',
 		score: 90,
-		
-		function() {
-			alert("here");
-		},
 		getTerm: function(){
 			return ame470.term;
 			var term = 10;
