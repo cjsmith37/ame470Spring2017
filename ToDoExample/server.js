@@ -34,8 +34,7 @@ app.get("/addTodo", function (req, res) {
 	//console.log(req.query);
 	//todoList.push(req.query);
     //res.send(JSON.stringify(todoList)); 
-}
-);
+});
 
 //connection between client and server delete
 
@@ -44,7 +43,7 @@ app.get("/getTodo", function(req,res) {
 		res.send(JSON.stringify(todoList));
 	});
 	//res.send(JSON.stringify(todoList));
-})
+});
 
 app.use(methodOverride());
 app.use(bodyParser());
