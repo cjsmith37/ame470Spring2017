@@ -6,6 +6,8 @@ var methodOverride = require('method-override');
 var hostname = process.env.HOSTNAME || 'localhost';
 var port = 8081;
 
+var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/tododb');
+
 app.get("/", function (req, res) {
       res.redirect("/index.html");
 });
