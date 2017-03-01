@@ -21,7 +21,8 @@ app.get("/deleteTodo", function(req,res) {
 });
 
 app.get("/addTodo", function (req, res) {
-	console.log(req.query);
+	//db.data.find()
+	//console.log(req.query);
 	todoList.push(req.query);
     res.send(JSON.stringify(todoList)); 
 }
@@ -30,7 +31,10 @@ app.get("/addTodo", function (req, res) {
 //connection between client and server delete
 
 app.get("/getTodo", function(req,res) {
-	res.send(JSON.stringify(todoList));
+	db.collection("data").find({}).toArray( function(err, result) {
+		res.send(JSON.stringify(todoList));
+	});
+	//res.send(JSON.stringify(todoList));
 })
 
 app.use(methodOverride());
