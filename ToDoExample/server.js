@@ -21,10 +21,19 @@ app.get("/deleteTodo", function(req,res) {
 });
 
 app.get("/addTodo", function (req, res) {
-	//db.data.find()
+	db.collection("data").insert(req.query, function(err, result){
+		if(err){
+			res.send("error");
+		}
+		else{
+			db.collection("data").find({}).toArray( function(err1, result1) {
+				res.send(JSON.stringify(todoList));
+			});
+		}
+	});
 	//console.log(req.query);
-	todoList.push(req.query);
-    res.send(JSON.stringify(todoList)); 
+	//todoList.push(req.query);
+    //res.send(JSON.stringify(todoList)); 
 }
 );
 
