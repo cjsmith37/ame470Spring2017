@@ -6,7 +6,7 @@ var methodOverride = require('method-override');
 var hostname = process.env.HOSTNAME || 'localhost';
 var port = 8080;
 
-var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/tododb');
+var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:28017/picturedb');
 
 server.get("/", function (req, res) {
       res.redirect("/index.html");
@@ -17,7 +17,7 @@ var todoList = [];
 
 
 
-server.get("/addTodo", function (req, res) {
+server.get("/addPic", function (req, res) {
   db.collection("data").insert(req.query, function(err, result){
       if(err){
         res.send("error"); 
@@ -33,7 +33,7 @@ server.get("/addTodo", function (req, res) {
 });
 
 
-server.get("/deleteTodo", function (req, res) {
+server.get("/deletePic", function (req, res) {
    //var id = parseInt(req.query.id);
    var id = req.query.id.toString();
    console.log(id);
@@ -52,7 +52,7 @@ server.get("/deleteTodo", function (req, res) {
    // todoList.splice(index,1);
 });
 
-server.get("/getTodos", function (req, res) {
+server.get("/getPic", function (req, res) {
   db.collection("data").find({}).toArray( function(err, result) {
     res.send(JSON.stringify(result));
   });
