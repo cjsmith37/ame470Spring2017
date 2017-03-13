@@ -8,7 +8,7 @@
       var id = new Date().getTime();
       var url = "./addPic" + "?id=" + id + "&pic=" + todo;
       loadFile(url ,function(d){
-        formatTodos(JSON.parse(d));
+        formatPics(JSON.parse(d));
       });
     }
     function deletePic(index){
