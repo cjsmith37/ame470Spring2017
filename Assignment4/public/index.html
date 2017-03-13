@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <script src='asyncReq.js'> </script>
+  <script>
+    function addNew(){
+      var todo = prompt("Enter New Todo:");
+      var id = new Date().getTime();
+      var url = "./addTodo" + "?id=" + id + "&todo=" + todo;
+      loadFile(url ,function(d){
+        formatTodos(JSON.parse(d));
+      });
+    }
+    function deleteTodo(index){
+      var flag = confirm("Are you sure you want to delete?");
+      if(flag){
+        var url = "./deleteTodo" + "?id=" + index;
+        loadFile(url ,function(d){
+          formatTodos(JSON.parse(d));
+        });
+      }
+    }
+    function formatTodos(list)
+    {
+      var markup = "";
+      if(list.length == 0){
+        markup = "No todos yet"
+      }
+      else{
+        for(var i = 0; i < list.length; i++){
+          markup += "<li>" + list[i].todo +
+            "<button class='delButton' onclick='deleteTodo(" + list[i].id + ")'> X </button>"+
+            "</li>"; 
+        }
+      }
+      document.getElementById("todoListWrapper").innerHTML = markup;
+    }
+    function start()
+    {
+      var url = "./getTodos";
+      loadFile(url ,function(d){
+        console.log(d);
+        formatTodos(JSON.parse(d));
+      })
+    }
+  </script>
+  <style>
+      h1{
+        text-align: center;
+      }
+      #addButton
+      {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+      .delButton
+      {
+          float: right;
+      }      
+  </style>
+</head>
+
+<body onload='start()'>
+  <h1> Todos </h1>
+  <button id='addButton' onclick='addNew()'> Add </button>
+  <ol id='todoListWrapper'> </ol>
+</body>
+
+</html>
