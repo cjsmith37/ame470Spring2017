@@ -16,7 +16,6 @@ server.get("/", function (req, res) {
 var picList = [];
 
 
-
 server.get("/addPic", function (req, res) {
   db.collection("data").insert(req.query, function(err, result){
       if(err){
@@ -28,13 +27,10 @@ server.get("/addPic", function (req, res) {
         });
       }
   });
-   // todoList.push(req.query);
-   // res.send(JSON.stringify(todoList));
 });
 
 
 server.get("/deletePic", function (req, res) {
-   //var id = parseInt(req.query.id);
    var id = req.query.id.toString();
    console.log(id);
    db.collection("data").remove({id: id}, function(err, result){
@@ -48,16 +44,12 @@ server.get("/deletePic", function (req, res) {
         });
       }
    });
-   // res.send(JSON.stringify(todoList));
-   // todoList.splice(index,1);
 });
 
 server.get("/getPic", function (req, res) {
   db.collection("data").find({}).toArray( function(err, result) {
     res.send(JSON.stringify(result));
   });
-
-   // res.send(JSON.stringify(todoList));
 });
 
 server.use(methodOverride());
