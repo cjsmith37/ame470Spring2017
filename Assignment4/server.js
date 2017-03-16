@@ -13,7 +13,8 @@ server.get("/", function (req, res) {
 });
 
 
-var picList = [];
+var pictureList = [];
+
 
 
 server.get("/addPic", function (req, res) {
@@ -46,7 +47,7 @@ server.get("/deletePic", function (req, res) {
    });
 });
 
-server.get("/getPic", function (req, res) {
+server.get("/getPics", function (req, res) {
   db.collection("data").find({}).toArray( function(err, result) {
     res.send(JSON.stringify(result));
   });
