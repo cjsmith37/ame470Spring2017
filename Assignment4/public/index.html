@@ -4,9 +4,9 @@
   <script src='asyncReq.js'> </script>
   <script>
     function addNew(){
-      var todo = prompt("Enter New Picture Link:");
+      var todo = prompt("Enter New Picture:");
       var id = new Date().getTime();
-      var url = "./addPic" + "?id=" + id + "&pic=" + todo;
+      var url = "./addPic" + "?id=" + id + "&pic=" + pic;
       loadFile(url ,function(d){
         formatPics(JSON.parse(d));
       });
@@ -16,7 +16,7 @@
       if(flag){
         var url = "./deletePic" + "?id=" + index;
         loadFile(url ,function(d){
-          formatTodos(JSON.parse(d));
+          formatPics(JSON.parse(d));
         });
       }
     }
@@ -37,7 +37,7 @@
     }
     function start()
     {
-      var url = "./getPic";
+      var url = "./getPics";
       loadFile(url ,function(d){
         console.log(d);
         formatPics(JSON.parse(d));
@@ -62,7 +62,7 @@
 </head>
 
 <body onload='start()'>
-  <h1> Image List </h1>
+  <h1> Picture Collection </h1>
   <button id='addButton' onclick='addNew()'> Add </button>
   <ol id='picListWrapper'> </ol>
 </body>
