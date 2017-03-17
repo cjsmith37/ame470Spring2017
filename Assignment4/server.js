@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
 var hostname = process.env.HOSTNAME || 'localhost';
-var port = 8080;
+var port = 8083;
 
 var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/picturedb');
 
@@ -20,7 +20,7 @@ var pictureList = [];
 server.get("/addPic", function (req, res) {
   db.collection("data").insert(req.query, function(err, result){
       if(err){
-        res.send("error"); 
+        res.send("error");
       }
       else{
         db.collection("data").find({}).toArray( function(err1, result1) {
@@ -37,7 +37,7 @@ server.get("/deletePic", function (req, res) {
    db.collection("data").remove({id: id}, function(err, result){
      console.log(err);
       if(err){
-        res.send("error"); 
+        res.send("error");
       }
       else{
         db.collection("data").find({}).toArray( function(err1, result1) {
