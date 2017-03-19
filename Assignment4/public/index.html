@@ -5,12 +5,14 @@
   <script>
     function addNew(){
       var pic = prompt("Enter New Picture:");
+      if (person != null) {
+        document.getElementById("picListWrapper").innerHTML =
+        "<img src=' " + pic + "'>";
       var id = new Date().getTime();
       var url = "./addPic" + "?id=" + id + "&pic=" + pic;
       loadFile(url ,function(d){
         formatPics(JSON.parse(d));
       });
-      document.getElementById("picListWrapper").innerHTML = "<img src=' " + pic + "'>";
     }
     function deletePic(index){
       var flag = confirm("Are you sure you want to delete?");
