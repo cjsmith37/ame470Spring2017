@@ -31,7 +31,7 @@
         for(var i = 0; i < list.length; i++){
           markup += "<ul>" + list[i].pic +
             "<button class='delButton' onclick='deletePic(" + list[i].id + ")'> X </button>"+
-            "</ul>";
+            pic + "</ul>";
         }
       }
       document.getElementById("picListWrapper").innerHTML = markup;
