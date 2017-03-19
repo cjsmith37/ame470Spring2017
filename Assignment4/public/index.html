@@ -8,6 +8,7 @@
       if (person != null) {
         document.getElementById("picListWrapper").innerHTML =
         "<img src=' " + pic + "'>";
+      }
       var id = new Date().getTime();
       var url = "./addPic" + "?id=" + id + "&pic=" + pic;
       loadFile(url ,function(d){
