@@ -7,8 +7,6 @@
       var pic = prompt("Enter New Picture:");
       var id = new Date().getTime();
       var url = "./addPic" + "?id=" + id + "&pic=" + pic;
-      var img = document.createElement("img");
-      img.src = src;
       loadFile(url ,function(d){
         formatPics(JSON.parse(d));
       });
@@ -49,11 +47,14 @@
   <style>
       h1{
         text-align: center;
-        font-family: lucida;
+        font-family: helvetica;
       }
       #addButton
       {
         position: absolute;
+        border: none;
+        color: white;
+        background-color: green;
         top: 20px;
         right: 20px;
       }
@@ -73,7 +74,7 @@
 
 <body onload='start()'>
   <h1> Picture Collection </h1>
-  <button id='addButton' onclick='addNew(src)'> Add </button>
+  <button id='addButton' onclick='addNew()'> Add Picture </button>
   <ol id='picListWrapper'> </ol>
 </body>
 
