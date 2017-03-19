@@ -10,7 +10,7 @@
       loadFile(url ,function(d){
         formatPics(JSON.parse(d));
       });
-      document.getElementById("addButton").innerHTML = "<img src=' " + pic + " '>";
+
     }
     function deletePic(index){
       var flag = confirm("Are you sure you want to delete?");
@@ -34,6 +34,10 @@
             "</ul>";
         }
       }
+      if (pic != null) {
+        document.getElementById("picListWrapper").innerHTML =
+        "<img src=' " + pic + "'>";
+    }
       document.getElementById("picListWrapper").innerHTML = markup;
     }
     function start()
