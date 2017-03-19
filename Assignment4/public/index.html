@@ -34,7 +34,7 @@
         }
       }
       document.getElementById("picListWrapper").innerHTML = markup;
-      document.getElementById("picListWrapper").src = pic;
+      document.getElementById("addButton").src = pic;
     }
     function start()
     {
@@ -90,7 +90,7 @@
 
 <body onload='start()'>
   <h1> Picture Collection </h1>
-  <button id='addButton' onclick='addNew(" + <img src=""> + ")'> Add Picture </button>
+  <button id='addButton' onclick='addNew(" + <img src=''> + ")'> Add Picture </button>
   <ol id='picListWrapper'> </ol>
 </body>
 
