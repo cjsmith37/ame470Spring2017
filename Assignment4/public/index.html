@@ -3,9 +3,10 @@
 <head>
   <script src='asyncReq.js'> </script>
   <script>
-    function addNew(){
+    function addNew(a){
       var pic = prompt("Enter New Picture:");
       var id = new Date().getTime();
+      document.getElementById("img").src=a;
 
       var url = "./addPic" + "?id=" + id + "&pic=" + pic;
       loadFile(url ,function(d){
@@ -56,9 +57,10 @@
         border: none;
         color: white;
         background-color: green;
-        size: 50px;
         top: 20px;
         right: 20px;
+        height: 100px;
+        width: 50px;
       }
       .delButton
       {
@@ -70,6 +72,14 @@
       }
       ul{
         list-style-type: none;
+      }
+      #picListWrapper {
+        height: 90%;
+        width: 90%;
+        position: absolute;
+        margin-left: 5%;
+        margin-top: 1%;
+        margin-bottom: 1%;
       }
   </style>
 </head>
