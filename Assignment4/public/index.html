@@ -3,11 +3,9 @@
 <head>
   <script src='asyncReq.js'> </script>
   <script>
-    function addNew(a){
+    function addNew(){
       var pic = prompt("Enter New Picture:");
       var id = new Date().getTime();
-      document.getElementById("img").src=a;
-
       var url = "./addPic" + "?id=" + id + "&pic=" + pic;
       loadFile(url ,function(d){
         formatPics(JSON.parse(d));
@@ -47,7 +45,7 @@
     }
   </script>
   <style>
-      h1{
+      h1 {
         text-align: center;
         font-family: helvetica;
       }
@@ -70,7 +68,7 @@
           color: white;
           background-color: grey;
       }
-      ul{
+      ul {
         list-style-type: none;
       }
       #picListWrapper {
@@ -78,15 +76,15 @@
         width: 50%;
         position: absolute;
         margin-left: 5%;
-        margin-top: 1%;
-        margin-bottom: 1%;
+        margin-top: 5%;
+        margin-bottom: 5%;
       }
   </style>
 </head>
 
 <body onload='start()'>
   <h1> Picture Collection </h1>
-  <button id='addButton' onclick='addNew(a)'> Add Picture </button>
+  <button id='addButton' onclick='addNew()'> Add Picture </button>
   <ol id='picListWrapper'> </ol>
 </body>
 
