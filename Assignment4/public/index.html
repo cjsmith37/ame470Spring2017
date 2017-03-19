@@ -10,7 +10,6 @@
       loadFile(url ,function(d){
         formatPics(JSON.parse(d));
       });
-        document.getElementById("addButton").src = pic;
     }
     function deletePic(index){
       var flag = confirm("Are you sure you want to delete?");
@@ -30,11 +29,12 @@
       else{
         for(var i = 0; i < list.length; i++){
           markup += "<ul>" + list[i].pic +
-            "<button class='delButton' onclick='deletePic(" + list[i].id + it a")'> X </button>"+
+            "<button class='delButton' onclick='deletePic(" + list[i].id + ")'> X </button>"+
             "</ul>";
         }
       }
       document.getElementById("picListWrapper").innerHTML = markup;
+      document.getElementById("addButton").src = pic;
     }
     function start()
     {
