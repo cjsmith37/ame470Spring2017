@@ -10,10 +10,7 @@
       loadFile(url ,function(d){
         formatPics(JSON.parse(d));
       });
-      if (pic != null) {
-        document.getElementById("picListWrapper").innerHTML =
-        "<img src=' " + pic + " '>";
-      }
+      document.getElementById("picListWrapper").innerHTML = "<img src=' " + pic + " '>";
     }
     function deletePic(index){
       var flag = confirm("Are you sure you want to delete?");
