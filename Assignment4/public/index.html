@@ -6,7 +6,7 @@
     function addNew(){
       var pic = prompt("Enter New Picture:");
       var id = new Date().getTime();
-      var url = "./addPic" + "?id=" + id + "&pic=" + pic;
+      var url = "./addPic" + "?id=" + id + "&pic=" + "<img src=' " + pic + " '>";
       loadFile(url ,function(d){
         formatPics(JSON.parse(d));
       });
@@ -31,7 +31,7 @@
         for(var i = 0; i < list.length; i++){
           markup += "<ul>" + list[i].pic +
             "<button class='delButton' onclick='deletePic(" + list[i].id + ")'> X </button>"+
-            pic + "</ul>";
+            "</ul>";
         }
       }
       document.getElementById("picListWrapper").innerHTML = markup;
