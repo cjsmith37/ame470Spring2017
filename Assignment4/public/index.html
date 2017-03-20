@@ -1,7 +1,8 @@
 <!doctype html>
 <html>
 <head>
-  <script src='asyncReq.js'> </script>
+	<script src='asyncReq.js'> </script>
+	<script src="https://code.jquery.com/jquery-3.2.0.js" integrity="sha256-wPFJNIFlVY49B+CuAIrDr932XSb6Jk3J1M22M3E2ylQ=" crossorigin="anonymous"></script>
   <script>
     function addNew(){
       var picURL = prompt("Enter New Picture Source URL:");
@@ -33,20 +34,25 @@
     {
       var markup = "";
       if(list.length == 0){
-        markup = "No pictures yet"
+		  markup = "No pictures yet"
+		  document.getElementById("picListWrapper").innerHTML = markup;
+		  return;
       }
-      else{
         for(var i = 0; i < list.length; i++){
           //markup += "<ul>" + "<br>" + list[i].pic + "<button class='delButton' onclick='deletePic(" + list[i].id + ")'> X </button>" + "<br>" + "</ul>";
 		  markup += "<li> <a href='javascript:picSelected(" + i + ")'>" + list[i].name + "</a></li>";
         }
       }
-      document.getElementById("picListWrapper").innerHTML = markup;
+      
+	  picSelected()
     }
 	
 	var currSel = 0;
-	function picSelected(id){
+	function picSelected(id, index){
 		currSel = id;
+		$("#picListWrapper li a").removeClass("selected");
+		$("#picListWrapper li:nth-of-type(" + index + ")").addClass("selected");
+		
 		var url = "./getPic?id=" + id;
 		loadFile(url, function(d){
 			var data = JSON.parse(d);
