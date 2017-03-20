@@ -4,18 +4,22 @@
   <script src='asyncReq.js'> </script>
   <script>
     function addNew(){
-      var pic = prompt("Enter New Picture Source URL:");
+      var picURL = prompt("Enter New Picture Source URL:");
       var name = prompt("Picture Name:");
-      var link = prompt("Picture Site URL:");
       var desc = prompt("Enter a picture description:");
       var id = new Date().getTime();
-	  if(pic.indexOf("http") >=0 && pic.length > 10){
-	  var url = "./addPic" + "?id=" + id + "&pic=" + "<img src=' " + pic + " '>" + "<a href=' " + link + " '>" + name + "</a>" + desc;
+	  if(picURL.indexOf("http") >=0 && picURL.length > 10){
+		  var url = "./addPic" + "?id=" + id + "&url=" + picURL + "&name=Untitled";
 	  loadFile(url ,function(d){
         formatPics(JSON.parse(d));
       });
   	 }
     }
+	
+	function deleteImage(){
+		deletePic(currSel);
+	}
+	
     function deletePic(index){
       var flag = confirm("Are you sure you want to delete?");
       if(flag){
