@@ -53,6 +53,13 @@ server.get("/getPics", function (req, res) {
   });
 });
 
+server.get("/getPic", function (req, res) {
+	var id = req.query.id.toString();
+	db.collection("data").findOne({id:id}, function(err, result) {
+		res.send(JSON.stringify(result));
+	});
+});
+
 server.use(methodOverride());
 server.use(bodyParser());
 server.use(express.static(__dirname + '/public'));

@@ -5,12 +5,12 @@
   <script>
     function addNew(){
       var pic = prompt("Enter New Picture Source URL:");
-      var title = prompt("Picture Title:");
+      var name = prompt("Picture Name:");
       var link = prompt("Picture Site URL:");
       var desc = prompt("Enter a picture description:");
       var id = new Date().getTime();
 	  if(pic.indexOf("http") >=0 && pic.length > 10){
-	  var url = "./addPic" + "?id=" + id + "&pic=" + "<img src=' " + pic + " '>" + "<br>" + "<a href=' " + link + " '>" + title + "</a>" + "<br>" + desc;
+	  var url = "./addPic" + "?id=" + id + "&pic=" + "<img src=' " + pic + " '>" + "<a href=' " + link + " '>" + name + "</a>" + desc;
 	  loadFile(url ,function(d){
         formatPics(JSON.parse(d));
       });
@@ -33,12 +33,24 @@
       }
       else{
         for(var i = 0; i < list.length; i++){
-          markup += "<ul>" + "<br>" + list[i].pic + "<button class='delButton' onclick='deletePic(" + list[i].id +
-          ")'> X </button>" + "<br>" + "</ul>";
+          //markup += "<ul>" + "<br>" + list[i].pic + "<button class='delButton' onclick='deletePic(" + list[i].id + ")'> X </button>" + "<br>" + "</ul>";
+		  markup += "<li> <a href='javascript:picSelected(" + i + ")'>" + list[i].name + "</a></li>";
         }
       }
       document.getElementById("picListWrapper").innerHTML = markup;
     }
+	
+	var currSel = 0;
+	function picSelected(id){
+		currSel = id;
+		var url = "./getPic?id=" + id;
+		loadFile(url, function(d){
+			var data = JSON.parse(d);
+			document.getElementById("image").style.backgroundImage = "url(" + data.url + ")";
+			document.getElementById("title").style.innerHTML = data.name;
+		});
+	}
+	
     function start()
     {
       var url = "./getPics";
@@ -69,7 +81,7 @@
           float: left;
           border: none;
           color: white;
-          background-color: grey;
+          background-color: gray;
       }
       ul {
         list-style-type: none;
@@ -79,7 +91,7 @@
         border-radius: 5px;
         overflow: hidden;
       }
-      #picListWrapper {
+      #picListWrapper{
         height: 90%;
         width: 90%;
         position: absolute;
@@ -87,6 +99,13 @@
         margin-top: 5%;
         margin-bottom: 5%;
       }
+	  #image{
+		  height:200px;
+		  width:100%;
+		  background-size: contain;
+		  background-position: 50%;
+		  background-repeat: no-repeat;
+	  }
   </style>
 </head>
 
