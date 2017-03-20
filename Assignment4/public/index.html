@@ -9,7 +9,7 @@
       var link = prompt("Picture URL:");
       var desc = prompt("Enter a picture description:")
       var id = new Date().getTime();
-      var url = "./addPic" + "?id=" + id + "&pic=" + "<img src=' " + pic + " '>" + "<br>" + "<a href=' " + link + " '>" + title + "<br>" + desc;
+      var url = "./addPic" + "?id=" + id + "&pic=" + "<img src=' " + pic + " '>" + "<br>" + "<a href=' " + link + " '>" + title + "</a>" + "<br>" + desc;
       loadFile(url ,function(d){
         formatPics(JSON.parse(d));
       });
@@ -66,8 +66,8 @@
       }
       .delButton
       {
+          position: absolute;
           float: left;
-          position: static;
           border: none;
           color: white;
           background-color: grey;
