@@ -4,9 +4,10 @@
   <script src='asyncReq.js'> </script>
   <script>
     function addNew(){
-      var pic = prompt("Enter New Picture:","Picture title:","Picture URL:");
+      var pic = prompt("Enter New Picture:");
+      var title = prompt("Picture Title:");
       var id = new Date().getTime();
-      var url = "./addPic" + "?id=" + id + "&pic=" + "<img src=' " + pic + " '>";
+      var url = "./addPic" + "?id=" + id + "&pic=" + "<img src=' " + pic + " '>" + title;
       loadFile(url ,function(d){
         formatPics(JSON.parse(d));
       });
