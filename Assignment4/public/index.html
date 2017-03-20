@@ -7,8 +7,9 @@
       var pic = prompt("Enter New Picture:");
       var title = prompt("Picture Title:");
       var link = prompt("Picture URL:");
+      var desc = prompt("Enter a picture description:")
       var id = new Date().getTime();
-      var url = "./addPic" + "?id=" + id + "&pic=" + "<img src=' " + pic + " '>" + "<br>" + "<a href=' " + link + " '>" + title;
+      var url = "./addPic" + "?id=" + id + "&pic=" + "<img src=' " + pic + " '>" + "<br>" + "<a href=' " + link + " '>" + title + "<br>" + desc;
       loadFile(url ,function(d){
         formatPics(JSON.parse(d));
       });
