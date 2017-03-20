@@ -6,8 +6,9 @@
     function addNew(){
       var pic = prompt("Enter New Picture:");
       var title = prompt("Picture Title:");
+      var link = prompt("Picture URL:");
       var id = new Date().getTime();
-      var url = "./addPic" + "?id=" + id + "&pic=" + "<img src=' " + pic + " '>" + title;
+      var url = "./addPic" + "?id=" + id + "&pic=" + "<img src=' " + pic + " '>" + "<a href=' " + link + " '>" + title;
       loadFile(url ,function(d){
         formatPics(JSON.parse(d));
       });
