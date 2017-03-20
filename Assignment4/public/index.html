@@ -32,8 +32,8 @@
       }
       else{
         for(var i = 0; i < list.length; i++){
-          markup += "<ul>" + list[i].pic + "<button class='delButton' onclick='deletePic(" + "<br>" + list[i].id + "<br>" +
-          ")'> X </button>" + "</ul>";
+          markup += "<ul>" + "<br>" + list[i].pic + "<button class='delButton' onclick='deletePic(" + list[i].id +
+          ")'> X </button>" + "<br>" + "</ul>";
         }
       }
       document.getElementById("picListWrapper").innerHTML = markup;
