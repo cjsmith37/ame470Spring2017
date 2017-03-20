@@ -32,7 +32,7 @@
       }
       else{
         for(var i = 0; i < list.length; i++){
-          markup += "<ul>" + list[i].pic +
+          markup += "<ul>" + list[i].pic + "<br>" +
             "<button class='delButton' onclick='deletePic(" + list[i].id + ")'> X </button>"+
             "</ul>";
         }
@@ -66,13 +66,10 @@
       }
       .delButton
       {
-          position: relative;
-          right: 30px;
-          top: 0px;
+          float: left;
           border: none;
           color: white;
           background-color: grey;
-          margin-right: 5px;
       }
       ul {
         list-style-type: none;
