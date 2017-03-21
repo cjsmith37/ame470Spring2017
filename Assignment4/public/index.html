@@ -2,7 +2,7 @@
 <html>
 <head>
 	<script src='asyncReq.js'> </script>
-	<script src="https://code.jquery.com/jquery-3.2.0.js" integrity="sha256-wPFJNIFlVY49B+CuAIrDr932XSb6Jk3J1M22M3E2ylQ=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
   <script>
     function addNew(){
       var picURL = prompt("Enter New Picture Source URL:");
@@ -40,24 +40,23 @@
       }
         for(var i = 0; i < list.length; i++){
           //markup += "<ul>" + "<br>" + list[i].pic + "<button class='delButton' onclick='deletePic(" + list[i].id + ")'> X </button>" + "<br>" + "</ul>";
-		  markup += "<li> <a href='javascript:picSelected(" + i + ")'>" + list[i].name + "</a></li>";
+		  markup += "<li> <a href='javascript:picSelected(" + list[i].id + "," + (i+1) +")'>" + list[i].name + "</a></li>";
         }
-      }
-      
-	  picSelected()
+		document.getElementById("picListWrapper").innerHTML = markup;
+		picSelected(list[0].id);
     }
 	
 	var currSel = 0;
 	function picSelected(id, index){
 		currSel = id;
 		$("#picListWrapper li a").removeClass("selected");
-		$("#picListWrapper li:nth-of-type(" + index + ")").addClass("selected");
+		$("#picListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
 		
 		var url = "./getPic?id=" + id;
 		loadFile(url, function(d){
 			var data = JSON.parse(d);
 			document.getElementById("image").style.backgroundImage = "url(" + data.url + ")";
-			document.getElementById("title").style.innerHTML = data.name;
+			document.getElementById("title").innerHTML = data.name;
 		});
 	}
 	
@@ -115,6 +114,10 @@
 		  background-size: contain;
 		  background-position: 50%;
 		  background-repeat: no-repeat;
+	  }
+	  .selected{
+		  color: green;
+		  text-transform: italics;
 	  }
   </style>
 </head>
