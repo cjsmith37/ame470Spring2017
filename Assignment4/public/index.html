@@ -24,7 +24,7 @@
         if(flag){
           var url = "./deletePic" + "?id=" + index;
           loadFile(url ,function(d){
-            formatTodos(JSON.parse(d));
+            formatPics(JSON.parse(d));
           });
         }
       }
