@@ -44,17 +44,18 @@
         imageSelected(list[0].id);
       }
       var currSel = 0;
-      function imageSelected(id, index){
-          currSel = id;
-          $("#picListWrapper li a").removeClass("selected");
-          $("#picListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
-          var url = "./getPic?id=" + id;
-          loadFile(url ,function(d){
-            var data = JSON.parse(d);
-            document.getElementById("theTitle").innerHTML = data.name;
-            document.getElementById("theImage").style.backgroundImage = "url(" + data.url + ")";
-          });
-      }
+	  function imageSelected(id, index){
+	          currSel = id;
+	          $("#picListWrapper li a").removeClass("selected");
+	          $("#picListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
+	          var url = "./getPic?id=" + id;
+	          loadFile(url ,function(d){
+	            var data = JSON.parse(d);
+	            document.getElementById("theTitle").innerHTML = data.name;
+	            document.getElementById("theImage").style.backgroundImage = "url(" + data.url + ")";
+	          });
+	      }
+      
       function start()
       {
         var url = "./getPics";
