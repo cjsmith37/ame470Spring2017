@@ -33,7 +33,7 @@
         var markup = "";
         if(list.length == 0){
           markup = "No images yet"
-          document.getElementById("picpicListWrapper").innerHTML = markup;
+          document.getElementById("picListWrapper").innerHTML = markup;
           return;
         }
         for(var i = 0; i < list.length; i++){
@@ -83,9 +83,6 @@
       .delButton
       {
           float: left;
-          border: none;
-          color: white;
-          background-color: gray;
       }
       ul {
         list-style-type: none;
@@ -103,7 +100,7 @@
         margin-top: 5%;
         margin-bottom: 5%;
       }
-	  #image{
+	  #theImage{
 		  height:200px;
 		  width:100%;
 		  background-size: contain;

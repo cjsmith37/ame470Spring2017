@@ -13,7 +13,7 @@ server.get("/", function (req, res) {
 });
 
 
-var pictureList = [];
+var picList = [];
 
 
 
