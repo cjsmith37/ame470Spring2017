@@ -18,33 +18,33 @@ var picList = [];
 
 
 server.get("/addPic", function (req, res) {
-  db.collection("data").insert(req.query, function(err, result){
-      if(err){
-        res.send("error");
-      }
-      else{
-        db.collection("data").find({}).toArray( function(err1, result1) {
-          res.send(JSON.stringify(result1));
-        });
-      }
-  });
+    db.collection("data").insert(req.query, function(err, result){
+         if(err){
+           res.send("error"); 
+         }
+         else{
+           db.collection("data").find({}).toArray( function(err1, result1) {
+             res.send(JSON.stringify(result1));
+           });
+         }
+     });
 });
 
 
 server.get("/deletePic", function (req, res) {
-   var id = req.query.id.toString();
-   console.log(id);
-   db.collection("data").remove({id: id}, function(err, result){
-     console.log(err);
-      if(err){
-        res.send("error");
-      }
-      else{
-        db.collection("data").find({}).toArray( function(err1, result1) {
-          res.send(JSON.stringify(result1));
-        });
-      }
-   });
+    var id = req.query.id.toString();
+      console.log(id);
+      db.collection("data").remove({id: id}, function(err, result){
+        console.log(err);
+         if(err){
+           res.send("error"); 
+         }
+         else{
+           db.collection("data").find({}).toArray( function(err1, result1) {
+             res.send(JSON.stringify(result1));
+           });
+         }
+      });
 });
 
 server.get("/getPics", function (req, res) {
