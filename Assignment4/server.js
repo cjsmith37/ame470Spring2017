@@ -13,11 +13,16 @@ server.get("/", function (req, res) {
 });
 
 
-var picList = [];
+server.get("/", function (req, res) {
+      res.redirect("/index.html");
+});
+
+
+var todoList = [];
 
 
 
-server.get("/addPic", function (req, res) {
+server.get("/addTodo", function (req, res) {
   db.collection("data").insert(req.query, function(err, result){
       if(err){
         res.send("error");
@@ -31,7 +36,8 @@ server.get("/addPic", function (req, res) {
 });
 
 
-server.get("/deletePic", function (req, res) {
+server.get("/deleteTodo", function (req, res) {
+   //var id = parseInt(req.query.id);
    var id = req.query.id.toString();
    console.log(id);
    db.collection("data").remove({id: id}, function(err, result){
@@ -47,13 +53,13 @@ server.get("/deletePic", function (req, res) {
    });
 });
 
-server.get("/getPics", function (req, res) {
+server.get("/getTodos", function (req, res) {
   db.collection("data").find({}).toArray( function(err, result) {
     res.send(JSON.stringify(result));
   });
 });
 
-server.get("/getPic", function (req, res) {
+server.get("/getTodo", function (req, res) {
   var id = req.query.id.toString();
   db.collection("data").findOne({id:id}, function(err, result) {
     res.send(JSON.stringify(result));
