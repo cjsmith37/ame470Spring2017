@@ -51,7 +51,16 @@
 
         var url = "./getPic?id=" + id;
         loadFile(url ,function(d){
-          var data = JSON.stringify(d);
+          d = d.replace(/\\n/g, "\\n")
+               .replace(/\\'/g, "\\'")
+               .replace(/\\"/g, '\\"')
+               .replace(/\\&/g, "\\&")
+               .replace(/\\r/g, "\\r")
+               .replace(/\\t/g, "\\t")
+               .replace(/\\b/g, "\\b")
+               .replace(/\\f/g, "\\f");
+               d = s.replace(/[\u0000-\u0019]+/g,""); 
+          var data = JSON.parse(d);
           document.getElementById("theTitle").innerHTML = data.name;
           document.getElementById("theImage").style.backgroundImage = "url(' + data.url + ')";
         });
