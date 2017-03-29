@@ -30,7 +30,7 @@
     }
     function formatPics(list)
     {
-      var markup = "";
+      var markup = ""
       if(list.length == 0){
         markup = "No images yet";
         document.getElementById("picListWrapper").innerHTML = markup;
@@ -45,7 +45,7 @@
     }
     var currSel = 0;
     function imageSelected(id, index){
-        currSel = id;
+        var id = currSel;
         $("#picListWrapper li a").removeClass("selected");
         $("#picListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
 
