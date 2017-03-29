@@ -45,7 +45,7 @@
     }
     var currSel = 0;
     function imageSelected(id, index){
-        var id = currSel;
+        currSel = id;
         $("#picListWrapper li a").removeClass("selected");
         $("#picListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
 
@@ -69,12 +69,13 @@
   </script>
   <style>
       .selected{
-        color: red;
+        color: green;
         text-transform: uppercase;
       }
 
       h1{
         text-align: center;
+        font-family: helvetica; 
       }
       #addButton
       {
