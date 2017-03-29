@@ -39,7 +39,7 @@
         return;
       }
       for(var i = 0; i < list.length; i++){
-        markup += "<li> <a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name +
+        markup += "<li><a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name +
             "</a></li>";
       }
       document.getElementById("picListWrapper").innerHTML = markup;
@@ -50,7 +50,8 @@
         var currSel = id;
         $("#picListWrapper li a").removeClass("selected");
         $("#picListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
-        var url = "./getPic" + "?id=" + id;
+
+        var url = "./getPic?id=" + id;
         loadFile(url ,function(d){
           var data = JSON.parse(d);
           document.getElementById("theTitle").innerHTML = data.name;
@@ -96,9 +97,9 @@
 </head>
 
 <body onload='start()'>
-  <h1> Images </h1>
-  <button id='addButton' onclick='addNew()'> Add using URL </button>
-  <ol id='picListWrapper'> </ol>
+  <h1>Picture List</h1>
+  <button id='addButton' onclick='addNew()'> Add URL </button>
+  <ul id='picListWrapper'> </ul>
   <div id='theDetails'>
     <h1 id='theTitle'></h1>
     <div id='theImage'></div>
