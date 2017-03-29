@@ -52,7 +52,7 @@
         var url = "./getPic" + "?id=" + id;
 
         loadFile(url ,function(d){
-          var data = JSON.parse(d);
+          var data = d;
           document.getElementById("theTitle").innerHTML = data.name;
           document.getElementById("theImage").style.backgroundImage = "url(' + data.url + ')";
         });
