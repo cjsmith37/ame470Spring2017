@@ -47,7 +47,7 @@
     function imageSelected(id, index){
         currSel = id;
         $("#picListWrapper li a").removeClass("selected");
-        $("#picListWrapper li:first(' + index + ') a").addClass("selected");
+        $("#picListWrapper li:eq(index) a").addClass("selected");
 
         var url = "./getPic?id=" + id;
         loadFile(url ,function(d){
