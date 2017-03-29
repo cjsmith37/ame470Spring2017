@@ -59,7 +59,7 @@
                .replace(/\\t/g, "\\t")
                .replace(/\\b/g, "\\b")
                .replace(/\\f/g, "\\f");
-               d = s.replace(/[\u0000-\u0019]+/g,""); 
+               d = d.replace(/[\u0000-\u0019]+/g,"");
           var data = JSON.parse(d);
           document.getElementById("theTitle").innerHTML = data.name;
           document.getElementById("theImage").style.backgroundImage = "url(' + data.url + ')";
