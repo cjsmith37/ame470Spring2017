@@ -47,7 +47,7 @@
     }
     var currSel = 0;
     function imageSelected(id, index){
-        var currSel = id;
+        currSel = id;
         $("#picListWrapper li a").removeClass("selected");
         $("#picListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
 
@@ -98,8 +98,8 @@
 
 <body onload='start()'>
   <h1>Picture List</h1>
-  <button id='addButton' onclick='addNew()'> Add URL </button>
-  <ul id='picListWrapper'> </ul>
+  <button id='addButton' onclick='addNew()'> Add </button>
+  <ol id='picListWrapper'> </ol>
   <div id='theDetails'>
     <h1 id='theTitle'></h1>
     <div id='theImage'></div>
