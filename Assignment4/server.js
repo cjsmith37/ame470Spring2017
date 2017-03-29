@@ -18,11 +18,11 @@ server.get("/", function (req, res) {
 });
 
 
-var todoList = [];
+var picList = [];
 
 
 
-server.get("/addTodo", function (req, res) {
+server.get("/addPic", function (req, res) {
   db.collection("data").insert(req.query, function(err, result){
       if(err){
         res.send("error");
@@ -36,8 +36,7 @@ server.get("/addTodo", function (req, res) {
 });
 
 
-server.get("/deleteTodo", function (req, res) {
-   //var id = parseInt(req.query.id);
+server.get("/deletePic", function (req, res) {
    var id = req.query.id.toString();
    console.log(id);
    db.collection("data").remove({id: id}, function(err, result){
@@ -53,13 +52,13 @@ server.get("/deleteTodo", function (req, res) {
    });
 });
 
-server.get("/getTodos", function (req, res) {
+server.get("/getPics", function (req, res) {
   db.collection("data").find({}).toArray( function(err, result) {
     res.send(JSON.stringify(result));
   });
 });
 
-server.get("/getTodo", function (req, res) {
+server.get("/getPic", function (req, res) {
   var id = req.query.id.toString();
   db.collection("data").findOne({id:id}, function(err, result) {
     res.send(JSON.stringify(result));
