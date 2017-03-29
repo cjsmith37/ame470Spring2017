@@ -51,7 +51,7 @@
         var currSel = id;
         $("#picListWrapper li a").removeClass("selected");
         $("#picListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
-        var url = "./getPic?id=" + id;
+        var url = "./getPic" + "?id=" + id;
         loadFile(url ,function(d){
           var data = JSON.parse(d);
           document.getElementById("theTitle").innerHTML = data.name;
@@ -98,7 +98,7 @@
 <body onload='start()'>
   <h1> Images </h1>
   <button id='addButton' onclick='addNew()'> Add using URL </button>
-  <li id='picListWrapper'> </li>
+  <ol id='picListWrapper'> </ol>
   <div id='theDetails'>
     <h1 id='theTitle'></h1>
     <div id='theImage'></div>
