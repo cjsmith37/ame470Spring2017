@@ -8,7 +8,7 @@
     function addNew(){
       var imageURL = prompt("Enter New Picture Source URL:");
       var id = new Date().getTime();
-      if(imageURL.indexOf("http") >=0 && imageURL.length > 10){
+      if(imageURL.indexOf("http") >=0 && imageURL.length >= 10){
         var url = "./addPic" + "?id=" + id + "&url=" + imageURL + "&name=Untitled";
         loadFile(url ,function(d){
           formatPics(JSON.parse(d));
