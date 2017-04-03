@@ -5,13 +5,6 @@
 <script src='asyncReq.js'> </script>
 <script src='https://code.jquery.com/jquery-3.2.0.min.js'> </script>
 <script>
-  function editImage(){
-    var url = document.getElementById("theImage").style.backgroundImage.replace('url("', "").replace('")','').replace("url('", "").replace("')",'');
-    console.log(url);
-    //console.log(url);
-    document.getElementById("DRFrame").src = "./demo/index.html#" + url;
-    document.getElementById("editWrapper").style.display = "block";
-  }
     function addNew(){
       var imageURL = prompt("Enter New Picture Source URL:");
       var id = new Date().getTime();
@@ -89,11 +82,6 @@
         top: 20px;
         right: 20px;
       }
-      #uploadButton{
-        position: absolute;
-        top: 20px;
-        right: 120px;
-      }
       .delButton
       {
           float: right;
@@ -105,29 +93,12 @@
         background-position: 50%;
         background-repeat: no-repeat;
       }
-      #editWrapper{
-        display: none;
-        background: rgba(0,0,0,.5);
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        top: 0px;
-        left: 0px;
-      }
-      #DRFrame{
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        top: 0px;
-        left: 0px;
-      }
   </style>
 </head>
 
 <body onload='start()'>
   <h1>Picture List</h1>
   <button id='addButton' onclick='addNew()'> Add </button>
-  <input id='uploadButton' type='file' onchange='uploadNew()'>
   <ol id='picListWrapper'> </ol>
   <div id='theDetails'>
     <h1 id='theTitle'></h1>
@@ -135,12 +106,7 @@
 
     <button onclick='deleteImage()'> Delete </button>
     <button onclick='renameImage()'> Rename </button>
-    <button onclick='editImage()'> Edit </button>
 
-  </div>
-
-  <div id='editWrapper'>
-    <iframe crossorigin='anonymous' id='DRFrame'> </iframe>
   </div>
 </body>
 
