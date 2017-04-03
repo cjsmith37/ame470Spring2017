@@ -8,7 +8,7 @@
   function editImage(){
     var url = document.getElementById("theImage").style.backgroundImage.replace('url("', "").replace('")','').replace("url('", "").replace("')",'');
     console.log(url);
-    console.log(url);
+    //console.log(url);
     document.getElementById("DRFrame").src = "./demo/index.html#" + url;
     document.getElementById("editWrapper").style.display = "block";
   }
@@ -44,8 +44,7 @@
         return;
       }
       for(var i = 0; i < list.length; i++){
-        markup += "<li><a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name +
-            "</a></li>";
+        markup += "<li><a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name + "</a></li>";
       }
       document.getElementById("picListWrapper").innerHTML = markup;
       imageSelected(list[0].id);
