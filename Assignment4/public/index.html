@@ -41,7 +41,7 @@
         return;
       }
       for(var i = 0; i < list.length; i++){
-        markup += "<li> <a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name + "</li></a>";
+        markup += "<li> <a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name + "</li>";
       }
       document.getElementById("picListWrapper").innerHTML = markup;
       imageSelected(list[0].id);
