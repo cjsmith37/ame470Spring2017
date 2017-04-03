@@ -6,10 +6,17 @@
 <script src='https://code.jquery.com/jquery-3.2.0.min.js'> </script>
 <script>
 	//base64, .todataurl darkroomjs
+	
+	function cancelImageEdit()
+	{
+		document.getElementById("DRFrame").src = "";
+		document.getElementById("editWrapper").style.display = "none";
+	}	
+	
   function editImage(){
     var url = document.getElementById("theImage").style.backgroundImage.replace('url("', "").replace('")','').replace("url('", "").replace("')",'');
     console.log(url);
-    //console.log(url);
+    console.log(url);
     document.getElementById("DRFrame").src = "./demo/index.html#" + url;
     document.getElementById("editWrapper").style.display = "block";
   }
@@ -45,7 +52,7 @@
         return;
       }
       for(var i = 0; i < list.length; i++){
-        markup += "<li><a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name + "</a></li>";
+        markup += "<li> <a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name + "</a></li>";
       }
       document.getElementById("picListWrapper").innerHTML = markup;
       imageSelected(list[0].id);
@@ -115,6 +122,9 @@
         top: 0px;
         left: 0px;
       }
+	  #editWrapper button{
+	  	
+	  }
       #DRFrame{
         position: fixed;
         height: 100%;
@@ -128,7 +138,7 @@
 <body onload='start()'>
   <h1>Picture List</h1>
   <button id='addButton' onclick='addNew()'> Add </button>
-  <input id='uploadButton' type='file' onchange='uploadNew()'>
+  <input id='uploadButton' type="file" onchange='uploadNew()'>
   <ol id='picListWrapper'> </ol>
   <div id='theDetails'>
     <h1 id='theTitle'></h1>
@@ -142,6 +152,7 @@
 
   <div id='editWrapper'>
     <iframe crossorigin='anonymous' id='DRFrame'> </iframe>
+	<button style='right:0px'>
   </div>
 </body>
 

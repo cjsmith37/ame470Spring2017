@@ -40,7 +40,7 @@
         document.getElementById("picListWrapper").innerHTML = markup;
         return;
       }
-      for(var i = 0; i < list.length; i++){
+      for(var i = 1; i < list.length; i++){
         markup += "<li> <a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name + "</a></li>";
       }
       document.getElementById("picListWrapper").innerHTML = markup;
