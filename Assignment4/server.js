@@ -13,11 +13,6 @@ server.get("/", function (req, res) {
 });
 
 
-server.get("/", function (req, res) {
-      res.redirect("/index.html");
-});
-
-
 var picList = [];
 
 
