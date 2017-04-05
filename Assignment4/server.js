@@ -6,7 +6,6 @@ var methodOverride = require('method-override');
 var hostname = process.env.HOSTNAME || 'localhost';
 var port = 8083;
 
-
 var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/picturedb');
 
 server.get("/", function (req, res) {
@@ -46,7 +45,6 @@ server.get("/deletePic", function (req, res) {
       }
    });
 });
-
 
 server.get("/getPics", function (req, res) {
   db.collection("data").find({}).toArray( function(err, result) {

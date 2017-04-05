@@ -39,7 +39,7 @@
   <script>
     // get image to be edited from hash of the URL
     document.getElementById("target").src = window.location.hash.replace("#","");
-    
+
     setTimeout("initDR()", 5000);
     var dkrm;
     function initDR(){
@@ -66,7 +66,7 @@
           //var cropPlugin = this.plugins['crop'];
           // cropPlugin.selectZone(170, 25, 300, 300);
           //cropPlugin.requireFocus();
-          this.addEventListener('core:transformation', function() {  
+          this.addEventListener('core:transformation', function() {
             sessionStorage.setItem("editedImage", dkrm.canvas.toDataURL())
           });
         }
