@@ -47,6 +47,14 @@ server.get("/deletePic", function (req, res) {
    });
 });
 
+server.get("/renameImage", function (req, res) {
+  var id = req.query.id.toString();
+  db.collection("data").findOne({id:id}, function(err, result) {
+    res.send(JSON.stringify(result));
+  });
+});
+
+
 server.get("/getPics", function (req, res) {
   db.collection("data").find({}).toArray( function(err, result) {
     res.send(JSON.stringify(result));

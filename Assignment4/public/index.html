@@ -20,11 +20,18 @@
        deletePic(currSel);
     }
 
-    function renameImage() {
+    function renameImage(index) {
       var rename = prompt("Rename your image?", "");
-      if (rename != null) {
-          document.getElementById("theTitle").innerHTML = rename;
+      //if (rename != null) {
+    //      document.getElementById("theTitle").innerHTML = rename;
+      //}
+      if(rename){
+        var url = "./renameImage" + "?id=" + id + "&url=" + imageURL + "&name= + rename + ";
+        loadFile(url ,function(d){
+          formatPics(JSON.parse(d));
+        });
       }
+    }
     }
 
     function deletePic(index){
