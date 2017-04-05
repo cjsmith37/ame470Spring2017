@@ -48,10 +48,7 @@ server.get("/deletePic", function (req, res) {
 });
 
 server.get("/renameImage", function (req, res) {
-  var id = req.query.id.toString();
-  console.log(id);
-  db.collection("data").findOne({id:id}, function(err, result) {
-    console.log(err);
+db.collection("data").insert(req.query, function(err, result){
      if(err){
        res.send("error");
      }
