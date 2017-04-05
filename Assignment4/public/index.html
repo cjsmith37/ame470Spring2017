@@ -5,6 +5,18 @@
   <script src='asyncReq.js'> </script>
   <script src='https://code.jquery.com/jquery-3.2.0.min.js'> </script>
   <script>
+  function cancelImageEdit()
+  {
+    document.getElementById("DRFrame").src = "";
+    document.getElementById("editWrapper").style.display = "none";
+  }
+  function editImage(){
+    var url = document.getElementById("theImage").style.backgroundImage.replace('url("', "").replace('")','').replace("url('", "").replace("')",'');
+    console.log(url);
+    console.log(url);
+    document.getElementById("DRFrame").src = "./demo/index.html#" + url;
+    document.getElementById("editWrapper").style.display = "block";
+  }
     function addNew(){
       var imageURL = prompt("Enter New Image URL:");
       var id = new Date().getTime();
@@ -20,13 +32,13 @@
        deletePic(currSel);
     }
 
-    function renameImage(index) {
+    function renameImage() {
       var rename = prompt("Rename your image?", "");
       //if (rename != null) {
     //      document.getElementById("theTitle").innerHTML = rename;
       //}
       if(rename){
-        var url = "./getPic" + "?id=" + index + "&url=" + imageURL + "&name= + rename + ";
+        var url = "./addPic" + "?id=" + index + "&url=" + imageURL + "&name= + rename + ";
         loadFile(url ,function(d){
           formatPics(JSON.parse(d));
         });
@@ -86,6 +98,7 @@
       }
       h1{
         text-align: center;
+        font-family: helvetica;
       }
       #addButton
       {
@@ -104,6 +117,15 @@
         background-position: 50%;
         background-repeat: no-repeat;
       }
+      #DRFrame{
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      top: 0px;
+      left: 0px;
+    }
+
+
   </style>
 </head>
 
@@ -118,6 +140,10 @@
     <button onclick='deleteImage()'> Delete </button>
     <button onclick='renameImage()'> Rename </button>
 
+  </div>
+
+  <div id='editWrapper'>
+    <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
   </div>
 
 </body>
