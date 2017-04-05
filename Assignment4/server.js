@@ -49,10 +49,20 @@ server.get("/deletePic", function (req, res) {
 
 server.get("/renameImage", function (req, res) {
   var id = req.query.id.toString();
+  console.log(id);
   db.collection("data").findOne({id:id}, function(err, result) {
-    res.send(JSON.stringify(result));
+    console.log(err);
+     if(err){
+       res.send("error");
+     }
+     else{
+       db.collection("data").find({}).toArray( function(err1, result1) {
+         res.send(JSON.stringify(result1));
+       });
+     }
   });
 });
+
 
 
 server.get("/getPics", function (req, res) {
