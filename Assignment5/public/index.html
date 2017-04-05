@@ -71,7 +71,7 @@
 
 	function renameImage(id, index){
 		var rename = prompt("Rename this image:","");
-		$("imageSelected list[i].name").replaceWith("rename");
+		$("imageSelected li:nth-of-type("+ list.name +") a").replaceWith("rename");
 	}
 		
     function start()
