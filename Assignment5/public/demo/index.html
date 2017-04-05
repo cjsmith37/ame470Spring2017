@@ -70,6 +70,13 @@
             sessionStorage.setItem("editedImage", dkrm.canvas.toDataURL())
           });
         }
+		save: {
+		      callback: function() {
+		          this.darkroom.selfDestroy(); // Cleanup
+		          var newImage = dkrm.canvas.toDataURL();
+		          fileStorageLocation = newImage;
+		      }
+		  }
       });
     }
   </script>
