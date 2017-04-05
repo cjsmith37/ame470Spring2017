@@ -19,6 +19,15 @@
     {
        deletePic(currSel);
     }
+
+    function renameImage() {
+      var rename = prompt("Rename your image?", "");
+      if (rename != null) {
+          document.getElementById("theTitle").innerHTML =
+          "&name= " + rename;
+      }
+    }
+
     function deletePic(index){
       var flag = confirm("Are you sure you want to delete this?");
       if(flag){
