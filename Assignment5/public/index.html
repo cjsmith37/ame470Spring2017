@@ -72,9 +72,8 @@
 	function renameImage(index){
 		var rename = prompt("Rename this image:","");
 		if(rename != null){
-			document.geElementById("theTitle").innerHTML = data.name;
+			document.getElementById("theTitle").innerHTML = data.name;
 		}
-		$("url("+ data.name +")").replaceWith("rename");
 	}
 		
     function start()
