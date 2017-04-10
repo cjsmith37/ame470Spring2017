@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width, maximum-scale=1.0">
+  <script src='asyncReq.js'> </script>
+  <script src='https://code.jquery.com/jquery-3.2.0.min.js'> </script>
+  <script>
+    function cancelImageEdit()
+    {
+      document.getElementById("DRFrame").src = "";
+      document.getElementById("editWrapper").style.display = "none";
+    }
+    function editImage(){
+      var url = document.getElementById("theImage").style.backgroundImage.replace('url("', "").replace('")','').replace("url('", "").replace("')",'');
+      console.log(url);
+      console.log(url);
+      document.getElementById("DRFrame").src = "./demo/index.html#" + url;
+      document.getElementById("editWrapper").style.display = "block";
+    }
+	
+    function addNew(){
+      var imageURL = prompt("Enter New Image URL:");
+      var id = new Date().getTime();
+      if(imageURL.indexOf("http") >=0 && imageURL.length > 10){
+        var url = "./addPic" + "?id=" + id + "&url=" + imageURL + "&name=Untitled";
+        loadFile(url ,function(d){
+          formatPics(JSON.parse(d));
+        });
+      }
+    }
+    function deleteImage()
+    {
+       deletePic(currSel);
+    }
+    function deletePic(index){
+      var flag = confirm("Are you sure you want to delete this?");
+      if(flag){
+        var url = "./deletePic" + "?id=" + index;
+        loadFile(url ,function(d){
+          formatPics(JSON.parse(d));
+        });
+      }
+    }
+    function formatPics(list)
+    {
+      var markup = "";
+      if(list.length == 0){
+        markup = "No images yet"
+        document.getElementById("picListWrapper").innerHTML = markup;
+        return;
+      }
+      for(var i = 0; i < list.length; i++){
+        markup += "<li> <a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name +
+            "</a></li>";
+      }
+      document.getElementById("picListWrapper").innerHTML = markup;
+      imageSelected(list[0].id);
+    }
+    var currSel = 0;
+    function imageSelected(id, index){
+        currSel = id;
+        $("#picListWrapper li a").removeClass("selected");
+        $("#picListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
+        var url = "./getPic?id=" + id;
+        loadFile(url ,function(d){
+          var data = JSON.parse(d);
+          document.getElementById("theTitle").innerHTML = data.name;
+          document.getElementById("theImage").style.backgroundImage = "url(" + data.url + ")";
+        });
+    }
+
+	function renameImage(index){
+		var rename = prompt("Rename this image:","");
+		if(rename != null){
+			document.getElementById("theTitle").innerHTML = data.name;
+		}
+	}
+		
+    function start()
+    {
+      var url = "./getPics";
+      loadFile(url ,function(d){
+        console.log(d);
+        formatPics(JSON.parse(d));
+      })
+    }
+  </script>
+  <style>
+      .selected{
+        color: green;
+        text-transform: uppercase;
+      }
+      h1{
+        text-align: center;
+		font-family: helvetica;
+      }
+      #addButton
+      {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+		color: green;
+      }
+      #uploadButton
+      {
+        position: absolute;
+        top: 20px;
+        right: 120px;
+      }
+      .delButton
+      {
+          float: right;
+      }
+      #theImage{
+        height: 200px;
+        width: 100%;
+        background-size: contain;
+        background-position: 50%;
+        background-repeat: no-repeat;
+      }
+      #editWrapper{
+        display: none;
+        background: rgba(0,0,0,.7);
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+      }
+      #editWrapper button{
+        position: fixed;
+        float: right;
+      }
+      #DRFrame{
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+      }
+  </style>
+</head>
+
+<body onload='start()'>
+  <h1> Picture List </h1>
+  <button id='addButton' onclick='addNew()'> Add Picture URL </button>
+  <input id='uploadButton' type="file" onchange='uploadNew()'>
+  <ol id='picListWrapper'> </ol>
+  <div id='theDetails'>
+    <h1 id='theTitle'></h1>
+    <div id='theImage'></div>
+
+    <button onclick='deleteImage()'> Delete </button>
+    <button onclick='renameImage()'> Rename </button>
+    <button onclick='editImage()'> Edit </button>
+
+  </div>
+
+
+  <div id='editWrapper'>
+    <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
+    <button style='right:0px' onclick='saveImageEdit()'> Save </button>
+    <button onclick='cancelImageEdit()'> Cancel </button>
+  </div>
+</body>
+
+</html>
