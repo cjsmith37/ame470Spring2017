@@ -69,9 +69,12 @@
         });
     }
 
-	function renameImage(id, index){
+	function renameImage(index){
 		var rename = prompt("Rename this image:","");
-		$("imageSelected("+ data.name +")").replaceWith("rename");
+		if(rename != null){
+			document.geElementById("theTitle").innerHTML = data.name;
+		}
+		$("url("+ data.name +")").replaceWith("rename");
 	}
 		
     function start()
