@@ -31,6 +31,12 @@
 	      xhr.open("POST", "/uploadFile", true);
 	      xhr.send(fd);
 	  }
+	  
+	  function cancelImageEdit(){
+	  }
+	  
+	  function editImage(){
+	  }
 	 
 	  
   </script>
@@ -47,7 +53,12 @@
 <h1>Picture List</h1>
 <input type='file' id='theFileUploader' onchange='fileUploaded()'> 
 <img style='height: 200px;display: block;width: auto;' id='preview'>
-<button onclick='editImage()'> Edit </button>
+
+<div id='editWrapper'>
+	<iframe crossorigin='anonymous' id='DRFrame'></iframe>
+	<button style='right:0px' onclick='saveImageEdit'>Save</button>
+	<button onclick='cancelImageEdit'> Cancel </button>
+</div>
 
   
 </body>
