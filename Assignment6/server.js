@@ -29,6 +29,24 @@ app.get("/", function (req, res) {
       res.redirect("/index.html");
 });
 
+  app.post('/uploadImage', function(req, res){
+        var intname = req.body.fileInput;
+        var s3Path = '/' + intname;
+        var buf = new Buffer(req.body.data.replace(/^data:image\/\w+;base64,/, ""),'base64')
+        var params = {
+            Bucket:'alldone',
+            ACL:'public-read',
+            Key:intname,
+            Body: buf,
+            ServerSideEncryption : 'AES256'
+        };
+        s3.putObject(params, function(err, data) {
+            console.log(err);
+            res.end("success");
+        });
+  });
+
+
 app.post('/uploadFile', function(req, res){
       console.log(req.body);
         var intname = req.body.fileInput;
@@ -39,15 +57,15 @@ app.post('/uploadFile', function(req, res){
         
         fs.readFile(tmpPath, function (err, data) {
             var params = {
-                Bucket:'ame470s2017tg',
+                Bucket:'ame470spring2017',
                 ACL:'public-read',
                 Key:intname,
                 Body: data,
                 ServerSideEncryption : 'AES256'
             };
             s3.putObject(params, function(err, data) {
-                console.log(err);
                 res.end("success");
+                console.log(err);
             });
         });
   });

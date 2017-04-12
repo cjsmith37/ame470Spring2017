@@ -25,6 +25,7 @@
 	      xhr.onreadystatechange = function(e) {  
 	        if (xhr.readyState != 4) { return; }
 	        // callback logic
+			document.getElementById("preview").src = "https://s3-us-west-2.amazonaws.com/ame470spring207/" fileInput;
 	        alert("done");
 	      };
 	      xhr.open("POST", "/uploadFile", true);
@@ -45,32 +46,6 @@
 	  document.getElementById("DRFrame").src = "./demo/index.html#" + url;
 	  document.getElementById("editWrapper").style.display = "block"; 
   		}
-	  
-	  function deleteImage(){
-		  deleteTodo(currSel);
-	  }
-	  
-
-      var currSel = 0;
-      function imageSelected(id, index){
-          currSel = id;
-          $("#picListWrapper li a").removeClass("selected");
-          $("#picListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
-          var url = "./getPic?id=" + id;
-          loadFile(url ,function(d){
-            var data = JSON.parse(d);
-            document.getElementById("theTitle").innerHTML = data.name;
-            document.getElementById("theImage").style.backgroundImage = "url(" + data.url + ")";
-          });
-      }
-	  
-	  function start(){
-	        var url = "./getPics";
-	        loadFile(url ,function(d){
-	          console.log(d);
-	          formatPics(JSON.parse(d));
-	        })
-	      }
 		  
 	  
   </script>
@@ -120,14 +95,9 @@
 <body>
 <h1>Picture List</h1>
 <input type='file' id='theFileUploader' onchange='fileUploaded()'> 
-<ol id='picListWrapper'> </ol>
-  <div id='theDetails'> 
-  	<h1 id='theTitle'></h1>
- 	<div id='theImage'></div>
+<img id='preview' style='height: 200px; display: block; width: auto;'>
+<button onclick='editImage()'> Edit </button>
 
-    <button onclick='deleteImage()'> Delete </button>
-    <button onclick='renameImage()'> Rename </button>
-    <button onclick='editImage()'> Edit </button>
 
 <div id='editWrapper'> 
     <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
