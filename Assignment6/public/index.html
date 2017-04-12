@@ -36,10 +36,11 @@
 	        document.getElementById("editWrapper").style.display = "none";
 	      }
 	  
-	  function editImage()
-	  	{ var url =
-	  document.getElementById("theImage").style.backgroundImage.replace('url("',
-	  "").replace('")','').replace("url('", "").replace("')",''); console.log(url); console.log(url);
+	  function editImage(){ 
+		  var url = document.getElementById("theImage").style.backgroundImage.replace('url("',
+	  "").replace('")','').replace("url('", "").replace("')",''); 
+	  console.log(url); 
+	  console.log(url);
 	  document.getElementById("DRFrame").src = "./demo/index.html#" + url;
 	  document.getElementById("editWrapper").style.display = "block"; 
   		}
@@ -102,8 +103,17 @@
   </style>
 </head>
 
-<body>
+<body onload='start()'>
+<h1>Picture List</h1>
 <input type='file' id='theFileUploader' onchange='fileUploaded()'> 
+<ol id='todoListWrapper'> </ol>
+  <div id='theDetails'> 
+  	<h1 id='theTitle'></h1>
+ 	<div id='theImage'></div>
+
+    <button onclick='deleteImage()'> Delete </button>
+    <button onclick='renameImage()'> Rename </button>
+    <button onclick='editImage()'> Edit </button>
 
 <div id='editWrapper'> 
     <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
