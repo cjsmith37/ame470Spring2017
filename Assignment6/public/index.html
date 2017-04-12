@@ -18,6 +18,7 @@
 	     fd.append('fileInput', fileInput);
 	     fd.append('input', file.files[0]);
 	     fd.append('date', (new Date()).toString());
+		 
 	      //fd.append('data', data);
 	      var xhr = new XMLHttpRequest();
 	      xhr.onreadystatechange = function(e) {  
@@ -28,6 +29,22 @@
 	      xhr.open("POST", "/uploadFile", true);
 	      xhr.send(fd);
 	  }
+	 
+	  function cancelImageEdit()
+	      {
+	        document.getElementById("DRFrame").src = "";
+	        document.getElementById("editWrapper").style.display = "none";
+	      }
+	  
+	  function editImage()
+	  	{ var url =
+	  document.getElementById("theImage").style.backgroundImage.replace('url("',
+	  "").replace('")','').replace("url('", "").replace("')",''); console.log(url); console.log(url);
+	  document.getElementById("DRFrame").src = "./demo/index.html#" + url;
+	  document.getElementById("editWrapper").style.display = "block"; 
+  		}
+		  
+	  
   </script>
   <style>
       .selected{
@@ -87,6 +104,12 @@
 
 <body>
 <input type='file' id='theFileUploader' onchange='fileUploaded()'> 
-</body>
 
+<div id='editWrapper'> 
+    <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
+    <button style='right:0px' onclick='saveImageEdit()'> Save </button>
+    <button onclick='cancelImageEdit()'> Cancel </button>
+</div>
+  
+</body>
 </html>
