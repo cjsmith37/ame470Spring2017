@@ -13,6 +13,7 @@
 	     var ext = filename.split(".");
 	     ext = ext[ext.length-1];
 	     console.log(ext);
+		 
 	     var fd = new FormData();
 	     var fileInput = "s3Upload_" + new Date().getTime().toString() + "." + ext;
 	     fd.append('fileInput', fileInput);
@@ -44,6 +45,32 @@
 	  document.getElementById("DRFrame").src = "./demo/index.html#" + url;
 	  document.getElementById("editWrapper").style.display = "block"; 
   		}
+	  
+	  function deleteImage(){
+		  deleteTodo(currSel);
+	  }
+	  
+
+      var currSel = 0;
+      function imageSelected(id, index){
+          currSel = id;
+          $("#picListWrapper li a").removeClass("selected");
+          $("#picListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
+          var url = "./getPic?id=" + id;
+          loadFile(url ,function(d){
+            var data = JSON.parse(d);
+            document.getElementById("theTitle").innerHTML = data.name;
+            document.getElementById("theImage").style.backgroundImage = "url(" + data.url + ")";
+          });
+      }
+	  
+	  function start(){
+	        var url = "./getPics";
+	        loadFile(url ,function(d){
+	          console.log(d);
+	          formatPics(JSON.parse(d));
+	        })
+	      }
 		  
 	  
   </script>
@@ -55,19 +82,6 @@
       h1{
         text-align: center;
 		font-family: helvetica;
-      }
-      #addButton
-      {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-		color: green;
-      }
-      #uploadButton
-      {
-        position: absolute;
-        top: 20px;
-        right: 120px;
       }
       .delButton
       {
@@ -103,10 +117,10 @@
   </style>
 </head>
 
-<body onload='start()'>
+<body>
 <h1>Picture List</h1>
 <input type='file' id='theFileUploader' onchange='fileUploaded()'> 
-<ol id='todoListWrapper'> </ol>
+<ol id='picListWrapper'> </ol>
   <div id='theDetails'> 
   	<h1 id='theTitle'></h1>
  	<div id='theImage'></div>
