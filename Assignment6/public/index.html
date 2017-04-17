@@ -36,7 +36,7 @@ function saveImageEdit(){
 	}
 	
     var fd = new FormData();
-    var fileInput = document.getElementById("preview".src.split("ame470spring2017/")[1];
+    var fileInput = document.getElementById("preview".src.split("ame470spring2017/")[1]);
     fd.append('fileInput', fileInput);
     fd.append('date', (new Date()).toString());
 	fd.append('data', sessionStorage.getItem("editImage"));
