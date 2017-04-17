@@ -67,7 +67,7 @@
           // cropPlugin.selectZone(170, 25, 300, 300);
           //cropPlugin.requireFocus();
           this.addEventListener('core:transformation', function() {  
-            sessionStorage.setItem("editedImage", dkrm.canvas.toDataURL())
+            sessionStorage.setItem("editedImage", dkrm.canvas.toDataURL());
 			sessionStorage.setItem("isEdited", "true");
           });
         }

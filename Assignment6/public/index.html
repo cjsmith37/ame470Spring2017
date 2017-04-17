@@ -49,7 +49,7 @@ function saveImageEdit(){
 		var url = document.getElementById("preview").src.split("ame470spring2017")[1];
 		var rename = prompt("Rename image", "");
 		if (rename != null) {
-			document.getElementById("preview").src.split("ame470spring2017")[1].innerHTML = rename;
+			document.getElementById("preview").src.split("ame470spring2017")[1] = rename;
 		}
 	}
 </script>
