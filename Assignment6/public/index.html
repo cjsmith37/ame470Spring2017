@@ -28,6 +28,11 @@ var fileUploaded = function()
     xhr.open("POST", "/uploadFile", true);
     xhr.send(fd);
 }
+
+function saveImageEdit(){
+	cancelImageEdit();
+	sessionStorage.getItem("isEdited") === true;
+}
     function cancelImageEdit()
     {
       document.getElementById("DRFrame").src = "";
@@ -41,7 +46,7 @@ var fileUploaded = function()
     }
 	
 	function renameImage(){
-		document.getElementById("preview").src.split("ame470spring2017")[1];
+		var url = document.getElementById("preview").src.split("ame470spring2017")[1];
 	}
 </script>
   <style>
@@ -102,6 +107,7 @@ var fileUploaded = function()
   <input type='file' id='theFileUploader' onchange='fileUploaded()'> 
   <img style='height: 200px;display: block;width: auto;' id='preview'> 
   <button onclick='editImage()'> Edit </button>
+  <button onclick='renameImage()'> Rename </button>
 
   <div id='editWrapper'> 
     <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>

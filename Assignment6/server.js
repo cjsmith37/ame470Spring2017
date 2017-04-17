@@ -32,7 +32,7 @@ app.get("/", function (req, res) {
   app.post('/uploadImage', function(req, res){
         var intname = req.body.fileInput;
         var s3Path = '/' + intname;
-        var buf = new Buffer(req.body.data.replace(/^data:image\/\w+;base64,/, ""),'base64')
+        var buf = new Buffer(req.body.data.replace(/^data:image\/\w+;base64,/, ""),'base64');
         var params = {
             Bucket:'ame470spring2017',
             ACL:'public-read',
