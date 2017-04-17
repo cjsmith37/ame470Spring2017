@@ -34,7 +34,7 @@ app.get("/", function (req, res) {
         var s3Path = '/' + intname;
         var buf = new Buffer(req.body.data.replace(/^data:image\/\w+;base64,/, ""),'base64')
         var params = {
-            Bucket:'alldone',
+            Bucket:'ame470spring2017',
             ACL:'public-read',
             Key:intname,
             Body: buf,
