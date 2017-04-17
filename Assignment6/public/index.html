@@ -30,16 +30,15 @@ var fileUploaded = function()
 }
 
 function saveImageEdit(){
-	cancelImageEdit();
-	if(sessionStorage.getItem("isEdited") != "true"){
-		return;
-	}
+	
+	if(sessionStorage.getItem("isEdited") == "true"){
 	
     var fd = new FormData();
     var fileInput = document.getElementById("preview".src.split("ame470spring2017/")[1]);
+	var fileInput = fileInput.split("?");
     fd.append('fileInput', fileInput);
     fd.append('date', (new Date()).toString());
-	fd.append('data', sessionStorage.getItem("editImage"));
+	fd.append('data', sessionStorage.getItem("editedImage"));
    
      //fd.append('data', data);
      var xhr = new XMLHttpRequest();
@@ -51,6 +50,8 @@ function saveImageEdit(){
      };
      xhr.open("POST", "/uploadImage", true);
      xhr.send(fd);
+ }
+ cancelImageEdit();
 }
 
 function cancelImageEdit()
@@ -58,18 +59,19 @@ function cancelImageEdit()
       document.getElementById("DRFrame").src = "";
       document.getElementById("editWrapper").style.display = "none";
     }
-    function editImage(){
+	
+function editImage(){
       var url = document.getElementById("preview").src;
       document.getElementById("DRFrame").src = "./demo/index.html#" + url;
       document.getElementById("editWrapper").style.display = "block";
 	  sessionStorage.setItem("isEdited","false");
     }
 	
-	function renameImage(){
-		var url = document.getElementById("preview").src.split("ame470spring2017")[1];
+function renameImage(){
+		//var url = document.getElementById("preview").src.split("ame470spring2017")[1];
 		var rename = prompt("Rename image", "");
 		if (rename != null) {
-			document.getElementById("preview").src.split("ame470spring2017")[1] = rename;
+			document.getElementById("preview".src.split("ame470spring2017/")[1]) = rename;
 		}
 	}
 </script>
