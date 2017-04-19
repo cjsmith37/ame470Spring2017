@@ -12,13 +12,13 @@ var hostname = process.env.HOSTNAME || 'localhost';
 var port = 8089;
 
 //app.use(bodyParser());
-//app.use(require('connect').bodyParser());
+app.use(require('connect').bodyParser());
 
 // parse application/x-www-form-urlencoded
-//app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
-//app.use(bodyParser.json())
+app.use(bodyParser.json())
 app.get("/", function (req, res) {
       res.redirect("/index.html");
 });
