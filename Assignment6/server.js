@@ -12,27 +12,23 @@ var hostname = process.env.HOSTNAME || 'localhost';
 var port = 8089;
 
 
-//app.use(methodOverride());
+app.use(methodOverride());
 //app.use(bodyParser());
-//app.use(require('connect').bodyParser());
+app.use(require('connect').bodyParser());
 
 
 // parse application/x-www-form-urlencoded
-//app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
-//app.use(bodyParser.json())
+app.use(bodyParser.json())
 
-//app.use(express.static(__dirname + '/public'));
-//app.use(errorHandler());
-
-var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/picturedb');
+app.use(express.static(__dirname + '/public'));
+app.use(errorHandler());
 
 app.get("/", function (req, res) {
       res.redirect("/index.html");
 });
-
-var picList =[];
 
 
 
@@ -76,22 +72,7 @@ app.post('/uploadFile', function(req, res){
   });
   
   app.get("/deletePic", function (req, res) {
-     //var id = parseInt(req.query.id);
-     var id = req.query.id.toString();
-     console.log(id);
-     db.collection("data").remove({id: id}, function(err, result){
-       console.log(err);
-        if(err){
-          res.send("error"); 
-        }
-        else{
-          db.collection("data").find({}).toArray( function(err1, result1) {
-            res.send(JSON.stringify(result1));
-          });
-        }
-     });
-     // res.send(JSON.stringify(todoList));
-     // todoList.splice(index,1);
+     
   });
 
   app.get("/getPics", function (req, res) {
@@ -107,10 +88,5 @@ app.post('/uploadFile', function(req, res){
     });
   });
 
-  app.use(methodOverride());
-  app.use(bodyParser());
-  app.use(express.static(__dirname + '/public'));
-  app.use(errorHandler());
-  
 console.log("Simple static server listening at http://" + hostname + ":" + port);
 app.listen(port);
