@@ -13,7 +13,7 @@ var port = 8089;
 
 
 app.use(methodOverride());
-//app.use(bodyParser());
+app.use(bodyParser());
 //app.use(require('connect').bodyParser());
 
 
