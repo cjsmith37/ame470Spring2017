@@ -116,13 +116,13 @@ function renameImage(){
                   });
               }
 
-    function start(){
+    /*function start(){
       var url = "./getPics";
       loadFile(url ,function(d){
           console.log(d);
           formatPics(JSON.parse(d));
             })
-          }
+          }*/
 
 </script>
   <style>
@@ -179,7 +179,7 @@ function renameImage(){
   </style>
 </head>
 
-<body onload='start()'>
+<body>
   <h1>Pictures</h1>
   <input type='file' id='theFileUploader' onchange='fileUploaded()'>
   <img style='height: 200px;display: block;width: auto;' id='preview'>
