@@ -24,11 +24,11 @@ app.use(express.static(__dirname + '/public'));
 app.use(errorHandler());
 
 
-server.get("/", function (req, res) {
+app.get("/", function (req, res) {
       res.redirect("/index.html");
 });
 
-server.post('/uploadImage', function(req, res){
+app.post('/uploadImage', function(req, res){
         var intname = req.body.fileInput;
         var s3Path = '/' + intname;
         var buf = new Buffer(req.body.data.replace(/^data:image\/\w+;base64,/, ""),'base64');
@@ -46,7 +46,7 @@ server.post('/uploadImage', function(req, res){
   });
 
 
-server.post('/uploadFile', function(req, res){
+app.post('/uploadFile', function(req, res){
       console.log(req.body);
         var intname = req.body.fileInput;
         var filename = req.files.input.name;
@@ -70,4 +70,4 @@ server.post('/uploadFile', function(req, res){
   });
 
 console.log("Simple static server listening at http://" + hostname + ":" + port);
-server.listen(port);
+app.listen(port);
