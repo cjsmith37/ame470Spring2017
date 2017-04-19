@@ -182,16 +182,15 @@ function renameImage(){
 <body onload='start()'>
   <h1>Pictures</h1>
   <input type='file' id='theFileUploader' onchange='fileUploaded()'>
-  <img style='height: 200px;display: block;width: auto;' id='preview'> 
-  <ol id='picListWrapper'> </ol>
-  <div id='theDetails'>
-    <h1 id='theTitle'></h1>
-    <div id='theImage'><div>
-
   <img style='height: 200px;display: block;width: auto;' id='preview'>
   <button onclick='deleteImage()'> Delete </button>
   <button onclick='editImage()'> Edit </button>
   <button onclick='renameImage()'> Rename </button>
+
+  <ol id='picListWrapper'> </ol>
+  <div id='theDetails'>
+    <h1 id='theTitle'></h1>
+    <div id='theImage'><div>
 </div>
 
   <div id='editWrapper'>
