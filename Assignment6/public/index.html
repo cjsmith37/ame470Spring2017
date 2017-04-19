@@ -74,55 +74,6 @@ function renameImage(){
 		}
 	}
 
-  function deleteImage(){
-         deletePic(currSel);
-      }
-
-  function deletePic(index){
-        var flag = confirm("Are you sure you want to delete?");
-        if(flag){
-          var url = "./deletePic" + "?id=" + index;
-          loadFile(url ,function(d){
-            formatPics(JSON.parse(d));
-          });
-        }
-      }
-
-  function formatPics(list){
-          var markup = "";
-          if(list.length == 0){
-              markup = "No images yet"
-              document.getElementById("picListWrapper").innerHTML = markup;
-              return;
-            }
-            for(var i = 0; i < list.length; i++){
-              markup += "<li> <a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name +
-                  "</a></li>";
-            }
-            document.getElementById("picListWrapper").innerHTML = markup;
-            imageSelected(list[0].id);
-          }
-    var currSel = 0;
-    function imageSelected(id, index){
-                  currSel = id;
-                  $("#picListWrapper li a").removeClass("selected");
-                  $("#picListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
-                  var url = "./getTodo?id=" + id;
-                  loadFile(url ,function(d){
-                    var data = JSON.parse(d);
-                    document.getElementById("theTitle").innerHTML = data.name;
-                    document.getElementById("theImage").style.backgroundImage = "url(" + data.url + ")";
-                  });
-              }
-
-    /*function start(){
-      var url = "./getPics";
-      loadFile(url ,function(d){
-          console.log(d);
-          formatPics(JSON.parse(d));
-            })
-          }*/
-
 </script>
   <style>
       .selected{
@@ -131,6 +82,7 @@ function renameImage(){
       }
       h1{
         text-align: center;
+		font-family: helvetica;
       }
       #addButton
       {
