@@ -6,11 +6,12 @@ var s3 = new AWS.S3();
 var express = require("express");
 var app = express();
 var bodyParser = require('body-parser');
-
 var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
 var hostname = process.env.HOSTNAME || 'localhost';
-var port = 8089;
+var port = 8087;
+
+
 app.use(methodOverride());
 //app.use(bodyParser());
 app.use(require('connect').bodyParser());
