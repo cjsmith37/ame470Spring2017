@@ -14,7 +14,7 @@ var port = 8089;
 
 app.use(methodOverride());
 //app.use(bodyParser());
-app.use(require('connect').bodyParser());
+//app.use(require('connect').bodyParser());
 
 
 // parse application/x-www-form-urlencoded
