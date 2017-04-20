@@ -10,6 +10,7 @@ var fileUploaded = function()
    var ext = filename.split(".");
    ext = ext[ext.length-1];
    console.log(ext);
+
    var fd = new FormData();
    var fileInput = "s3Upload_" + new Date().getTime().toString() + "." + ext;
    fd.append('fileInput', fileInput);
@@ -39,7 +40,7 @@ function saveImageEdit(){
         cancelImageEdit();
         if (xhr.readyState != 4) { return; }
           // callback logic
-        document.getElementById("preview").src = "https://s3-us-west-2.amazonaws.com/ame470spring2017/" + fileInput + "?=" + new Date().getTime();
+        document.getElementById("preview").src = "https://s3-us-west-2.amazonaws.com/ame470spring2017/" + fileInput + "?t=" + new Date().getTime();
       };
       xhr.open("POST", "/uploadImage", true);
       xhr.send(fd);
@@ -65,7 +66,7 @@ function editImage(){
       }
       h1{
         text-align: center;
-		font-family: helvetica;
+		    font-family: helvetica;
       }
       #addButton
       {
@@ -117,9 +118,7 @@ function editImage(){
   <h1>Pictures</h1>
   <input type='file' id='theFileUploader' onchange='fileUploaded()'>
   <img style='height: 200px;display: block;width: auto;' id='preview'>
-  <button onclick='deleteImage()'> Delete </button>
   <button onclick='editImage()'> Edit </button>
-  <button onclick='renameImage()'> Rename </button>
 
   <div id='editWrapper'>
     <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>

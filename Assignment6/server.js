@@ -18,10 +18,10 @@ app.use(require('connect').bodyParser());
 
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
 app.use(errorHandler());
@@ -55,7 +55,7 @@ app.post('/uploadFile', function(req, res){
     var fileType =  req.files.input.type;
     var tmpPath = req.files.input.path;
     var s3Path = '/' + intname;
-    
+
     fs.readFile(tmpPath, function (err, data) {
         var params = {
             Bucket:'ame470spring2017',
@@ -68,23 +68,6 @@ app.post('/uploadFile', function(req, res){
             res.end("success");
             console.log(err);
         });
-    });
-  });
-  
-  app.get("/deletePic", function (req, res) {
-     
-  });
-
-  app.get("/getPics", function (req, res) {
-    db.collection("data").find({}).toArray( function(err, result) {
-      res.send(JSON.stringify(result));
-    });
-  });
-
-  app.get("/getPic", function (req, res) {
-    var id = req.query.id.toString();
-    db.collection("data").findOne({id:id}, function(err, result) {
-      res.send(JSON.stringify(result));
     });
   });
 
