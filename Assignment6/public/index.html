@@ -17,7 +17,7 @@ var fileUploaded = function()
    fd.append('date', (new Date()).toString());
     //fd.append('data', data);
     var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function(e) {  
+    xhr.onreadystatechange = function(e) {
       if (xhr.readyState != 4) { return; }
         // callback logic
        document.getElementById("preview").src = "https://s3-us-west-2.amazonaws.com/ame470spring2017/" + fileInput;
@@ -35,11 +35,11 @@ function saveImageEdit(){
      fd.append('data', sessionStorage.getItem("editedImage"));
       //fd.append('data', data);
       var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function(e) {  
+      xhr.onreadystatechange = function(e) {
         cancelImageEdit();
         if (xhr.readyState != 4) { return; }
           // callback logic
-        document.getElementById("preview").src = "https://s3-us-west-2.amazonaws.com/ame470spring2017/" + fileInput + "?t=" + new Date().getTime();
+        document.getElementById("preview").src = "https://s3-us-west-2.amazonaws.com/ame470spring2017/" + fileInput + "?=" + new Date().getTime();
       };
       xhr.open("POST", "/uploadImage", true);
       xhr.send(fd);
