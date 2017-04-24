@@ -12,7 +12,10 @@ var hostname = process.env.HOSTNAME || 'localhost';
 var port = 8089;
 
 app.use(methodOverride());
-app.use(bodyParser());
+//app.use(bodyParser());
+app.use(require('connect').bodyParser());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'));
 app.use(errorHandler());
 
