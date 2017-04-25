@@ -31,6 +31,15 @@
     {
        deletePic(currSel);
     }
+    function renameImage(){
+      var imageName = prompt("Enter new image name:");
+      var id = new Date().getTime();
+      if(imageURL.indexOf("http") >=0 && imageURL.length > 10){
+        var url = "./renamePic" + "?id=" + id + "&url=" + "&name= + imageName + ";
+        loadFile(url ,function(d){
+          formatPics(JSON.parse(d));
+        });
+	  }
     function deletePic(index){
       var flag = confirm("Are you sure you want to delete this?");
       if(flag){
