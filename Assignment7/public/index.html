@@ -180,16 +180,6 @@ function start()
       <h1 id='theTitle'></h1>
       <div id='theImage'></div>
    </div>
-  
-  
-  <select onchange='presetSelected()' id='filterPresets'>
-      <option value='sepia(100%)'> Sepia </option>
-      <option value='invert(100%)'> Invert </option>
-      <option value='sepia(100%) grayscale(50%) blur(50%)'> My first filter </option>
-      <option value='saturate(100%) opacity(50%)'> Vintage </option>
-      <option value=''> Custom </option>
-    </select>
-    <input type='text' id='canFilter' onchange='fileUploaded()'>
 	
   <button onclick='editImage()'> Edit </button>
   <button onclick='deleteImage()'> Delete </button>
@@ -197,6 +187,14 @@ function start()
 
   <div id='editWrapper'>
     <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
+    <select onchange='presetSelected()' id='filterPresets'>
+        <option value='sepia(100%)'> Sepia </option>
+        <option value='invert(100%)'> Invert </option>
+        <option value='sepia(100%) grayscale(50%) blur(50%)'> My first filter </option>
+        <option value='saturate(100%) opacity(50%)'> Vintage </option>
+        <option value=''> Custom </option>
+      </select>
+      <input type='text' id='canFilter' onchange='fileUploaded()'>
     <button style='right:0px' onclick='saveImageEdit()'> Save </button>
     <button onclick='cancelImageEdit()'> Cancel </button>
   </div>
