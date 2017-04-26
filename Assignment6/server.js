@@ -12,16 +12,7 @@ var hostname = process.env.HOSTNAME || 'localhost';
 var port = 8080;
 
 app.use(methodOverride());
-//app.use(bodyParser());
 app.use(require('connect').bodyParser());
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
-
-// parse application/json
-app.use(bodyParser.json())
-
-
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 

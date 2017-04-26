@@ -2,7 +2,7 @@
 <head>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous"> </script>	
+    crossorigin="anonymous"> </script>
 <script src='asyncReq.js'> </script>
 
 <script>
@@ -67,7 +67,7 @@ function deleteImage()
     {
        deletePic(currSel);
     }
-	
+
     function deletePic(index){
       var flag = confirm("Are you sure you want to delete this?");
       if(flag){
@@ -88,7 +88,7 @@ function formatPics(list)
   }
   for(var i = 0; i < list.length; i++){
     markup += "<li> <a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name +
-        "</a></li>"; 
+        "</a></li>";
   }
   document.getElementById("picListWrapper").innerHTML = markup;
   imageSelected(list[0].id);
@@ -176,12 +176,12 @@ function start()
   <input type='file' id='theFileUploader' onchange='fileUploaded()'>
   <img style='height: 200px;display: block;width: auto;' id='preview'>
   <ol id='todoListWrapper'> </ol>
-    <div id='theDetails'> 
+    <div id='theDetails'>
       <h1 id='theTitle'></h1>
       <div id='theImage'></div>
    </div>
-  
-  
+
+
   <select onchange='presetSelected()' id='filterPresets'>
       <option value='sepia(100%)'> Sepia </option>
       <option value='invert(100%)'> Invert </option>
@@ -190,10 +190,10 @@ function start()
       <option value=''> Custom </option>
     </select>
     <input type='text' id='canFilter' onchange='fileUploaded()'>
-	
+
   <button onclick='editImage()'> Edit </button>
   <button onclick='deleteImage()'> Delete </button>
-  
+
 
   <div id='editWrapper'>
     <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
