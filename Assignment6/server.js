@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'));
 app.use(errorHandler());
 
-var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/picturedb');
+var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/picdb');
 
 app.get("/", function (req, res) {
       res.redirect("/index.html");
