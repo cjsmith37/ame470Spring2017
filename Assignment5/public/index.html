@@ -72,7 +72,7 @@
 	function renameImage(){
     var rename = prompt("Rename this image","");
     if (imageSelected(currSel)) {
-      document.getElementById("theTitle").replace(data.name).innerHTML = rename;
+      document.getElementById("theTitle").replace(list[i].name).innerHTML = rename;
     }
   }
 
