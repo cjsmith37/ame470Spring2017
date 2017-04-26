@@ -17,6 +17,7 @@
       document.getElementById("DRFrame").src = "./demo/index.html#" + url;
       document.getElementById("editWrapper").style.display = "block";
     }
+	
     function addNew(){
       var imageURL = prompt("Enter New Image URL:");
       var id = new Date().getTime();
@@ -31,15 +32,6 @@
     {
        deletePic(currSel);
     }
-    function renameImage(){
-      var imageName = prompt("Enter new image name:");
-      var id = new Date().getTime();
-      if(imageURL.indexOf("http") >=0 && imageURL.length > 10){
-        var url = "./renamePic" + "?id=" + id + "&url=" + "&name= + imageName + ";
-        loadFile(url ,function(d){
-          formatPics(JSON.parse(d));
-        });
-	  }
     function deletePic(index){
       var flag = confirm("Are you sure you want to delete this?");
       if(flag){
@@ -76,6 +68,14 @@
           document.getElementById("theImage").style.backgroundImage = "url(" + data.url + ")";
         });
     }
+
+	function renameImage(index){
+		var rename = prompt("Rename this image:","");
+		if(rename != null){
+			document.getElementById("theTitle").innerHTML = data.name;
+		}
+	}
+		
     function start()
     {
       var url = "./getPics";
@@ -87,18 +87,19 @@
   </script>
   <style>
       .selected{
-        color: red;
+        color: green;
         text-transform: uppercase;
       }
       h1{
         text-align: center;
-				font-family: helvetica;
+		font-family: helvetica;
       }
       #addButton
       {
         position: absolute;
         top: 20px;
         right: 20px;
+		color: green;
       }
       #uploadButton
       {
