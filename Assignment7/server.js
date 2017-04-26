@@ -26,8 +26,6 @@ app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'));
 app.use(errorHandler());
 
-var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/picdb');
-
 app.get("/", function (req, res) {
       res.redirect("/index.html");
 });
@@ -70,36 +68,6 @@ app.post('/uploadFile', function(req, res){
             res.end("success");
             console.log(err);
         });
-    });
-  });
-  
-  
-  server.get("/deletePic", function (req, res) {
-     var id = req.query.id.toString();
-     console.log(id);
-     db.collection("data").remove({id: id}, function(err, result){
-       console.log(err);
-        if(err){
-          res.send("error"); 
-        }
-        else{
-          db.collection("data").find({}).toArray( function(err1, result1) {
-            res.send(JSON.stringify(result1));
-          });
-        }
-     });
-  });
-  
-  server.get("/getPics", function (req, res) {
-    db.collection("data").find({}).toArray( function(err, result) {
-      res.send(JSON.stringify(result));
-    });
-  });
-
-  server.get("/getPic", function (req, res) {
-    var id = req.query.id.toString();
-    db.collection("data").findOne({id:id}, function(err, result) {
-      res.send(JSON.stringify(result));
     });
   });
   
