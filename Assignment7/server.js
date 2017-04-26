@@ -71,11 +71,5 @@ app.post('/uploadFile', function(req, res){
     });
   });
   
-server.use(methodOverride());
-server.use(bodyParser());
-server.use(express.static(__dirname + '/public'));
-server.use(errorHandler());
-  
 console.log("Simple static server listening at http://" + hostname + ":" + port);
 app.listen(port);
-server.listen(port);
