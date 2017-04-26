@@ -14,8 +14,6 @@ var port = 8080;
 app.use(methodOverride());
 //app.use(bodyParser());
 app.use(require('connect').bodyParser());
-<<<<<<< HEAD
-
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -23,10 +21,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-=======
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
->>>>>>> f4ce4e49c8be1771090a39492dbb1a672d7b847a
+
 app.use(express.static(__dirname + '/public'));
 app.use(errorHandler());
 
@@ -36,11 +34,8 @@ app.get("/", function (req, res) {
       res.redirect("/index.html");
 });
 
-<<<<<<< HEAD
-=======
-var pictureList = [];
+var picList = [];
 
->>>>>>> f4ce4e49c8be1771090a39492dbb1a672d7b847a
 app.post('/uploadImage', function(req, res){
     var intname = req.body.fileInput;
     var s3Path = '/' + intname;
@@ -79,11 +74,11 @@ app.post('/uploadFile', function(req, res){
         });
     });
   });
-  
+
   server.get("/addPic", function (req, res) {
     db.collection("data").insert(req.query, function(err, result){
         if(err){
-          res.send("error"); 
+          res.send("error");
         }
         else{
           db.collection("data").find({}).toArray( function(err1, result1) {
@@ -92,14 +87,14 @@ app.post('/uploadFile', function(req, res){
         }
     });
   });
-  
+
   server.get("/deletePic", function (req, res) {
      var id = req.query.id.toString();
      console.log(id);
      db.collection("data").remove({id: id}, function(err, result){
        console.log(err);
         if(err){
-          res.send("error"); 
+          res.send("error");
         }
         else{
           db.collection("data").find({}).toArray( function(err1, result1) {
@@ -108,7 +103,7 @@ app.post('/uploadFile', function(req, res){
         }
      });
   });
-  
+
   server.get("/getPics", function (req, res) {
     db.collection("data").find({}).toArray( function(err, result) {
       res.send(JSON.stringify(result));
@@ -121,12 +116,12 @@ app.post('/uploadFile', function(req, res){
       res.send(JSON.stringify(result));
     });
   });
-  
+
 server.use(methodOverride());
 server.use(bodyParser());
 server.use(express.static(__dirname + '/public'));
 server.use(errorHandler());
-  
+
 console.log("Simple static server listening at http://" + hostname + ":" + port);
 app.listen(port);
 server.listen(port);
