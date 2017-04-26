@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
 var hostname = process.env.HOSTNAME || 'localhost';
-var port = 8082;
+var port = 8083;
 
 var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/picturedb');
 
