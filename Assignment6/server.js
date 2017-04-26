@@ -66,7 +66,7 @@ app.post('/uploadFile', function(req, res){
     });
   });
 
-  server.get("/deletePic", function (req, res) {
+  app.get("/deletePic", function (req, res) {
      var id = req.query.id.toString();
      console.log(id);
      db.collection("data").remove({id: id}, function(err, result){
@@ -82,24 +82,24 @@ app.post('/uploadFile', function(req, res){
      });
   });
 
-  server.get("/getPics", function (req, res) {
+  app.get("/getPics", function (req, res) {
     db.collection("data").find({}).toArray( function(err, result) {
       res.send(JSON.stringify(result));
     });
   });
 
-  server.get("/getPic", function (req, res) {
+  app.get("/getPic", function (req, res) {
     var id = req.query.id.toString();
     db.collection("data").findOne({id:id}, function(err, result) {
       res.send(JSON.stringify(result));
     });
   });
 
-server.use(methodOverride());
-server.use(bodyParser());
-server.use(express.static(__dirname + '/public'));
-server.use(errorHandler());
+//server.use(methodOverride());
+//server.use(bodyParser());
+//server.use(express.static(__dirname + '/public'));
+//server.use(errorHandler());
 
 console.log("Simple static server listening at http://" + hostname + ":" + port);
 app.listen(port);
-server.listen(port);
+//server.listen(port);
