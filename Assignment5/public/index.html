@@ -71,9 +71,9 @@
 
 	function renameImage(){
 	   $('li').click(renameImage(){
-       //$('li.active').removeClass('active');
+       $('li.active').removeClass('active');
 
-       $(this).addClass('selected');
+       $(this).addClass('active');
        var li = $(this);
        $("#rename").click(renameImage(){
          $(li).replaceWith('<input type ="text" id="change_me">');
@@ -101,6 +101,9 @@
       .selected{
         color: green;
         text-transform: uppercase;
+      }
+      .active {
+	       background-color: rgb(128,128,128);
       }
       h1{
         text-align: center;
