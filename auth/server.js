@@ -4,7 +4,7 @@ var express = require("express"),
     errorHandler = require('errorhandler'),
     methodOverride = require('method-override'),
     hostname = process.env.HOSTNAME || 'localhost',
-    port = 8080;
+    port = 8086;
 
 app.get("/", function (req, res) {
   res.redirect("/index.html");
