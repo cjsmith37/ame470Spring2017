@@ -4,7 +4,7 @@ var express = require("express"),
     errorHandler = require('errorhandler'),
     methodOverride = require('method-override'),
     hostname = process.env.HOSTNAME || 'localhost',
-    port = 8086;
+    port = 8080;
 
 app.get("/", function (req, res) {
   res.redirect("/index.html");
@@ -15,7 +15,7 @@ var auth = require('./authenticate.js');
 var db = require('mongoskin').db('mongodb://user:pwd@localhost:27017/tododb');
 console.log(db);
 
-app.get("/addtodo", function (req, res) {
+app.get("/addTodo", function (req, res) {
 	var x = req.query;
 	var callback = function(error, result){
 		if(result)
@@ -23,7 +23,7 @@ app.get("/addtodo", function (req, res) {
 			res.end("added");
 		}
 	}
-	db.collection("todo").insert(x, callback);
+	db.collection("tododb").insert(x, callback);
  });
 
  app.get("/renamePhoto", function (req, res) {
