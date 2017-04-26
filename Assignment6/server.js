@@ -66,19 +66,6 @@ app.post('/uploadFile', function(req, res){
     });
   });
 
-  server.get("/addPic", function (req, res) {
-    db.collection("data").insert(req.query, function(err, result){
-        if(err){
-          res.send("error");
-        }
-        else{
-          db.collection("data").find({}).toArray( function(err1, result1) {
-            res.send(JSON.stringify(result1));
-          });
-        }
-    });
-  });
-
   server.get("/deletePic", function (req, res) {
      var id = req.query.id.toString();
      console.log(id);
