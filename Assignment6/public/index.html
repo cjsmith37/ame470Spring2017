@@ -5,7 +5,10 @@
     crossorigin="anonymous"> </script>
 <script src='asyncReq.js'> </script>
 <script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.20.min.js"> </script>
-
+<script>function getHtml(template) {
+       return template.join('\n');
+    }
+    listAlbums();</script>
 <script>
 var fileUploaded = function()
 {
@@ -107,20 +110,15 @@ function imageSelected(id, index){
       document.getElementById("theImage").style.backgroundImage = "url(" + data.url + ")";
     });
 }
-
-function start()
-{
-  var url = "./getPics";
-  loadFile(url ,function(d){
-    console.log(d);
-    formatPics(JSON.parse(d));
-  })
+s3_list.listBuckets(function(err, data) {
+if (err) {
+console.log("Error", err);
+} else {
+console.log("Success", data.Buckets);
 }
+});
 
-function getHtml(template) {
-       return template.join('\n');
-    }
-    listAlbums();
+
 
     function listAlbums() {
       s3.listObjects({Delimiter: '/'}, function(err, data) {
@@ -291,6 +289,8 @@ function getHtml(template) {
         });
       });
     }
+
+
 
 </script>
   <style>
