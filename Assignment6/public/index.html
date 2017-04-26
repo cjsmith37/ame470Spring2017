@@ -4,6 +4,7 @@
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"> </script>
 <script src='asyncReq.js'> </script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.20.min.js"> </script>
 
 <script>
 var fileUploaded = function()
@@ -115,6 +116,11 @@ function start()
     formatPics(JSON.parse(d));
   })
 }
+
+function getHtml(template) {
+       return template.join('\n');
+    }
+    listAlbums();
 </script>
   <style>
       .selected{
@@ -175,21 +181,12 @@ function start()
   <h1>Pictures</h1>
   <input type='file' id='theFileUploader' onchange='fileUploaded()'>
   <img style='height: 200px;display: block;width: auto;' id='preview'>
-  <ol id='todoListWrapper'> </ol>
+  <ol id='picListWrapper'> </ol>
     <div id='theDetails'>
       <h1 id='theTitle'></h1>
       <div id='theImage'></div>
+      <div id="app"></div>
    </div>
-
-
-  <select onchange='presetSelected()' id='filterPresets'>
-      <option value='sepia(100%)'> Sepia </option>
-      <option value='invert(100%)'> Invert </option>
-      <option value='sepia(100%) grayscale(50%) blur(50%)'> My first filter </option>
-      <option value='saturate(100%) opacity(50%)'> Vintage </option>
-      <option value=''> Custom </option>
-    </select>
-    <input type='text' id='canFilter' onchange='fileUploaded()'>
 
   <button onclick='editImage()'> Edit </button>
   <button onclick='deleteImage()'> Delete </button>
