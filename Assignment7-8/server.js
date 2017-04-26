@@ -14,7 +14,7 @@ var port = 8080;
 app.use(methodOverride());
 //app.use(bodyParser());
 app.use(require('connect').bodyParser());
-<<<<<<< HEAD
+
 
 
 // parse application/x-www-form-urlencoded
@@ -23,24 +23,17 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-=======
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
->>>>>>> f4ce4e49c8be1771090a39492dbb1a672d7b847a
 app.use(express.static(__dirname + '/public'));
 app.use(errorHandler());
 
-var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/picturedb');
+var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/picdb');
 
 app.get("/", function (req, res) {
       res.redirect("/index.html");
 });
 
-<<<<<<< HEAD
-=======
-var pictureList = [];
+var picList = [];
 
->>>>>>> f4ce4e49c8be1771090a39492dbb1a672d7b847a
 app.post('/uploadImage', function(req, res){
     var intname = req.body.fileInput;
     var s3Path = '/' + intname;
