@@ -69,12 +69,24 @@
         });
     }
 
-	function renameImage(index){
-		var rename = prompt("Rename this image:","");
-		if(rename != null){
-			document.getElementById("theTitle").innerHTML = data.name;
-		}
-	}
+	function renameImage(){
+	   $('li').click(renameImage(){
+       //$('li.active').removeClass('active');
+
+       $(this).addClass('selected');
+       var li = $(this);
+       $("#rename").click(renameImage(){
+         $(li).replaceWith('<input type ="text" id="change_me">');
+         $("#change_me").focus();
+         setInterval(renameImage(){
+           var val = $("change_me").val();
+           if (! $("#change_me").is(":focus")){
+             $('#change_me').replaceWith('<li>' + val + '</li>');
+           }
+         }, 100);
+       });
+     });
+	});
 
     function start()
     {
