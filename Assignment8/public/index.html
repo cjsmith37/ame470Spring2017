@@ -1,0 +1,205 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"> </script>	
+<script src='asyncReq.js'> </script>
+
+<script>
+var fileUploaded = function()
+{
+   var file = $('#theFileUploader').get(0);
+   var fileObj = $('#theFileUploader').get(0).files[0]
+   var filename = fileObj.name;
+   var ext = filename.split(".");
+   ext = ext[ext.length-1];
+   console.log(ext);
+
+   var fd = new FormData();
+   var fileInput = "s3Upload_" + new Date().getTime().toString() + "." + ext;
+   fd.append('fileInput', fileInput);
+   fd.append('input', file.files[0]);
+   fd.append('date', (new Date()).toString());
+    //fd.append('data', data);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(e) {
+      if (xhr.readyState != 4) { return; }
+        // callback logic
+       document.getElementById("preview").src = "https://s3-us-west-2.amazonaws.com/ame470spring2017/" + fileInput;
+    };
+    xhr.open("POST", "/uploadFile", true);
+    xhr.send(fd);
+}
+function saveImageEdit(){
+  if(sessionStorage.getItem("isEdited") == "true"){
+     var fd = new FormData();
+     var fileInput = document.getElementById("preview").src.split("ame470spring2017/")[1];
+     fileInput = fileInput.split("?")[0];
+     fd.append('fileInput', fileInput);
+     fd.append('date', (new Date()).toString());
+     fd.append('data', sessionStorage.getItem("editedImage"));
+      //fd.append('data', data);
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function(e) {
+        cancelImageEdit();
+        if (xhr.readyState != 4) { return; }
+          // callback logic
+        document.getElementById("preview").src = "https://s3-us-west-2.amazonaws.com/ame470spring2017/" + fileInput + "?t=" + new Date().getTime();
+      };
+      xhr.open("POST", "/uploadImage", true);
+      xhr.send(fd);
+  }
+}
+
+function cancelImageEdit()
+{
+  document.getElementById("DRFrame").src = "";
+  document.getElementById("editWrapper").style.display = "none";
+}
+function editImage(){
+  var url = document.getElementById("preview").src;
+  document.getElementById("DRFrame").src = "./demo/index.html#" + url;
+  document.getElementById("editWrapper").style.display = "block";
+  sessionStorage.setItem("isEdited", "false");
+}
+
+function deleteImage()
+    {
+       deletePic(currSel);
+    }
+	
+    function deletePic(index){
+      var flag = confirm("Are you sure you want to delete this?");
+      if(flag){
+        var url = "./deletePic" + "?id=" + index;
+        loadFile(url ,function(d){
+          formatPics(JSON.parse(d));
+        });
+      }
+    }
+
+function formatPics(list)
+{
+  var markup = "";
+  if(list.length == 0){
+    markup = "No images yet"
+    document.getElementById("picListWrapper").innerHTML = markup;
+    return;
+  }
+  for(var i = 0; i < list.length; i++){
+    markup += "<li> <a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name +
+        "</a></li>"; 
+  }
+  document.getElementById("picListWrapper").innerHTML = markup;
+  imageSelected(list[0].id);
+}
+
+var currSel = 0;
+function imageSelected(id, index){
+    currSel = id;
+    $("#picListWrapper li a").removeClass("selected");
+    $("#picListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
+    var url = "./getPic?id=" + id;
+    loadFile(url ,function(d){
+      var data = JSON.parse(d);
+      document.getElementById("theTitle").innerHTML = data.name;
+      document.getElementById("theImage").style.backgroundImage = "url(" + data.url + ")";
+    });
+}
+
+function start()
+{
+  var url = "./getPics";
+  loadFile(url ,function(d){
+    console.log(d);
+    formatPics(JSON.parse(d));
+  })
+}
+</script>
+  <style>
+      .selected{
+        color: red;
+        text-transform: uppercase;
+      }
+      h1{
+        text-align: center;
+		    font-family: helvetica;
+      }
+      #addButton
+      {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+      #uploadButton
+      {
+        position: absolute;
+        top: 20px;
+        right: 120px;
+      }
+      .delButton
+      {
+          float: right;
+      }
+      #theImage{
+        height: 200px;
+        width: 100%;
+        background-size: contain;
+        background-position: 50%;
+        background-repeat: no-repeat;
+      }
+      #editWrapper{
+        display: none;
+        background: rgba(0,0,0,.7);
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+      }
+      #editWrapper button{
+        position: fixed;
+        float: right;
+      }
+      #DRFrame{
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+      }
+  </style>
+</head>
+
+<body>
+  <h1>Pictures</h1>
+  <input type='file' id='theFileUploader' onchange='fileUploaded()'>
+  <img style='height: 200px;display: block;width: auto;' id='preview'>
+  <ol id='picListWrapper'> </ol>
+    <div id='theDetails'> 
+      <h1 id='theTitle'></h1>
+      <div id='theImage'></div>
+   </div>
+  
+  
+  <select onchange='presetSelected()' id='filterPresets'>
+      <option value='sepia(100%)'> Sepia </option>
+      <option value='invert(100%)'> Invert </option>
+      <option value='sepia(100%) grayscale(50%) blur(50%)'> My first filter </option>
+      <option value='saturate(100%) opacity(50%)'> Vintage </option>
+      <option value=''> Custom </option>
+    </select>
+    <input type='text' id='canFilter' onchange='fileUploaded()'>
+	
+  <button onclick='editImage()'> Edit </button>
+  <button onclick='deleteImage()'> Delete </button>
+  
+
+  <div id='editWrapper'>
+    <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
+    <button style='right:0px' onclick='saveImageEdit()'> Save </button>
+    <button onclick='cancelImageEdit()'> Cancel </button>
+  </div>
+
+</body>
+</html>
