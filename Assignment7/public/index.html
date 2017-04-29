@@ -6,8 +6,7 @@
 <script src='asyncReq.js'> </script>
 
 <script>
-var fileUploaded = function()
-{
+var fileUploaded = function(){
    var file = $('#theFileUploader').get(0);
    var fileObj = $('#theFileUploader').get(0).files[0]
    var filename = fileObj.name;
@@ -51,8 +50,7 @@ function saveImageEdit(){
   }
 }
 
-function cancelImageEdit()
-{
+function cancelImageEdit(){
   document.getElementById("DRFrame").src = "";
   document.getElementById("editWrapper").style.display = "none";
 }
@@ -63,7 +61,7 @@ function editImage(){
   sessionStorage.setItem("isEdited", "false");
 }
 
-}
+
 </script>
   <style>
       .selected{
