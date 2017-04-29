@@ -78,8 +78,8 @@
       });
     }
 
-	var orig = dkrm.canvas.toDataURL();
-	var ctx = dkrm.canvas.getContext('2D');
+	var orig = canvas.toDataURL();
+	var ctx = canvas.getContext('2D');
 
 	var image = new Image();
 	image.onload = function() {
@@ -98,13 +98,6 @@
 	}
 
   </script>
-  <select onchange='presetSelected()' id='filterPresets'>
-        <option value='sepia(100%)'> Sepia </option>
-        <option value='invert(100%)'> Invert </option>
-        <option value='sepia(100%) grayscale(50%) blur(50%)'> My first filter </option>
-        <option value='saturate(100%) opacity(50%)'> Vintage </option>
-        <option value=''> Custom </option>
-  </select>
-  <input type='textarea' id='canFilter' onchange='fileUploaded()'>
+
 </body>
 </html>
