@@ -15,8 +15,6 @@ app.use(methodOverride());
 //app.use(bodyParser());
 app.use(require('connect').bodyParser());
 
-
-
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -70,6 +68,6 @@ app.post('/uploadFile', function(req, res){
         });
     });
   });
-  
+
 console.log("Simple static server listening at http://" + hostname + ":" + port);
 app.listen(port);
