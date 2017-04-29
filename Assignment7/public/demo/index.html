@@ -85,7 +85,7 @@
 	image.onload = function() {
 		ctx.drawImage(image, 0,0);
 	};
-	image.src = canvas;
+	image.src = orig;
 
 	ctx.filter = document.getElementById("canFilter").value;
 	ctx.drawImage(img, 0, 0, width, height);
