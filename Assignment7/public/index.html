@@ -185,14 +185,6 @@ function start()
 
 
   <div id='editWrapper'>
-    <select onchange='presetSelected()' id='filterPresets'>
-          <option value='sepia(100%)'> Sepia </option>
-          <option value='invert(100%)'> Invert </option>
-          <option value='sepia(100%) grayscale(50%) blur(50%)'> My first filter </option>
-          <option value='saturate(100%) opacity(50%)'> Vintage </option>
-          <option value=''> Custom </option>
-    </select>
-    <input type='textarea' id='canFilter' onchange='fileUploaded()'>
     <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
     <canvas id='DRFRame'></canvas>
     <button style='right:0px' onclick='saveImageEdit()'> Save </button>
