@@ -92,7 +92,7 @@ function ChangeFilter(event) {
     Image = document.getElementById("preview");
     Filter = document.getElementById("Filter").value;
 
-    Image.style.WebkitFilter = "grayscale(" + Filter * 10 + "%)"
+    Image.style.WebkitFilter = "grayscale(" + Filter * 100 + "%), sepia(" + Filter * 100 + "%)"
 }
 
 </script>
@@ -151,6 +151,8 @@ function ChangeFilter(event) {
       img {
       -webkit-filter: grayscale(100%);
       filter: grayscale(100%);
+      -webkit-filter: sepia(100%);
+      filter: sepia(100%);
       }
   </style>
 </head>
@@ -159,15 +161,16 @@ function ChangeFilter(event) {
   <h1>Pictures</h1>
   <input type='file' id='theFileUploader' onchange='fileUploaded()'>
 
-<form>
-    Greyscale:
-    <input type="range" id="Filter" name="points" min="0" max="10" onchange="ChangeFilter()" />
-</form>
-
   <img style='height: 200px;display: block;width: auto;' id='preview'>
 
   <button onclick='editImage()'> Edit </button>
   <button onclick='deleteImage()'> Delete </button>
+  <form>
+      Grayscale:
+      <input type="range" id="Filter" name="points" min="0" max="100" onchange="ChangeFilter()" />
+      Sepia:
+      <input type="range" id="Filter" name="points" min="0" max="100" onchange="ChangeFilter()" />
+  </form>
 
 
   <div id='editWrapper'>
