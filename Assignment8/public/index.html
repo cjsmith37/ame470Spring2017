@@ -4,8 +4,34 @@
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"> </script>
 <script src='asyncReq.js'> </script>
-<script src='http://cdnjs.cloudflare.com/ajax/libs/camanjs/4.0.0/caman.full.min.js'>
-</script>
+</head>
+
+<body>
+  <h1>Pictures</h1>
+  <input type='file' id='theFileUploader' onchange='fileUploaded()'>
+
+  <img style='height: 200px;display: block;width: auto;' id='preview'>
+
+  <button onclick='editImage()'> Edit </button>
+  <button onclick='deleteImage()'> Delete </button>
+
+  <form>
+    Sepia:
+    <input type="range" id="slider1" value="0" name="points">
+    Blur:
+    <input type="range" id="slider2" value="0" name="points">
+    Grayscale:
+    <input type="range" id="slider3" value="0" name="points">
+    Invert:
+    <input type="range" id="slider4" value="0" name="points">
+  </form>
+
+
+  <div id='editWrapper'>
+    <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
+    <button style='right:0px' onclick='saveImageEdit()'> Save </button>
+    <button onclick='cancelImageEdit()'> Cancel </button>
+  </div>
 
 <script>
 var fileUploaded = function()
@@ -65,36 +91,7 @@ function editImage(){
   sessionStorage.setItem("isEdited", "false");
 }
 
-  /*var canvas = document.createElement("canvas");
-  var img = document.createElement("img");
-  img.onload= function(){
-           var width = img.width;
-           var height = img.height;
-
-           canvas.width = width;
-           canvas.height = height;
-           var ctx = canvas.getContext("2d");
-           ctx.filter = document.getElementById("canFilter").value;//'sepia(100%)';
-           ctx.drawImage(img, 0, 0, width, height);
-           var base64St = canvas.toDataURL("image/png");
-           document.getElementById("preview").src = base64St;
-           document.getElementById("preview").style.height = height + "px";
-           document.getElementById("preview").style.width= height + "px";
-       }
-       img.src = data;
-
-  function presetSelected(){
-  document.getElementById('canFilter').value = document.getElementById('filterPresets').value;
-  fileUploaded();
-}*/
-
-/*function ChangeFilter(event) {
-    Image = document.getElementById("preview");
-    Filter = document.getElementById("Filter").value;
-
-    Image.style.WebkitFilter = "grayscale(" + Filter * 10 + "%), sepia(" + Filter * 10 + "%)"
-}*/
-/*var image = document.getElementById("preview");
+var image = document.getElementById("preview");
 var slider1 = document.getElementById("slider1");
 var slider2 = document.getElementById("slider2");
 var slider3 = document.getElementById("slider3");
@@ -105,43 +102,23 @@ var blur = slider2.value;
 var grayscale = slider3.value;
 var invert = slider4.value;
 
-slider1.addEventListener("input", function(){
+slider1.addEventListener("input", function() {
     sepia = this.value;
     image.style.WebkitFilter = "blur("+blur+"px) sepia(" + this.value + "%) grayscale("+grayscale+"%) invert("+invert+"%)";
 });
-slider2.addEventListener("input", function(){
+slider2.addEventListener("input", function() {
     blur = this.value;
     image.style.WebkitFilter = "blur(" + this.value + "px) sepia("+sepia+"%) grayscale("+grayscale+"%) invert("+invert+"%)" ;
 });
-slider3.addEventListener("input", function(){
+slider3.addEventListener("input", function() {
     grayscale = this.value;
     image.style.WebkitFilter = "blur("+blur+"px) sepia("+sepia+"%) grayscale(" + this.value + "%) invert("+invert+"%)" ;
 });
-slider4.addEventListener("input", function(){
+slider4.addEventListener("input", function() {
     invert = this.value;
     image.style.WebkitFilter = "blur("+blur+"px) sepia("+sepia+"%) grayscale("+grayscale+"%) invert(" + this.value + "%)" ;
-});*/
+});
 
-var image = document.getElementById("preview");
-var filter = document.getElementById("filter").value;
-
-function SepiaChangeFilter(event) {
-
-    image.style.WebkitFilter = "blur("+blur+"px) sepia(" + this.value + "%) grayscale("+grayscale+"%) invert("+invert+"%)";
-}
-
-function BlurChangeFilter(event) {
-
-  image.style.WebkitFilter = "blur(" + this.value + "px) sepia("+sepia+"%) grayscale("+grayscale+"%) invert("+invert+"%)";
-}
-
-function GrayscaleChangeFilter(event) {
-    image.style.WebkitFilter = "blur("+blur+"px) sepia("+sepia+"%) grayscale(" + this.value + "%) invert("+invert+"%)";
-}
-
-function InvertChangeFilter(event){
-  image.style.WebkitFilter = "blur("+blur+"px) sepia("+sepia+"%) grayscale("+grayscale+"%) invert(" + this.value + "%)";
-}
 
 </script>
   <style>
@@ -201,34 +178,5 @@ function InvertChangeFilter(event){
         filter: grayscale(100%) invert(100%) blur(5px) sepia(100%);
       }
   </style>
-</head>
-
-<body>
-  <h1>Pictures</h1>
-  <input type='file' id='theFileUploader' onchange='fileUploaded()'>
-
-  <img style='height: 200px;display: block;width: auto;' id='preview'>
-
-  <button onclick='editImage()'> Edit </button>
-  <button onclick='deleteImage()'> Delete </button>
-
-  <form>
-    Sepia:
-    <input type="range" id="slider1" value="0" name="points" min="0" max="10" onchange="SepiaChangeFilter()">
-    Blur:
-    <input type="range" id="slider2" value="0" name="points" min="0" max="10" onchange="BlurChangeFilter()">
-    Grayscale:
-    <input type="range" id="slider3" value="0" name="points" min="0" max="10" onchange="GrayscaleChangeFilter()">
-    Invert:
-    <input type="range" id="slider4" value="0" name="points" min="0" max="10" onchange="InvertChangeFilter()">
-  </form>
-
-
-  <div id='editWrapper'>
-    <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
-    <button style='right:0px' onclick='saveImageEdit()'> Save </button>
-    <button onclick='cancelImageEdit()'> Cancel </button>
-  </div>
-
 </body>
 </html>
