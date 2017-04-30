@@ -84,14 +84,14 @@
     var ctx = this.dkrm.canvas.getContext("2D");
 
     var image = new Image();
-    this.image.onload = function() {
-      this.ctx.drawImage(image, 0,0);
+    image.onload = function() {
+      ctx.drawImage(image, 0,0);
     };
     image.src = orig;
 
-    this.ctx.filter = document.getElementById("canFilter").value;
-    this.ctx.drawImage(img, 0, 0, width, height);
-    var base64St = canvas.toDataURL("image/png");
+    ctx.filter = document.getElementById("canFilter").value;
+    ctx.drawImage(img, 0, 0, width, height);
+    var base64St = this.canvas.toDataURL("image/png");
 
 
     /*var canvas = document.createElement("canvas");
