@@ -107,19 +107,19 @@ var invert = slider4.value;
 
 slider1.addEventListener("input", function(){
     sepia = this.value;
-    img.style["-webkit-filter"] = "grayscale("+grayscale+"%) blur("+blur+"px) sepia(" + this.value + "%) invert("+invert+"%)";
+    img.style["-webkit-filter"] = "blur("+blur+"px) sepia(" + this.value + "%) grayscale("+grayscale+"%) invert("+invert+"%)";
 });
 slider2.addEventListener("input", function(){
     blur = this.value;
-    img.style["-webkit-filter"] = "grayscale("+grayscale+"%) blur(" + this.value + "px) sepia("+sepia+"%) invert("+invert+"%)";
+    img.style["-webkit-filter"] = "blur(" + this.value + "px) sepia("+sepia+"%) grayscale("+grayscale+"%) invert("+invert+"%)" ;
 });
 slider3.addEventListener("input", function(){
     grayscale = this.value;
-    img.style["-webkit-filter"] = "grayscale(" + this.value + "%) blur("+blur+"px) sepia("+sepia+"%) invert("+invert+"%)";
+    img.style["-webkit-filter"] = "blur("+blur+"px) sepia("+sepia+"%) grayscale(" + this.value + "%) invert("+invert+"%)" ;
 });
 slider4.addEventListener("input", function(){
     invert = this.value;
-    img.style["-webkit-filter"] = "grayscale("+grayscale+"%) blur("+blur+"px) sepia("+sepia+"%) invert(" + this.value + "%)";
+    img.style["-webkit-filter"] = "blur("+blur+"px) sepia("+sepia+"%) grayscale("+grayscale+"%) invert(" + this.value + "%)" ;
 });
 
 </script>
