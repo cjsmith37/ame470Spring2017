@@ -79,8 +79,8 @@
       });
     }
 
-    var orig = dkrm.DRFrame.toDataURL();
-    var ctx = dkrm.DRFrame.getContext('2d');
+    var orig = dkrm.canvas.toDataURL();
+    var ctx = dkrm.canvas.getContext('2d');
 
     var image = new Image();
     image.onload = function() {
