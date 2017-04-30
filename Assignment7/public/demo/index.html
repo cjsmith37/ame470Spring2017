@@ -80,7 +80,7 @@
     }
 
     var orig = dkrm.canvas.toDataURL();
-    var canvas = document.getElementById("editedImage");
+    var canvas = document.getElementById("DRFrame");
 
     var image = new Image();
     image.onload = function() {
@@ -89,6 +89,7 @@
       var height = orig.height;
       dkrm.canvas.width = width;
       dkrm.canvas.height = height;
+      //var ctx = dkrm.canvas.getContext('2d');
       var ctx = dkrm.canvas.getContext('2d');
       ctx.filter = document.getElementById("canFilter").value;
       ctx.drawImage(img, 0, 0, width, height);
