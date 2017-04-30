@@ -65,7 +65,7 @@ function editImage(){
   sessionStorage.setItem("isEdited", "false");
 }
 
-  var canvas = document.createElement("canvas");
+  /*var canvas = document.createElement("canvas");
   var img = document.createElement("img");
   img.onload= function(){
            var width = img.width;
@@ -86,7 +86,7 @@ function editImage(){
   function presetSelected(){
   document.getElementById('canFilter').value = document.getElementById('filterPresets').value;
   fileUploaded();
-}
+}*/
 
 function ChangeFilter(event) {
     Image = document.getElementById("Image");
@@ -159,21 +159,12 @@ function ChangeFilter(event) {
   <h1>Pictures</h1>
   <input type='file' id='theFileUploader' onchange='fileUploaded()'>
 
-  <select onchange='presetSelected()' id='filterPresets'>
-      <option value='sepia(100%)'> Sepia </option>
-      <option value='invert(100%)'> Invert </option>
-      <option value='sepia(100%) grayscale(50%) blur(50%)'> My first filter </option>
-      <option value='saturate(100%) opacity(50%)'> Vintage </option>
-      <option value=''> Custom </option>
-    </select>
-
 <form>
     Greyscale:
     <input type="range" id="Filter" name="points" min="0" max="10" onchange="ChangeFilter()" />
 </form>
 
-
-    <img style='height: 200px;display: block;width: auto;' id='preview'>
+  <img style='height: 200px;display: block;width: auto;' id='preview'>
 
   <button onclick='editImage()'> Edit </button>
   <button onclick='deleteImage()'> Delete </button>
