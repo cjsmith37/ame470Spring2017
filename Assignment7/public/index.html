@@ -16,7 +16,7 @@
      <option value='saturate(100%) opacity(50%)'> Vintage </option>
      <option value=''> Custom </option>
    </select>
-   <input type='text' id='canFilter' onchange='uploadImage()'>
+   <input type='text' id='canFilter' onchange='fileUploaded()'>
   <img style='height: 200px;display: block;width: auto;' id='preview'>
    <button onclick='editImage()'> Edit </button>
    <button onclick='deleteImage()'> Delete </button>
@@ -27,7 +27,6 @@
     <button style='right:0px' onclick='saveImageEdit()'> Save </button>
     <button onclick='cancelImageEdit()'> Cancel </button>
   </div>
-
 
 </body>
 
@@ -87,10 +86,10 @@ function editImage(){
   sessionStorage.setItem("isEdited", "false");
 }
 
-function presetSelected(){
+/*function presetSelected(){
   document.getElementById('canFilter').value = document.getElementById('filterPresets').value;
   //fileUploaded();
-}
+}*/
 
 </script>
   <style>

@@ -77,9 +77,28 @@
           });
         }
       });
+
+      var orig = dkrm.canvas.toDataURL();
+      var ctx = dkrm.canvas.getContex("2D");
+
+      var image = new Image();
+      image.onload = function() {
+        ctx.drawImage(image, 0,0);
+      };
+      image.src = orig;
+
+      ctx.filter = document.getElementById("canFilter").value;
+      ctx.drawImage(img, 0, 0, width, height);
+      var base64St = canvas.toDataURL("image/png");
+
+      function presetSelected()
+      {
+        document.getElementById('canFilter').value = document.getElementById('filterPresets').value;
+        uploadImage();
+      }
     }
 
-    var canvas = document.createElement("canvas");
+    /*var canvas = document.createElement("canvas");
     var orig = dkrm.canvas.toDataURL();
 
 
@@ -89,13 +108,13 @@
       var width = orig.width;
       var height = orig.height;
 
-      canvas.width = width;
-      canvas.height = height;
-      var ctx = canvas.getContext("2d");
+    //  canvas.width = width;
+    //  canvas.height = height;
+    //  var ctx = canvas.getContext("2d");
 
-      //dkrm.canvas.width = width;
-      //dkrm.canvas.height = height;
-    //  var ctx = dkrm.canvas.getContext('2d');
+      dkrm.canvas.width = width;
+      dkrm.canvas.height = height;
+      var ctx = dkrm.canvas.getContext('2d');
       ctx.filter = document.getElementById("canFilter").value;
       ctx.drawImage(img, 0, 0, width, height);
       var base64St = canvas.toDataURL("image/png");
@@ -103,7 +122,7 @@
       document.getElementById("preview").style.height = height + "px";
       document.getElementById("preview").style.width= height + "px";
       image.src = orig;
-    };
+    };*/
 
 
 
