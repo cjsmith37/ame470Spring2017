@@ -4,6 +4,32 @@
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"> </script>
 <script src='asyncReq.js'> </script>
+</head>
+
+<body>
+  <h1>Pictures</h1>
+  <input type='file' id='theFileUploader' onchange='fileUploaded()'>
+<select onchange='presetSelected()' id='filterPresets'>
+     <option value='sepia(100%)'> Sepia </option>
+     <option value='invert(100%)'> Invert </option>
+     <option value='sepia(100%) grayscale(50%) blur(50%)'> My first filter </option>
+     <option value='saturate(100%) opacity(50%)'> Vintage </option>
+     <option value=''> Custom </option>
+   </select>
+   <input type='text' id='canFilter' onchange='uploadImage()'>
+  <img style='height: 200px;display: block;width: auto;' id='preview'>
+   <button onclick='editImage()'> Edit </button>
+   <button onclick='deleteImage()'> Delete </button>
+
+
+  <div id='editWrapper'>
+    <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
+    <button style='right:0px' onclick='saveImageEdit()'> Save </button>
+    <button onclick='cancelImageEdit()'> Cancel </button>
+  </div>
+
+
+</body>
 
 <script>
 var fileUploaded = function(){
@@ -120,30 +146,7 @@ function presetSelected(){
         left: 0px;
       }
   </style>
-</head>
-
-<body>
-  <h1>Pictures</h1>
-  <input type='file' id='theFileUploader' onchange='fileUploaded()'>
-<select onchange='presetSelected()' id='filterPresets'>
-     <option value='sepia(100%)'> Sepia </option>
-     <option value='invert(100%)'> Invert </option>
-     <option value='sepia(100%) grayscale(50%) blur(50%)'> My first filter </option>
-     <option value='saturate(100%) opacity(50%)'> Vintage </option>
-     <option value=''> Custom </option>
-   </select>
-   <input type='text' id='canFilter' onchange='uploadImage()'>
-  <img style='height: 200px;display: block;width: auto;' id='preview'>
-   <button onclick='editImage()'> Edit </button>
-   <button onclick='deleteImage()'> Delete </button>
 
 
-  <div id='editWrapper'>
-    <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
-    <button style='right:0px' onclick='saveImageEdit()'> Save </button>
-    <button onclick='cancelImageEdit()'> Cancel </button>
-  </div>
 
-
-</body>
 </html>
