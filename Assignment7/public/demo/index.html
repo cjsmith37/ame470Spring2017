@@ -77,38 +77,29 @@
           });
         }
       });
+      var orig = dkrm.canvas.toDataURL();
+      var ctx = dkrm.canvas.getContext('2d');
+
+    	var image = new Image();
+    	image.onload = function() {
+    		ctx.drawImage(image, 0,0);
+    	};
+    	image.src = orig;
+
+    	ctx.filter = document.getElementById("canFilter").value;
+    	ctx.drawImage(img, 0, 0, width, height);
+    	var base64St = canvas.toDataURL("image/png");
+
+    	function presetSelected(){
+    	  document.getElementById('canFilter').value = document.getElementById('filterPresets').value;
+    	  fileUploaded();
+    	}
     }
 
 
-  var orig = dkrm.canvas.toDataURL();
-  var ctx = dkrm.canvas.getContext('2d');
 
-	var image = new Image();
-	image.onload = function() {
-		ctx.drawImage(image, 0,0);
-	};
-	image.src = orig;
-
-	ctx.filter = document.getElementById("canFilter").value;
-	ctx.drawImage(img, 0, 0, width, height);
-	var base64St = canvas.toDataURL("image/png");
-
-	function presetSelected()
-	{
-	  document.getElementById('canFilter').value = document.getElementById('filterPresets').value;
-	  fileUploaded();
-	}
 
   </script>
-  
-    <input id='sepia' type="range" min="0" max="100" step="1" value="0" data-filter='sepia'> Sepia </input>
-    <input id='invert' type="range" min="0" max="100" step="1" value="0" data-filter='invert'> Invert </input>
-    <input id='invert' type="range" min="0" max="100" step="1" value="0" data-filter='grayscale'> Grayscale </input>
-    <input id='invert' type="range" min="0" max="100" step="1" value="0" data-filter='blur'> Blur </input>
-        <option value='sepia(100%) grayscale(50%) blur(50%)'> My first filter </option>
-        <option value='saturate(100%) opacity(50%)'> Vintage </option>
-        <option value=''> Custom </option>
-  </select>
-  <input type='text' id='canFilter' onchange='fileUploaded()'>
+
 </body>
 </html>

@@ -129,15 +129,20 @@ function editImage(){
    </div>
    <button onclick='editImage()'> Edit </button>
    <button onclick='deleteImage()'> Delete </button>
-
+   <select onchange='presetSelected()' id='filterPresets'>
+      <option value='sepia(100%)'> Sepia </option>
+      <option value='invert(100%)'> Invert </option>
+      <option value='sepia(100%) grayscale(50%) blur(50%)'> My first filter </option>
+      <option value='saturate(100%) opacity(50%)'> Vintage </option>
+      <option value=''> Custom </option>
+    </select>
+    <input type='text' id='canFilter' onchange='imageUploaded()'>
 
   <div id='editWrapper'>
     <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
     <canvas id='DRFRame'></canvas>
     <button style='right:0px' onclick='saveImageEdit()'> Save </button>
     <button onclick='cancelImageEdit()'> Cancel </button>
-
-
   </div>
 
 
