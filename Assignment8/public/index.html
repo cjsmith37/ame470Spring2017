@@ -94,11 +94,16 @@ function editImage(){
 
     Image.style.WebkitFilter = "grayscale(" + Filter * 10 + "%), sepia(" + Filter * 10 + "%)"
 }*/
-
+var img = document.getElementById("preview");
 var slider1 = document.getElementById("slider1");
 var slider2 = document.getElementById("slider2");
 var slider3 = document.getElementById("slider3");
 var slider4 = document.getElementById("slider4");
+
+var sepia = slider1.value;
+var blur = slider2.value;
+var grayscale = slider3.value;
+var invert = slider4.value;
 
 slider1.addEventListener("input", function(){
     sepia = this.value;
