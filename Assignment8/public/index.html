@@ -88,12 +88,34 @@ function editImage(){
   fileUploaded();
 }*/
 
-function ChangeFilter(event) {
+/*function ChangeFilter(event) {
     Image = document.getElementById("preview");
     Filter = document.getElementById("Filter").value;
 
     Image.style.WebkitFilter = "grayscale(" + Filter * 10 + "%), sepia(" + Filter * 10 + "%)"
-}
+}*/
+
+var slider1 = document.getElementById("slider1");
+var slider2 = document.getElementById("slider2");
+var slider3 = document.getElementById("slider3");
+var slider4 = document.getElementById("slider4");
+
+slider1.addEventListener("input", function(){
+    sepia = this.value;
+    img.style["-webkit-filter"] = "grayscale("+grayscale+"%) blur("+blur+"px) sepia(" + this.value + "%) invert("+invert+"%)";
+});
+slider2.addEventListener("input", function(){
+    blur = this.value;
+    img.style["-webkit-filter"] = "grayscale("+grayscale+"%) blur(" + this.value + "px) sepia("+sepia+"%) invert("+invert+"%)";
+});
+slider3.addEventListener("input", function(){
+    grayscale = this.value;
+    img.style["-webkit-filter"] = "grayscale(" + this.value + "%) blur("+blur+"px) sepia("+sepia+"%) invert("+invert+"%)";
+});
+slider4.addEventListener("input", function(){
+    invert = this.value;
+    img.style["-webkit-filter"] = "grayscale("+grayscale+"%) blur("+blur+"px) sepia("+sepia+"%) invert(" + this.value + "%)";
+});
 
 </script>
   <style>
@@ -149,8 +171,8 @@ function ChangeFilter(event) {
         left: 0px;
       }
       img {
-      -webkit-filter: grayscale(100%) sepia(100%);
-      filter: grayscale(100%) sepia(100%);
+      -webkit-filter: grayscale(100%) sepia(100%) invert(100%) blur(100px);
+      filter: grayscale(100%) sepia(100%) invert(100%) blur(100px);
       }
   </style>
 </head>
@@ -165,7 +187,7 @@ function ChangeFilter(event) {
   <button onclick='deleteImage()'> Delete </button>
   <form>
       Grayscale:
-      <input type="range" id="Filter" name="points" min="0" max="100" onchange="ChangeFilter()" />
+      <input type="range" id=/>
       Sepia:
       <input type="range" id="Filter" name="points" min="0" max="100" onchange="ChangeFilter()" />
   </form>
