@@ -94,7 +94,6 @@ function editImage(){
 
     Image.style.WebkitFilter = "grayscale(" + Filter * 10 + "%), sepia(" + Filter * 10 + "%)"
 }*/
-var img = document.getElementById("preview");
 var slider1 = document.getElementById("slider1");
 var slider2 = document.getElementById("slider2");
 var slider3 = document.getElementById("slider3");
@@ -174,6 +173,10 @@ slider4.addEventListener("input", function(){
         width: 100%;
         top: 0px;
         left: 0px;
+      }
+      img{
+        filter: blur(50px) sepia(50%) invert(100%) grayscale(100%);
+        -webkit-filter: blur(50px) sepia(50%) invert(100%) grayscale(100%);
       }
   </style>
 </head>
