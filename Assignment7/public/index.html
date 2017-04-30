@@ -61,6 +61,10 @@ function editImage(){
   sessionStorage.setItem("isEdited", "false");
 }
 
+function presetSelected(){
+  document.getElementById('canFilter').value = document.getElementById('filterPresets').value;
+  fileUploaded();
+}
 
 </script>
   <style>
