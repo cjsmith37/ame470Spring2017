@@ -88,9 +88,14 @@
       ctx.drawImage(image, 0,0);
       var width = orig.width;
       var height = orig.height;
-      dkrm.canvas.width = width;
-      dkrm.canvas.height = height;
-      var ctx = dkrm.canvas.getContext('2d');
+
+      canvas.width = width;
+      canvas.height = height;
+      var ctx = canvas.getContext("2d");
+
+      //dkrm.canvas.width = width;
+      //dkrm.canvas.height = height;
+    //  var ctx = dkrm.canvas.getContext('2d');
       ctx.filter = document.getElementById("canFilter").value;
       ctx.drawImage(img, 0, 0, width, height);
       var base64St = canvas.toDataURL("image/png");
