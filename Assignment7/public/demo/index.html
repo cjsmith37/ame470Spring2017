@@ -77,11 +77,12 @@
 			      sessionStorage.setItem("isEdited", "true");
           });
         }
-        //var orig = this.dkrm.canvas.toDataURL();
-        var ctx = this.dkrm.canvas.getContext("2D");
+
 
         var image = new Image();
         this.image.onload = function() {
+          var orig = this.dkrm.canvas.toDataURL();
+          var ctx = this.dkrm.canvas.getContext("2D");
           this.ctx.drawImage(image, 0,0);
         };
         image.src = orig;
