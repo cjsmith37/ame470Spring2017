@@ -76,22 +76,22 @@
             sessionStorage.setItem("editedImage", dkrm.canvas.toDataURL());
 			      sessionStorage.setItem("isEdited", "true");
           });
-          var orig = dkrm.canvas.toDataURL();
-          var ctx = dkrm.canvas.getContext("2D");
-
-          var image = new Image();
-          image.onload = function() {
-            ctx.drawImage(image, 0,0);
-          };
-          image.src = orig;
-
-          ctx.filter = document.getElementById("canFilter").value;
-          ctx.drawImage(img, 0, 0, width, height);
-          var base64St = canvas.toDataURL("image/png");
-
         }
       });
     }
+    var orig = dkrm.canvas.toDataURL();
+    var ctx = dkrm.canvas.getContext("2D");
+
+    var image = new Image();
+    image.onload = function() {
+      ctx.drawImage(image, 0,0);
+    };
+    image.src = orig;
+
+    ctx.filter = document.getElementById("canFilter").value;
+    ctx.drawImage(img, 0, 0, width, height);
+    var base64St = canvas.toDataURL("image/png");
+
 
     /*var canvas = document.createElement("canvas");
     var orig = dkrm.canvas.toDataURL();
