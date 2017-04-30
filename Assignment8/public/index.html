@@ -94,6 +94,7 @@ function editImage(){
 
     Image.style.WebkitFilter = "grayscale(" + Filter * 10 + "%), sepia(" + Filter * 10 + "%)"
 }*/
+var image = document.getElementById("preview");
 var slider1 = document.getElementById("slider1");
 var slider2 = document.getElementById("slider2");
 var slider3 = document.getElementById("slider3");
@@ -106,19 +107,19 @@ var invert = slider4.value;
 
 slider1.addEventListener("input", function(){
     sepia = this.value;
-    img.style["-webkit-filter"] = "blur("+blur+"px) sepia(" + this.value + "%) grayscale("+grayscale+"%) invert("+invert+"%)";
+    image.style.WebkitFilter = "blur("+blur+"px) sepia(" + this.value + "%) grayscale("+grayscale+"%) invert("+invert+"%)";
 });
 slider2.addEventListener("input", function(){
     blur = this.value;
-    img.style["-webkit-filter"] = "blur(" + this.value + "px) sepia("+sepia+"%) grayscale("+grayscale+"%) invert("+invert+"%)" ;
+    image.style.WebkitFilter = "blur(" + this.value + "px) sepia("+sepia+"%) grayscale("+grayscale+"%) invert("+invert+"%)" ;
 });
 slider3.addEventListener("input", function(){
     grayscale = this.value;
-    img.style["-webkit-filter"] = "blur("+blur+"px) sepia("+sepia+"%) grayscale(" + this.value + "%) invert("+invert+"%)" ;
+    image.style.WebkitFilter = "blur("+blur+"px) sepia("+sepia+"%) grayscale(" + this.value + "%) invert("+invert+"%)" ;
 });
 slider4.addEventListener("input", function(){
     invert = this.value;
-    img.style["-webkit-filter"] = "blur("+blur+"px) sepia("+sepia+"%) grayscale("+grayscale+"%) invert(" + this.value + "%)" ;
+    image.style.WebkitFilter = "blur("+blur+"px) sepia("+sepia+"%) grayscale("+grayscale+"%) invert(" + this.value + "%)" ;
 });
 
 </script>
@@ -174,6 +175,10 @@ slider4.addEventListener("input", function(){
         top: 0px;
         left: 0px;
       }
+      img {
+        -webkit-filter: grayscale(100%) invert(100%) blur(5px) sepia(100%);
+        filter: grayscale(100%) invert(100%) blur(5px) sepia(100%);
+      }
   </style>
 </head>
 
@@ -188,13 +193,13 @@ slider4.addEventListener("input", function(){
 
   <form>
     Sepia:
-    <input type="range" id="slider1" value="0">
+    <input type="range" id="slider1" value="0" name="points">
     Blur:
-    <input type="range" id="slider2" value="0">
+    <input type="range" id="slider2" value="0" name="points">
     Grayscale:
-    <input type="range" id="slider3" value="0">
+    <input type="range" id="slider3" value="0" name="points">
     Invert:
-    <input type="range" id="slider4" value="0">
+    <input type="range" id="slider4" value="0" name="points">
   </form>
 
 
