@@ -88,6 +88,13 @@ function editImage(){
   fileUploaded();
 }
 
+function ChangeFilter(event) {
+    Image = document.getElementById("Image");
+    Filter = document.getElementById("Filter").value;
+
+    Image.style.WebkitFilter = "grayscale(" + Filter * 10 + "%)"
+}
+
 </script>
   <style>
       .selected{
@@ -141,6 +148,10 @@ function editImage(){
         top: 0px;
         left: 0px;
       }
+      img {
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
+      }
   </style>
 </head>
 
@@ -156,11 +167,12 @@ function editImage(){
       <option value=''> Custom </option>
     </select>
 
-  <div onchange='fileUploaded' id='canFilter'>
-    <input type="range" min="0" max="100" step="1" value="0" data-filter="brightness">Brightness
-    <input type="range" min="0" max="100" step="1" value="0" data-filter="sepia">Sepia
-    <input type="range" min="0" max="100" step="1" value="0" data-filter="noise">Noise
-  </div>
+<form>
+    Greyscale:
+    <input type="range" id="Filter" name="points" min="0" max="10" onchange="ChangeFilter()" />
+</form>
+
+
     <img style='height: 200px;display: block;width: auto;' id='preview'>
 
   <button onclick='editImage()'> Edit </button>
