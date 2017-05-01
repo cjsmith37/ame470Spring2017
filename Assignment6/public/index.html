@@ -5,6 +5,16 @@
     crossorigin="anonymous"> </script>
 <script src='asyncReq.js'> </script>
 <script>
+function addNew(){
+     var imageURL = prompt("Enter New Image URL:");
+     var id = new Date().getTime();
+     if(imageURL.indexOf("http") >=0 && imageURL.length > 10){
+       var url = "./addTodo" + "?id=" + id + "&url=" + imageURL + "&name=Untitled";
+       loadFile(url ,function(d){
+         formatTodos(JSON.parse(d));
+       });
+     }
+   }
 
 function cancelImageEdit()
 {
@@ -61,8 +71,7 @@ function deleteImage()
               document.getElementById("theImage").style.backgroundImage = "url(" + data.url + ")";
             });
 
-        function start()
-        {
+        function start(){
           var url = "./getTodos";
           loadFile(url ,function(d){
             console.log(d);
@@ -122,6 +131,9 @@ function deleteImage()
 <body onload='start()'>
   <h1>Images</h1>
   <form action="/" method="POST" enctype="multipart/form-data">
+
+  <button id='addButton' onclick='addNew()'> Add using URL </button>
+
     <input type="file" name="file">
     <input type="submit" value="submit">
   </form>

@@ -1,9 +1,4 @@
 var fs = require('fs');
-var AWS = require('aws-sdk');
-AWS.config.loadFromPath('./credentials.json');
-var s3 = new AWS.S3();
-var Dynamo = new AWS.DynamoDB.DocumentClient({region: 'us-east-1'});
-
 var express = require("express");
 var server = express();
 var bodyParser = require('body-parser');
@@ -31,7 +26,7 @@ server.post('/fileUpload', upload.single('file'), function(req, res) {
   fs.rename(req.file.path, file, function(err) {
     if (err) {
       console.log(err);
-      res.send(500);
+      res.send("error");
     } else {
       res.json({
         message: 'File uploaded successfully',
@@ -40,6 +35,20 @@ server.post('/fileUpload', upload.single('file'), function(req, res) {
     }
   });
 });
+
+server.get("/addTodo", function (req, res) {
+  db.collection("data").insert(req.query, function(err, result){
+      if(err){
+        res.send("error");
+      }
+      else{
+        db.collection("data").find({}).toArray( function(err1, result1) {
+          res.send(JSON.stringify(result1));
+        });
+      }
+  });
+});
+
 
   server.get("/deleteTodo", function (req, res) {
      //var id = parseInt(req.query.id);
@@ -56,8 +65,6 @@ server.post('/fileUpload', upload.single('file'), function(req, res) {
           });
         }
      });
-     // res.send(JSON.stringify(todoList));
-     // todoList.splice(index,1);
   });
 
   server.get("/getTodos", function (req, res) {
