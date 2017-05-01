@@ -19,7 +19,7 @@ function editImage(){
  }
 
 function addNew(){
-    var imageURL = document.getElementById("addButton");
+    var imageURL = prompt("Enter New Image URL:");
     var id = new Date().getTime();
     if(imageURL.indexOf("http") >=0 && imageURL.length >= 10){
       var url = "./addTodo" + "?id=" + id + "&url=" + imageURL + "&name=Untitled";
@@ -130,7 +130,8 @@ function deleteImage()
 
 <body onload='start()'>
   <h1>Image List</h1>
-  <input id='addButton' type="file" onchange='addNew()'>
+  <button id='addButton' onclick='addNew()'> Add using URL </button>
+  <input id='uploadButton' type="file" onchange='uploadNew()'>
   <ol id='todoListWrapper'> </ol>
   <div id='theDetails'>
     <h1 id='theTitle'></h1>
