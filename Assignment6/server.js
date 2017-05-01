@@ -21,33 +21,39 @@ server.get("/", function (req, res) {
 
 var todoList = [];
 
-server.post('/fileUpload', upload.single('file'), function(req, res) {
-  var file = __dirname + '/' + req.file.filename;
-  fs.rename(req.file.path, file, function(err) {
-    if (err) {
-      console.log(err);
-      res.send("error");
-    } else {
-      res.json({
-        message: 'File uploaded successfully',
-        filename: req.file.filename
-      });
-    }
-  });
-});
 
-server.get("/addTodo", function (req, res) {
-  db.collection("data").insert(req.query, function(err, result){
-      if(err){
-        res.send("error");
-      }
-      else{
-        db.collection("data").find({}).toArray( function(err1, result1) {
-          res.send(JSON.stringify(result1));
-        });
-      }
+server.get("/addtodo", function (req, res) {
+	var x = req.query;
+	var callback = function(error, result){
+		if(result)
+		{
+			res.end("added");
+		}
+	}
+	db.collection("todo").insert(x, callback);
+ });
+
+ server.get("/renamePhoto", function (req, res) {
+ 	var x = req.query;
+ 	var callback = function(error, result){
+ 		if(result)
+ 		{
+ 			res.end("done");
+ 		}
+ 	}
+
+	db.collection(req.query.colletion).findOne({id: x.id}, function(err, result1) {
+		if(result1){
+			console.log(result1);
+			result1.name = x.name;
+			db.collection(req.query.collection).save(result1, callback);
+		}
+		else{
+			db.collection(req.query.collection).insert(x, callback);
+		}
+	});
+
   });
-});
 
 
   server.get("/deleteTodo", function (req, res) {
