@@ -22,33 +22,31 @@ server.get("/", function (req, res) {
 var todoList = [];
 
 
-server.get("/addtodo", function (req, res) {
-	var x = req.query;
-	var callback = function(error, result){
-		if(result)
-		{
-			res.end("added");
-		}
-	}
-	db.collection("todo").insert(x, callback);
- });
+erver.get("/addTodo", function (req, res) {
+  db.collection("data").insert(req.query, function(err, result){
+      if(err){
+        res.send("error");
+      }
+      else{
+        db.collection("data").find({}).toArray( function(err1, result1) {
+          res.send(JSON.stringify(result1));
+        });
+      }
+  });
+});
+
 
 server.get("/renamePhoto", function (req, res) {
- 	var x = req.query;
- 	var callback = function(error, result){
- 		if(result)
- 		{
- 			res.end("done");
- 		}
- 	}
-  db.collection(req.query.collection).findOne({id: x.id}, function(err, result1) {
-		if(result1){
-			console.log(result1);
-			result1.name = x.name;
-			db.collection(req.query.collection).save(result1, callback);
-		}
+    var id = req.query.id.toString();
+    console.log(id);
+    db.collection("data").edit({id: id}, function(err, result){
+      console.log(err);
+       if(err){
+         res.send("error");
+       }
 		else{
-			db.collection(req.query.collection).insert(x, callback);
+			db.collection("data").find({}).toArray( function(err1, result1) {
+        res.send(JSON.stringify(result1));
 		}
 	});
 
