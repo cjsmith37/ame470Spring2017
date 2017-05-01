@@ -2,6 +2,7 @@ var fs = require('fs');
 var AWS = require('aws-sdk');
 AWS.config.loadFromPath('./credentials.json');
 var s3 = new AWS.S3();
+var Dynamo = new AWS.DynamoDB.DocumentClient({region: 'us-east-1'});
 
 var express = require("express");
 var app = express();
@@ -19,13 +20,9 @@ app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'));
 app.use(errorHandler());
 
-var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/picdb');
-
 app.get("/", function (req, res) {
       res.redirect("/index.html");
 });
-
-var picList = [];
 
 app.post('/uploadImage', function(req, res){
     var intname = req.body.fileInput;
