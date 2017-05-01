@@ -6,16 +6,9 @@
 <script src='asyncReq.js'> </script>
 <script>
 function addNew(){
-  /*var file = $('#theFileUploader').get(0);
-     var fileObj = $('#theFileUploader').get(0).files[0]
-     var filename = fileObj.name;
-     var ext = filename.split(".");
-     ext = ext[ext.length-1];
-     console.log(ext);*/
-
-    var imageURL = new FormData();
+    var imageURL = document.getElementById("addButton").value;
     var id = new Date().getTime();
-    if(imageURL.indexOf("http") >=0 && imageURL.length > 10){
+    if(imageURL.indexOf("http") >=0 && imageURL.length >= 10){
       var url = "./addTodo" + "?id=" + id + "&url=" + imageURL + "&name=Untitled";
       loadFile(url ,function(d){
         formatTodos(JSON.parse(d));
@@ -133,21 +126,22 @@ function deleteImage()
 
 <body onload='start()'>
   <h1>Images</h1>
-	<input type='file' id='fileUpload' onchange='addNew()'>
+  <button id='addButton' type="file" onchange='addNew()'> Add Picture </button>
   <ol id='todoListWrapper'> </ol>
   <div id='theDetails'>
     <h1 id='theTitle'></h1>
     <div id='theImage'></div>
-</div>
+
   <button onclick='editImage()'> Edit </button>
   <button onclick='deleteImage()'> Delete </button>
   <button onclick='renameImage()'> Rename </button>
+</div>
 
   <div id='editWrapper'>
     <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
     <button style='right:0px' onclick='saveImageEdit()'> Save </button>
     <button onclick='cancelImageEdit()'> Cancel </button>
   </div>
-
 </body>
+
 </html>
