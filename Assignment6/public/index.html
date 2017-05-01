@@ -3,150 +3,142 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous"> </script>
-<script src="https://sdk.amazonaws.com/js/aws-sdk-2.7.20.min.js"> </script>
+<script src='asyncReq.js'> </script>
 <script>
-// Fetch the gallery name from the gallery input
-function getGalleryName() {
-  return document.getElementById('gallery-name').value;
+
+function cancelImageEdit()
+{
+  document.getElementById("DRFrame").src = "";
+  document.getElementById("editWrapper").style.display = "none";
 }
+function editImage(){
+   var url = document.getElementById("theImage").style.backgroundImage.replace('url("', "").replace('")','').replace("url('", "").replace("')",'');
+   console.log(url);
+   console.log(url);
+   document.getElementById("DRFrame").src = "./demo/index.html#" + url;
+   document.getElementById("editWrapper").style.display = "block";
+ }
 
-// Grab a reference to the upload button
-let uploadButton = document.getElementById('upload-button');
+function deleteImage()
+   {
+      deleteTodo(currSel);
+   }
 
-// Make the button respond to clicks
-uploadButton.addEventListener('click', function() {
-  let fileChooser = document.getElementById('file-chooser');
-  let file = fileChooser.files[0];
+   function deleteTodo(index){
+         var flag = confirm("Are you sure you want to delete this?");
+         if(flag){
+           var url = "./deleteTodo" + "?id=" + index;
+           loadFile(url ,function(d){
+             formatTodos(JSON.parse(d));
+           });
+         }
+       }
 
-  // Check that the user has specified a file to upload
-  if (!file) {
-    alert("You must choose a file to upload!");
-    return;
-  }
+    function formatTodos(list){
+        var markup = "";
+        if(list.length == 0){
+            markup = "No images yet"
+            document.getElementById("todoListWrapper").innerHTML = markup;
+            return;
+          }
+          for(var i = 0; i < list.length; i++){
+            markup += "<li> <a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name +
+                "</a></li>";
+          }
+          document.getElementById("todoListWrapper").innerHTML = markup;
+          imageSelected(list[0].id);
+        }
 
-  // Check the MIME type is an image
-  if (file.type.indexOf("image") == -1) {
-    alert("You may only upload images");
-    return;
-  }
+        var currSel = 0;
+        function imageSelected(id, index){
+            currSel = id;
+            $("#todoListWrapper li a").removeClass("selected");
+            $("#todoListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
+            var url = "./getTodo?id=" + id;
+            loadFile(url ,function(d){
+              var data = JSON.parse(d);
+              document.getElementById("theTitle").innerHTML = data.name;
+              document.getElementById("theImage").style.backgroundImage = "url(" + data.url + ")";
+            });
 
-  // Get the gallery name and check that it isn't empty
-  let galleryName = getGalleryName();
-  if (!galleryName) {
-    alert("You need to enter a gallery name");
-    return;
-  }
+        function start()
+        {
+          var url = "./getTodos";
+          loadFile(url ,function(d){
+            console.log(d);
+            formatTodos(JSON.parse(d));
+          })
+        }
 
-  // Specify the S3 upload parameters
-  let params = {
-    Key: galleryName + '/' + file.name,
-    ContentType: file.type,
-    Body: file,
-    ACL: 'public-read'
-  };
-
-  // Upload the file
-  S3.upload(params, function(err, data) {
-    if (err) {
-      alert(err);
-    } else {
-      alert("Image uploaded successfully!");
-    }
-  });
-});
-
-// Get a reference to the button to list images
-let listImagesButton = document.getElementById('list-images');
-
-// Upon click, fetch the index from Dynamo and use that to
-// fetch images in the specified gallery
-listImagesButton.addEventListener('click', function() {
-  let galleryName = getGalleryName();
-  if (!galleryName) {
-    alert("Must enter a gallery name to list the images!");
-    return;
-  }
-
-  // Disable the list button so you can't perform multiple fetches at once
-  listImagesButton.disabled = true;
-  // Dispose of any images from previous fetches
-  emptyImageList();
-
-  // Fetch all images in the gallery, then re-enable the list button.
-  listImagesInGallery(galleryName, function(err) {
-    if (err) {
-      alert("Dynamo error: " + err);
-    }
-    listImagesButton.disabled = false;
-  });
-})
-
-// Fetch all images in the given gallery.
-// `startKey` represents the exclusive start key of the Dynamo query.
-// To start a new query, leave `startKey` undefined.
-// This function recursively calls itself until there are no more query pages,
-// and then runs the callback.
-function listImagesInGallery(galleryName, cb, startKey) {
-  let params = {
-    TableName: 'images-index',
-    ProjectionExpression: 'file_path',
-    KeyConditionExpression: 'gallery = :galleryname',
-    ExpressionAttributeValues: {
-      ":galleryname": galleryName
-    },
-    ExclusiveStartKey: startKey,
-  }
-
-  Dynamo.query(params, function (err, data) {
-    if (err) {
-      return cb(err);
-    }
-
-    for (item of data.Items) {
-      appendImageToList(item.file_path);
-    }
-
-    if (data.LastEvaluatedKey) { // there are more pages to fetch
-      // Soon ECMA6 will have tail call optimization :D
-      return listImagesInGallery(galleryName, cb, data.LastEvaluatedKey);
-    } else {
-      return cb(null);
-    }
-  })
-}
-
-// Add an image to the end of the image list
-function appendImageToList(imagePath) {
-  let ul = document.getElementById('image-list');
-  let li = document.createElement('li');
-  let img = document.createElement('img');
-
-  img.src = 'https://s3-your-bucket-region.amazonaws.com/ame470spring2017/' + imagePath
-  img.style.maxWidth = "200px";
-
-  li.appendChild(img);
-  ul.appendChild(li);
-}
-
-// Remove all images from the image list
-function emptyImageList() {
-  document.getElementById('image-list').innerHTML = '';
-}
 </script>
   <style>
-
+      .selected{
+        color: green;
+        text-transform: uppercase;
+      }
+      h1{
+        text-align: center;
+      }
+      #uploadButton
+      {
+        position: absolute;
+        top: 20px;
+        right: 120px;
+      }
+      .delButton
+      {
+          float: right;
+      }
+      #theImage{
+        height: 200px;
+        width: 100%;
+        background-size: contain;
+        background-position: 50%;
+        background-repeat: no-repeat;
+      }
+      #editWrapper{
+        display: none;
+        background: rgba(0,0,0,.7);
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+      }
+      #editWrapper button{
+        position: fixed;
+        float: right;
+      }
+      #DRFrame{
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        top: 0px;
+        left: 0px;
+      }
   </style>
 </head>
 
-<body>
-  Image: <input type="file" id="file-chooser" />
-  <br>
-  Gallery: <input type="text" id="gallery-name" />
-  <br>
+<body onload='start()'>
+  <h1>Images</h1>
+  <form action="/" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="submit">
+  </form>
+  <ol id='todoListWrapper'> </ol>
+  <div id='theDetails'>
+    <h1 id='theTitle'></h1>
+    <div id='theImage'></div>
 
-  <button id="upload-button">Upload Image</button>
-  <button id="list-images">List images in gallery </button>
+  <button onclick='editImage()'> Edit </button>
+  <button onclick='deleteImage()'> Delete </button>
+  <button onclick='renameImage()'> Rename </button>
 
-  <ul id="image-list" />
+  <div id='editWrapper'>
+    <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
+    <button style='right:0px' onclick='saveImageEdit()'> Save </button>
+    <button onclick='cancelImageEdit()'> Cancel </button>
+  </div>
+
 </body>
 </html>

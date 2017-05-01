@@ -5,65 +5,44 @@ var s3 = new AWS.S3();
 var Dynamo = new AWS.DynamoDB.DocumentClient({region: 'us-east-1'});
 
 var express = require("express");
-var app = express();
+var server = express();
 var bodyParser = require('body-parser');
+var multer  = require('multer');
 var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
+
+server.use(express.static('public'));
+server.use(bodyParser.urlencoded({ extended: false }));
+var upload = multer({ dest: '/tmp' })
+
 var hostname = process.env.HOSTNAME || 'localhost';
 var port = 8080;
 
-app.use(methodOverride());
-app.use(require('connect').bodyParser());
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/tododb');
 
-app.use(express.static(__dirname + '/public'));
-app.use(errorHandler());
-
-app.get("/", function (req, res) {
+server.get("/", function (req, res) {
       res.redirect("/index.html");
 });
 
-app.post('/uploadImage', function(req, res){
-    var intname = req.body.fileInput;
-    var s3Path = '/' + intname;
-    var buf = new Buffer(req.body.data.replace(/^data:image\/\w+;base64,/, ""),'base64');
-    var params = {
-        Bucket:'ame470spring2017',
-        ACL:'public-read',
-        Key:intname,
-        Body: buf,
-        ServerSideEncryption : 'AES256'
-    };
-    s3.putObject(params, function(err, data) {
-        console.log(err);
-        res.end("success");
-    });
+var todoList = [];
+
+server.post('/fileUpload', upload.single('file'), function(req, res) {
+  var file = __dirname + '/' + req.file.filename;
+  fs.rename(req.file.path, file, function(err) {
+    if (err) {
+      console.log(err);
+      res.send(500);
+    } else {
+      res.json({
+        message: 'File uploaded successfully',
+        filename: req.file.filename
+      });
+    }
+  });
 });
 
-app.post('/uploadFile', function(req, res){
-    var intname = req.body.fileInput;
-    var filename = req.files.input.name;
-    var fileType =  req.files.input.type;
-    var tmpPath = req.files.input.path;
-    var s3Path = '/' + intname;
-
-    fs.readFile(tmpPath, function (err, data) {
-        var params = {
-            Bucket:'ame470spring2017',
-            ACL:'public-read',
-            Key:intname,
-            Body: data,
-            ServerSideEncryption : 'AES256'
-        };
-        s3.putObject(params, function(err, data) {
-            res.end("success");
-            console.log(err);
-        });
-    });
-  });
-
-  app.get("/deletePic", function (req, res) {
+  server.get("/deleteTodo", function (req, res) {
+     //var id = parseInt(req.query.id);
      var id = req.query.id.toString();
      console.log(id);
      db.collection("data").remove({id: id}, function(err, result){
@@ -77,26 +56,27 @@ app.post('/uploadFile', function(req, res){
           });
         }
      });
+     // res.send(JSON.stringify(todoList));
+     // todoList.splice(index,1);
   });
 
-  app.get("/getPics", function (req, res) {
-    db.collection("data").find({}).toArray( function(err, result) {
-      res.send(JSON.stringify(result));
-    });
+  server.get("/getTodos", function (req, res) {
+  db.collection("data").find({}).toArray( function(err, result) {
+    res.send(JSON.stringify(result));
   });
+});
 
-  app.get("/getPic", function (req, res) {
-    var id = req.query.id.toString();
-    db.collection("data").findOne({id:id}, function(err, result) {
-      res.send(JSON.stringify(result));
-    });
+server.get("/getTodo", function (req, res) {
+  var id = req.query.id.toString();
+  db.collection("data").findOne({id:id}, function(err, result) {
+    res.send(JSON.stringify(result));
   });
+});
 
-//server.use(methodOverride());
-//server.use(bodyParser());
-//server.use(express.static(__dirname + '/public'));
-//server.use(errorHandler());
 
+  server.use(methodOverride());
+  server.use(bodyParser());
+  server.use(express.static(__dirname + '/public'));
+  server.use(errorHandler());
 console.log("Simple static server listening at http://" + hostname + ":" + port);
-app.listen(port);
-//server.listen(port);
+server.listen(port);
