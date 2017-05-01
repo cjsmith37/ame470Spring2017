@@ -40,7 +40,8 @@ server.get("/renamePhoto", function (req, res) {
  		{
  			res.end("done");
  		}
- 	}  db.collection(req.query.collection).findOne({id: x.id}, function(err, result1) {
+ 	}
+  db.collection(req.query.collection).findOne({id: x.id}, function(err, result1) {
 		if(result1){
 			console.log(result1);
 			result1.name = x.name;
