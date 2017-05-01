@@ -78,19 +78,20 @@
           });
         }
 
-        var orig = this.dkrm.canvas.toDataURL();
-        var ctx = this.dkrm.canvas.getContext("2D");
+        var orig = dkrm.canvas.toDataURL();
 
         var image = new Image();
-        this.image.onload = function() {
+        image.onload = function() {
+          var width = image.width;
+          var height = image.height;
 
-          this.ctx.drawImage(image, 0,0);
+          var ctx = dkrm.canvas.getContext("2D");
+          ctx.filter = document.getElementById("canFilter").value;
+        //  this.ctx.drawImage(image, 0,0);
+          ctx.drawImage(image, 0, 0, width, height);
+          var base64St = canvas.toDataURL("image/png");
         };
-        this.image.src = orig;
-
-        this.ctx.filter = document.getElementById("canFilter").value;
-        this.ctx.drawImage(img, 0, 0, width, height);
-        var base64St = this.canvas.toDataURL("image/png");
+        image.src = orig;
       });
 
     }
