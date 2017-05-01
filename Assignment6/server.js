@@ -33,16 +33,14 @@ server.get("/addtodo", function (req, res) {
 	db.collection("todo").insert(x, callback);
  });
 
- server.get("/renamePhoto", function (req, res) {
+server.get("/renamePhoto", function (req, res) {
  	var x = req.query;
  	var callback = function(error, result){
  		if(result)
  		{
  			res.end("done");
  		}
- 	}
-
-	db.collection(req.query.colletion).findOne({id: x.id}, function(err, result1) {
+ 	}  db.collection(req.query.collection).findOne({id: x.id}, function(err, result1) {
 		if(result1){
 			console.log(result1);
 			result1.name = x.name;
@@ -56,7 +54,7 @@ server.get("/addtodo", function (req, res) {
   });
 
 
-  server.get("/deleteTodo", function (req, res) {
+server.get("/deleteTodo", function (req, res) {
      //var id = parseInt(req.query.id);
      var id = req.query.id.toString();
      console.log(id);
@@ -73,7 +71,7 @@ server.get("/addtodo", function (req, res) {
      });
   });
 
-  server.get("/getTodos", function (req, res) {
+server.get("/getTodos", function (req, res) {
   db.collection("data").find({}).toArray( function(err, result) {
     res.send(JSON.stringify(result));
   });
