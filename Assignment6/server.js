@@ -13,7 +13,7 @@ var methodOverride = require('method-override');
 
 server.use(express.static('public'));
 server.use(bodyParser.urlencoded({ extended: false }));
-var upload = multer({ dest: '/tmp' });
+var upload = multer({ dest: '/tmp/' });
 
 var hostname = process.env.HOSTNAME || 'localhost';
 var port = 8080;
