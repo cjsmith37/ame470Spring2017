@@ -6,12 +6,12 @@
 <script src='asyncReq.js'> </script>
 <script>
 function addNew(){
-  var file = $('#theFileUploader').get(0);
+  /*var file = $('#theFileUploader').get(0);
      var fileObj = $('#theFileUploader').get(0).files[0]
      var filename = fileObj.name;
      var ext = filename.split(".");
      ext = ext[ext.length-1];
-     console.log(ext);
+     console.log(ext);*/
 
     var imageURL = new FormData();
     var id = new Date().getTime();
@@ -52,41 +52,42 @@ function deleteImage()
          }
        }
 
-function formatTodos(list){
-        var markup = "";
-        if(list.length == 0){
-            markup = "No images yet"
-            document.getElementById("todoListWrapper").innerHTML = markup;
-            return;
-          }
-          for(var i = 0; i < list.length; i++){
-            markup += "<li> <a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name +
-                "</a></li>";
-          }
-          document.getElementById("todoListWrapper").innerHTML = markup;
-          imageSelected(list[0].id);
-        }
+       function formatTodos(list)
+           {
+             var markup = "";
+             if(list.length == 0){
+               markup = "No images yet"
+               document.getElementById("todoListWrapper").innerHTML = markup;
+               return;
+             }
+             for(var i = 0; i < list.length; i++){
+               markup += "<li> <a href='javascript:imageSelected(" + list[i].id + "," + (i+1) + ")'>" + list[i].name +
+                   "</a></li>";
+             }
+             document.getElementById("todoListWrapper").innerHTML = markup;
+             imageSelected(list[0].id);
+           }
 
-  var currSel = 0;
-  function imageSelected(id, index){
-            currSel = id;
-            $("#todoListWrapper li a").removeClass("selected");
-            $("#todoListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
-            var url = "./getTodo?id=" + id;
-            loadFile(url ,function(d){
-              var data = JSON.parse(d);
-              document.getElementById("theTitle").innerHTML = data.name;
-              document.getElementById("theImage").style.backgroundImage = "url(" + data.url + ")";
-            });
+           var currSel = 0;
+            function imageSelected(id, index){
+                 currSel = id;
+                 $("#todoListWrapper li a").removeClass("selected");
+                 $("#todoListWrapper li:nth-of-type(" + index + ") a").addClass("selected");
+                 var url = "./getTodo?id=" + id;
+                 loadFile(url ,function(d){
+                   var data = JSON.parse(d);
+                   document.getElementById("theTitle").innerHTML = data.name;
+                   document.getElementById("theImage").style.backgroundImage = "url(" + data.url + ")";
+                 });
+             }
 
-  function start(){
-    var url = "./getTodos";
-    loadFile(url ,function(d){
-        console.log(d);
-        formatTodos(JSON.parse(d));
-        })
-      }
-
+             function start(){
+               var url = "./getTodos";
+               loadFile(url ,function(d){
+                 console.log(d);
+                 formatTodos(JSON.parse(d));
+               })
+             }
 </script>
   <style>
       .selected{
