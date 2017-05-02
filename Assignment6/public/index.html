@@ -46,7 +46,7 @@ function uploadNew(){
     xhr.onreadystatechange = function(e) {
       if (xhr.readyState != 4) { return; }
         // callback logic
-       document.getElementById("theImage").src = fileInput + new Date().getTime();
+       document.getElementById("theImage").src = fileInput;
     };
     xhr.open("POST", "/addTodo", true);
     xhr.send(fd);
@@ -57,7 +57,7 @@ function uploadNew(){
       });
     }
   }
-}
+
 
 function deleteImage()
    {
