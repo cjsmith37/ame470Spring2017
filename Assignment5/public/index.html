@@ -49,7 +49,7 @@ function cancelImageEdit()
       document.getElementById("editWrapper").style.display = "block";
     }
 
-    function addNew(){
+    function addNew(imageURL){
       var imageURL = prompt("Enter New Image URL:");
       var id = new Date().getTime();
       if(imageURL.indexOf("http") >=0 && imageURL.length > 10){
@@ -100,12 +100,19 @@ function cancelImageEdit()
         });
     }
 
-	function renameImage(){
-    var rename = prompt("Rename this image","");
-    if (imageSelected(currSel)) {
-      document.getElementById("picListWrapper").innerHTML.replace(list[i].name) = rename;
-    }
-  }
+    function renameImage(){
+          var url = "./getTodo?id=" + currSel;
+          loadFile(url ,function(d){
+            var data = JSON.parse(d);
+            var flag = prompt("Rename Image", data.name);
+            if(flag){
+              var url = "./renamePic" + "?id=" + currSel + "&name=" + flag;
+              loadFile(url ,function(d){
+                formatTodos(JSON.parse(d));
+              });
+            }
+          });
+      }
 
     function start()
     {
@@ -115,34 +122,27 @@ function cancelImageEdit()
         formatPics(JSON.parse(d));
       })
     }
+
   </script>
   <style>
       .selected{
         color: green;
         text-transform: uppercase;
       }
-      .active {
+      .active{
 	       background-color: rgb(128,128,128);
       }
       h1{
         text-align: center;
-		font-family: helvetica;
+		    font-family: helvetica;
       }
-      #addButton
-      {
+      #addButton{
         position: absolute;
         top: 20px;
         right: 20px;
 		color: green;
       }
-      #uploadButton
-      {
-        position: absolute;
-        top: 20px;
-        right: 120px;
-      }
-      .delButton
-      {
+      .delButton{
           float: right;
       }
       #theImage{
@@ -177,8 +177,7 @@ function cancelImageEdit()
 
 <body onload='start()'>
   <h1> Picture List </h1>
-  <button id='addButton' onclick='addNew()'> Add Picture URL </button>
-  <input id='uploadButton' type="file" onchange='uploadNew()'>
+  <button id='addButton' onclick='addNew()'> Add Picture </button>
   <ol id='picListWrapper'> </ol>
   <div id='theDetails'>
     <h1 id='theTitle'></h1>

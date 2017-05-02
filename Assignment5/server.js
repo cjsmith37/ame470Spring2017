@@ -28,6 +28,34 @@ server.get("/addPic", function (req, res) {
   });
 });
 
+server.get("/renamePic", function (req, res) {
+   //var id = parseInt(req.query.id);
+   var id = req.query.id.toString();
+   console.log(id);
+  db.collection("data").findOne({id:id}, function(err, result) {
+    if(result){
+      result.name = req.query.name;
+      db.collection("data").save(result, function(e){
+        db.collection("data").find({}).toArray( function(err1, result1) {
+          res.send(JSON.stringify(result1));
+        });
+      });
+    }
+  });
+   db.collection("data").remove({id: id}, function(err, result){
+     console.log(err);
+      if(err){
+        res.send("error");
+      }
+      else{
+        db.collection("data").find({}).toArray( function(err1, result1) {
+          res.send(JSON.stringify(result1));
+        });
+      }
+   });
+});
+
+
 
 server.get("/deletePic", function (req, res) {
    //var id = parseInt(req.query.id);
