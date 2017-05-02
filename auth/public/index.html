@@ -98,7 +98,7 @@
            aXMLHttpRequest.onreadystatechange = function (aEvt) {
    				if(aXMLHttpRequest.readyState == 4){
  				   allData = aXMLHttpRequest.responseText;
-				   callback(allData)
+				   callback(allData);
 			   }
 
         };

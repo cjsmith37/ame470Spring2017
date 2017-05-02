@@ -166,7 +166,7 @@ app.get('/getUser', function(req, res){
 });
 
 app.get('/createUser', function(req, res){
-				db.collection("users").findOne({userID:req.query.userID}, function(err, result) {
+				db.collection("users").findOne({userID:req.query.ID}, function(err, result) {
 						if(result) {
 							res.send('0');
 						} else {
