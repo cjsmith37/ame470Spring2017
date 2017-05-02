@@ -5,11 +5,42 @@
   <script src='asyncReq.js'> </script>
   <script src='https://code.jquery.com/jquery-3.2.0.min.js'> </script>
   <script>
-    function cancelImageEdit()
-    {
-      document.getElementById("DRFrame").src = "";
-      document.getElementById("editWrapper").style.display = "none";
-    }
+
+function saveImageEdit(){
+  if(sessionStorage.getItem("isEdited") == "true"){
+     var fd = new FormData();
+     var fileInput = document.getElementById("theImage").style.backgroundImage.replace('url("', "").replace('")','').replace("url('","").replace("')","");
+
+    console.log(fileInput);
+
+     fd.append('fileInput', fileInput);
+     fd.append('date', (new Date()).toString());
+     fd.append('data', sessionStorage.getItem("editedImage"));
+      //fd.append('data', data);
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function(e) {
+        cancelImageEdit();
+        if (xhr.readyState != 4) { return; }
+          // callback logic
+        start();
+      };
+      xhr.open("POST", "/uploadImage", true);
+      xhr.send(fd);
+  }
+  else{
+    cancelImageEdit();
+  }
+}
+
+function cancelImageEdit()
+   {
+     document.getElementById("DRFrame").src = "";
+     document.getElementById("editWrapper").style.display = "none";
+     if(sessionStorage.getItem("isEdited")  === "true"){
+     }
+
+   }
+
     function editImage(){
       var url = document.getElementById("theImage").style.backgroundImage.replace('url("', "").replace('")','').replace("url('", "").replace("')",'');
       console.log(url);
