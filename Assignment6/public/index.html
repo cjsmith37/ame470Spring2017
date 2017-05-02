@@ -31,7 +31,7 @@ var uploadNew = function()
 function saveImageEdit(){
   if(sessionStorage.getItem("isEdited") == "true"){
      var fd = new FormData();
-     var fileInput = document.getElementById("theImage").style.backgroundImage.replace('url("', "").replace('")','').replace("url('","").replace("')","").replace("url(","").replace(")","").split("/ame470spring2017/")[1].split("?")[0];
+     var fileInput = document.getElementById("theImage").style.backgroundImage.replace('url("', "").replace('")','').replace("url('", "").replace("')",'').split("/ame470spring2017/")[1].split("?")[0];
 
     console.log(fileInput);
 
