@@ -34,6 +34,7 @@ function uploadNew(input){
   var id = new Date().getTime();
       var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
       if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
+
           var reader = new FileReader();
 
           reader.onload = function (e) {
@@ -154,7 +155,7 @@ function deleteImage()
   <ol id='todoListWrapper'> </ol>
   <div id='theDetails'>
     <h1 id='theTitle'></h1>
-    <div id='theImage' src="#"></div>
+    <div id='theImage'></div>
 
   <button onclick='editImage()'> Edit </button>
   <button onclick='deleteImage()'> Delete </button>
