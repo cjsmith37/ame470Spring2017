@@ -46,7 +46,7 @@ function uploadNew(input){
   }
 
 
-  $("#uploadButton").change(function(){ 
+  $("#uploadButton").change(function(){
           uploadNew(this);
       });
 
@@ -152,11 +152,11 @@ function deleteImage()
 <body onload='start()'>
   <h1>Image List</h1>
   <button id='addButton' onclick='addNew()'> Add using URL </button>
-  <input id='uploadButton' type="file" onchange='uploadNew()'>
+  <input id='uploadButton' type="file">
   <ol id='todoListWrapper'> </ol>
   <div id='theDetails'>
     <h1 id='theTitle'></h1>
-    <div id='theImage'></div>
+    <div id='theImage' src="#"></div>
 
   <button onclick='editImage()'> Edit </button>
   <button onclick='deleteImage()'> Delete </button>
