@@ -12,7 +12,7 @@ app.get("/", function (req, res) {
 
 var auth = require('./authenticate.js');
 
-var db = require('mongoskin').db('mongodb://user:pwd@localhost:27017/tododb');
+var db = require('mongoskin').db('mongodb://user:pwd@localhost:27017/picdb');
 console.log(db);
 
 app.get("/addtodo", function (req, res) {
@@ -35,7 +35,7 @@ app.get("/addtodo", function (req, res) {
  		}
  	}
 
-	db.collection(req.query.colletion).findOne({id: x.id}, function(err, result1) {
+	db.collection(req.query.collection).findOne({id: x.id}, function(err, result1) {
 		if(result1){
 			console.log(result1);
 			result1.name = x.name;
