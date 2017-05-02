@@ -30,7 +30,8 @@ function addNew(){
   }
 
 function uploadNew(input){
-  var url = input.value;
+  var url = "./addTodo" + "?id" + id + "&url=" + input.value + "&name=Untitled";
+  var id = new Date().getTime();
       var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
       if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
           var reader = new FileReader();
@@ -38,14 +39,11 @@ function uploadNew(input){
           reader.onload = function (e) {
               $('#theImage').attr('src', e.target.result);
           }
-
           reader.readAsDataURL(input.files[0]);
       }else{
            $('#theImage').attr('src', '/assets/no_preview.png');
       }
   }
-
-
   $("#uploadButton").change(function(){
           uploadNew(this);
       });
