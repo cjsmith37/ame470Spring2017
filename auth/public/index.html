@@ -163,7 +163,7 @@ var userID = "";
    var allPhotos;
    function updateList()
    {
-	   var url = "./listphotos";
+	   var url = "./listPhotos";
 	   url = url + "?collection=" + userID;
 
 	   var callback = function(data){
@@ -185,7 +185,7 @@ var userID = "";
 
    function deletePhoto(i){
 	   id = allPhotos[i];
-	   var url = "./deletephoto?index=" + encodeURIComponent(index);
+	   var url = "./deletePhoto?index=" + encodeURIComponent(index);
 	   url = url + "&collection=" + userID;
 	   var callback = function(data){
 		   if(data === "deleted"){
@@ -199,7 +199,7 @@ var userID = "";
 	   var id = allPhotos[i].id;
 	   var newname = prompt("Rename photo", getPhotoName(id))
 
-	   var url = "./renamephoto?id=" + encodeURIComponent(id)
+	   var url = "./renamePhoto?id=" + encodeURIComponent(id)
 	   					+ "&name=" + encodeURIComponent(newname)
 						+ "&collection=" + userID;
 

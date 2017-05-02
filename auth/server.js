@@ -15,6 +15,8 @@ var auth = require('./authenticate.js');
 var db = require('mongoskin').db('mongodb://user:pwd@localhost:27017/picdb');
 console.log(db);
 
+picList = [];
+
 app.get("/addTodo", function (req, res) {
 	var x = req.query;
 	var callback = function(error, result){
