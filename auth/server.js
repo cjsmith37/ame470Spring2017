@@ -12,10 +12,10 @@ app.get("/", function (req, res) {
 
 var auth = require('./authenticate.js');
 
-var db = require('mongoskin').db('mongodb://user:pwd@localhost:27017/picdb');
+var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/picdb');
 console.log(db);
 
-picList = [];
+var picList = [];
 
 app.get("/addTodo", function (req, res) {
 	var x = req.query;
