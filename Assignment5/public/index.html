@@ -24,7 +24,7 @@ function saveImageEdit(){
           // callback logic
         start();
       };
-      xhr.open("POST", "/uploadImage", true);
+      xhr.open("POST", "/addPic", true);
       xhr.send(fd);
   }
   else{
@@ -101,7 +101,7 @@ function cancelImageEdit()
     }
 
     function renameImage(){
-          var url = "./getTodo?id=" + currSel;
+          var url = "./getPic?id=" + currSel;
           loadFile(url ,function(d){
             var data = JSON.parse(d);
             var flag = prompt("Rename Image", data.name);
