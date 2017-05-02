@@ -6,14 +6,14 @@ var express = require("express"),
     hostname = process.env.HOSTNAME || 'localhost',
     port = 8080;
 
-app.get("/", function (req, res) {
-  res.redirect("/index.html");
-});
-
 var auth = require('./authenticate.js');
 
 var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/picdb');
 console.log(db);
+
+app.get("/", function (req, res) {
+  res.redirect("/index.html");
+});
 
 var picList = [];
 
