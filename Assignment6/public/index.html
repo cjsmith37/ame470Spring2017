@@ -30,8 +30,8 @@ function addNew(){
   }
 
 function uploadNew(){
-  var file = $('#theFileUploader').get(0);
-   var fileObj = $('#theFileUploader').get(0).files[0]
+  var file = $('#uploadButton').get(0);
+   var fileObj = $('#uploadButton').get(0).files[0]
    var filename = fileObj.name;
    var ext = filename.split(".");
    ext = ext[ext.length-1];
