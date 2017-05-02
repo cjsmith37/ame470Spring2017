@@ -5,19 +5,50 @@
   <script src='asyncReq.js'> </script>
   <script src='https://code.jquery.com/jquery-3.2.0.min.js'> </script>
   <script>
-    function cancelImageEdit()
-    {
-      document.getElementById("DRFrame").src = "";
-      document.getElementById("editWrapper").style.display = "none";
-    }
-    function editImage(){
+
+function editImage(){
       var url = document.getElementById("theImage").style.backgroundImage.replace('url("', "").replace('")','').replace("url('", "").replace("')",'');
       console.log(url);
       console.log(url);
       document.getElementById("DRFrame").src = "./demo/index.html#" + url;
       document.getElementById("editWrapper").style.display = "block";
     }
-	
+
+function saveImageEdit(){
+  if(sessionStorage.getItem("isEdited") == "true"){
+     var fd = new FormData();
+     var fileInput = document.getElementById("theImage").style.backgroundImage.replace('url("', "").replace('")','').replace("url('","").replace("')","");
+
+    console.log(fileInput);
+
+     fd.append('fileInput', fileInput);
+     fd.append('date', (new Date()).toString());
+     fd.append('data', sessionStorage.getItem("editedImage"));
+      //fd.append('data', data);
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function(e) {
+        cancelImageEdit();
+        if (xhr.readyState != 4) { return; }
+          // callback logic
+        start();
+      };
+      xhr.open("POST", "/uploadImage", true);
+      xhr.send(fd);
+  }
+  else{
+    cancelImageEdit();
+  }
+}
+
+function cancelImageEdit()
+   {
+     document.getElementById("DRFrame").src = "";
+     document.getElementById("editWrapper").style.display = "none";
+     if(sessionStorage.getItem("isEdited")  === "true"){
+     }
+
+   }
+
     function addNew(){
       var imageURL = prompt("Enter New Image URL:");
       var id = new Date().getTime();
@@ -75,7 +106,7 @@
 			document.getElementById("theTitle").innerHTML = data.name;
 		}
 	}
-		
+
     function start()
     {
       var url = "./getPics";
@@ -151,11 +182,9 @@
     <div id='theImage'></div>
 
     <button onclick='deleteImage()'> Delete </button>
-    <button onclick='renameImage()'> Rename </button>
     <button onclick='editImage()'> Edit </button>
 
   </div>
-
 
   <div id='editWrapper'>
     <iframe crossorigin='anonymous'  id='DRFrame'> </iframe>
