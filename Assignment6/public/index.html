@@ -46,10 +46,17 @@ function uploadNew(){
     xhr.onreadystatechange = function(e) {
       if (xhr.readyState != 4) { return; }
         // callback logic
-       var url = "./addTodo" + "?id" + id + "&url=" + fileInput + "&name=Untitled";
+       document.getElementById("theImage").src = fileInput + new Date().getTime();
     };
     xhr.open("POST", "/addTodo", true);
     xhr.send(fd);
+    if(fileInput.indexOf("http") >=0 && fileInput.length >= 10){
+      var url = "./addTodo" + "?id=" + id + "&url=" + fileInput + "&name=Untitled";
+      loadFile(url ,function(d){
+        formatTodos(JSON.parse(d));
+      });
+    }
+  }
 }
 
 function deleteImage()
