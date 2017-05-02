@@ -80,14 +80,14 @@
       });
     }
 
-        var orig = dkrm.sourcecanvas.toDataURL();
+        var orig = dkrm.canvas.toDataURL();
 
         var image = new Image();
         image.onload = function() {
           var width = image.width;
           var height = image.height;
 
-          var ctx = dkrm.sourcecanvas.getContext("2D");
+          var ctx = dkrm.canvas.getContext("2D");
           ctx.filter = document.getElementById("canFilter").value;
         //  this.ctx.drawImage(image, 0,0);
 
