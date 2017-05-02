@@ -12,15 +12,25 @@ server.get("/", function (req, res) {
       res.redirect("/index.html");
 });
 
-
 var todoList = [];
-
-
 
 server.get("/addTodo", function (req, res) {
   db.collection("data").insert(req.query, function(err, result){
       if(err){
-        res.send("error"); 
+        res.send("error");
+      }
+      else{
+        db.collection("data").find({}).toArray( function(err1, result1) {
+          res.send(JSON.stringify(result1));
+        });
+      }
+  });
+});
+
+server.get("/uploadTodo", function (req, res) {
+  db.collection("data").insert(req.query, function(err, result){
+      if(err){
+        res.send("error");
       }
       else{
         db.collection("data").find({}).toArray( function(err1, result1) {
@@ -40,7 +50,7 @@ server.get("/deleteTodo", function (req, res) {
    db.collection("data").remove({id: id}, function(err, result){
      console.log(err);
       if(err){
-        res.send("error"); 
+        res.send("error");
       }
       else{
         db.collection("data").find({}).toArray( function(err1, result1) {
