@@ -154,7 +154,7 @@ function deleteImage()
 <body onload='start()'>
   <h1>Image List</h1>
   <button id='addButton' onclick='addNew()'> Add using URL </button>
-  <input id='uploadButton' type="file">
+  <input id='uploadButton' type="file" onchange='uploadNew'>
   <ol id='todoListWrapper'> </ol>
   <div id='theDetails'>
     <h1 id='theTitle'></h1>
