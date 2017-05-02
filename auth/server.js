@@ -15,7 +15,7 @@ var auth = require('./authenticate.js');
 var db = require('mongoskin').db('mongodb://user:pwd@localhost:27017/picdb');
 console.log(db);
 
-app.get("/addtodo", function (req, res) {
+app.get("/addTodo", function (req, res) {
 	var x = req.query;
 	var callback = function(error, result){
 		if(result)
@@ -23,7 +23,7 @@ app.get("/addtodo", function (req, res) {
 			res.end("added");
 		}
 	}
-	db.collection("todo").insert(x, callback);
+	db.collection("pic").insert(x, callback);
  });
 
  app.get("/renamePhoto", function (req, res) {
@@ -51,7 +51,7 @@ app.get("/addtodo", function (req, res) {
 
 
 
-app.get("/deletephoto", function (req, res) {
+app.get("/deletePhoto", function (req, res) {
 	var index = req.query.index;
 	var callback = function(error, result){
 		if(result)
