@@ -181,5 +181,4 @@ app.get('/createUser', function(req, res){
 	  });
 
 console.log("Simple static server listening at http://" + hostname + ":" + port);
-app.listen(hostname);
 app.listen(port);
