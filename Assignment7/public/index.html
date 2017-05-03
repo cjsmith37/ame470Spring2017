@@ -89,8 +89,7 @@ function editImage(){
 }
 
 function presetSelected(){
-    document.getElementById('canFilter').value;
-    document.getElementById('filterPresets').value;
+    document.getElementById('canFilter').value = document.getElementById('filterPresets').value;
     sessionStorage.setItem("isEdited", "false");
   }
 
