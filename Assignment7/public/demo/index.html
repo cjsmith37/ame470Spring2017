@@ -83,17 +83,17 @@
         var orig = dkrm.canvas.toDataURL();
         var ctx = dkrm.canvas.getContext("2D");
 
-        var image = new Image();
-        image.onload = function() {
+        var img = new Image();
+        img.onload = function() {
           var width = image.width;
           var height = image.height;
-          ctx.filter = document.getElementById("canFilter").value;
+          this.ctx.filter = document.getElementById("canFilter").value;
         //  this.ctx.drawImage(image, 0,0);
 
-          ctx.drawImage(image, 0, 0, width, height);
-          var base64St = canvas.toDataURL("image/png");
+          thus.ctx.drawImage(image, 0, 0, width, height);
+          var base64St = dkrm.canvas.toDataURL("image/png");
         };
-        image.src = orig;
+        img.src = orig;
 
 
 
