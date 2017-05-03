@@ -1,6 +1,6 @@
 
 function authenticate(name, pass, db, fn) {
-	console.log('userID: '+ name +' password: '+ pass )
+	console.log('userID: '+ name +' password: '+ pass );
 	db.collection("users").findOne({userID:name, password:pass}, function(err, user) {
 		if (err) {
 			return fn(err);
