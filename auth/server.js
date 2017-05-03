@@ -1,26 +1,21 @@
 var express = require("express"),
-	app = express(),
-	bodyParser = require('body-parser'),
-	errorHandler = require('errorhandler'),
-	methodOverride = require('method-override'),
-	hostname = process.env.HOSTNAME || 'localhost',
-	port = 8090;
-	
-app.get("/", function (req, res) {
-	  res.redirect("/index.html");
-	});	
+    app = express(),
+    bodyParser = require('body-parser'),
+    errorHandler = require('errorhandler'),
+    methodOverride = require('method-override'),
+    hostname = process.env.HOSTNAME || 'localhost',
+    port = 8088;
 
+app.get("/", function (req, res) {
+  res.redirect("/index.html");
+});
 
 var auth = require('./authenticate.js');
 
-var db = require('mongoskin').db('mongodb://user:pwd@27.0.0.1:27017/picdb');
+var db = require('mongoskin').db('mongodb://user:pwd@localhost:27017/picdb');
 console.log(db);
 
-
-
-var picList = [];
-
-app.get("/addTodo", function (req, res) {
+app.get("/addtodo", function (req, res) {
 	var x = req.query;
 	var callback = function(error, result){
 		if(result)
@@ -56,7 +51,7 @@ app.get("/addTodo", function (req, res) {
 
 
 
-app.get("/deletePhoto", function (req, res) {
+app.get("/deletephoto", function (req, res) {
 	var index = req.query.index;
 	var callback = function(error, result){
 		if(result)
@@ -89,7 +84,7 @@ app.use(errorHandler({
 var fs = require('fs');
 var AWS = require('aws-sdk');
 AWS.config.loadFromPath('./credentials.json');
-var s3 = new AWS.S3();//.client;
+var s3 = new AWS.S3()//.client;
 
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
@@ -171,7 +166,7 @@ app.get('/getUser', function(req, res){
 });
 
 app.get('/createUser', function(req, res){
-				db.collection("users").findOne({userID:req.query.ID}, function(err, result) {
+				db.collection("users").findOne({userID:req.query.userID}, function(err, result) {
 						if(result) {
 							res.send('0');
 						} else {
@@ -186,5 +181,4 @@ app.get('/createUser', function(req, res){
 	  });
 
 console.log("Simple static server listening at http://" + hostname + ":" + port);
-app.listen(port);
-app.listen(hostname);
+app.listen(port, hostname);
