@@ -90,7 +90,7 @@ function editImage(){
 
 function presetSelected(){
     document.getElementById('canFilter').value = document.getElementById('filterPresets').value;
-    fileUploaded();
+    sessionStorage.setItem("isEdited", "false");
   }
 
 </script>
