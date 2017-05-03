@@ -33,8 +33,6 @@ server.get("/", function (req, res) {
 
 var todoList = [];
 
-
-
 server.get("/addTodo", function (req, res) {
   db.collection("data").insert(req.query, function(err, result){
       if(err){
@@ -147,9 +145,5 @@ server.post('/uploadFile', function(req, res){
     });
   });
 
-
-//server.use(bodyParser());
-//server.use(require('connect').bodyParser());
-//server.use(bodyParser.connect());
 console.log("Simple static server listening at http://" + hostname + ":" + port);
 server.listen(port);
