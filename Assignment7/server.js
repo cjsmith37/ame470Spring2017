@@ -4,7 +4,7 @@ AWS.config.loadFromPath('./credentials.json');
 var s3 = new AWS.S3();
 
 var express = require("express");
-var app = express();
+var server = express();
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
 var methodOverride = require('method-override');
