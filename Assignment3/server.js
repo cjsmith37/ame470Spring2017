@@ -16,10 +16,6 @@ app.get("/eval", function (req, res) {
     res.send(result.toString()); // send response body
 });
 
-
-
-
-
 app.use(methodOverride());
 app.use(bodyParser());
 app.use(express.static(__dirname + '/public'));
