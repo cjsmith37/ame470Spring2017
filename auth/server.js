@@ -4,16 +4,19 @@ var express = require("express"),
 	errorHandler = require('errorhandler'),
 	methodOverride = require('method-override'),
 	hostname = process.env.HOSTNAME || 'localhost',
-	port = 8084;
+	port = 8088;
+	
+app.get("/", function (req, res) {
+	  res.redirect("/index.html");
+	});	
+
 
 var auth = require('./authenticate.js');
 
-var db = require('mongoskin').db('mongodb://user:pwd@127.0.0.1:27017/picdb');
+var db = require('mongoskin').db('mongodb://user:pwd@localhost:27017/picdb');
 console.log(db);
 
-app.get("/", function (req, res) {
-  res.redirect("/index.html");
-});
+
 
 var picList = [];
 
@@ -86,7 +89,7 @@ app.use(errorHandler({
 var fs = require('fs');
 var AWS = require('aws-sdk');
 AWS.config.loadFromPath('./credentials.json');
-var s3 = new AWS.S3()//.client;
+var s3 = new AWS.S3();//.client;
 
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
