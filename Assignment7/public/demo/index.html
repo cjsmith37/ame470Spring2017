@@ -80,18 +80,25 @@
       });
     }
 
+        var canvas = document.createElement("canvas");
         var orig = dkrm.canvas.toDataURL();
         var ctx = dkrm.canvas.getContext("2D");
 
         var img = new Image();
         img.onload = function() {
-          var width = image.width;
-          var height = image.height;
-          this.ctx.filter = document.getElementById("canFilter").value;
+          var width = img.width;
+          var height = img.height;
+          canvas.width = width;
+          canvas.height = height;
+          ctx.filter = document.getElementById("canFilter").value;
+
         //  this.ctx.drawImage(image, 0,0);
 
-          thus.ctx.drawImage(image, 0, 0, width, height);
+          ctx.drawImage(image, 0, 0, width, height);
           var base64St = dkrm.canvas.toDataURL("image/png");
+          document.getElementById("preview").src = base64St;
+          document.getElementById("preview").style.height = height + "px";
+          document.getElementById("preview").style.width= height + "px";
         };
         img.src = orig;
 
