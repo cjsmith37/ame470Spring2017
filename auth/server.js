@@ -13,7 +13,7 @@ app.get("/", function (req, res) {
 
 var auth = require('./authenticate.js');
 
-var db = require('mongoskin').db('mongodb://user:pwd@localhost:27017/picdb');
+var db = require('mongoskin').db('mongodb://user:pwd@27.0.0.1:27017/picdb');
 console.log(db);
 
 
